@@ -70,6 +70,30 @@ class DataServiceClient extends $grpc.Client {
         options: options);
   }
 
+  /// 文件上传（分块）- 用于 OTA 部署模型/配置到机器人
+  $grpc.ResponseFuture<$1.UploadFileResponse> uploadFile(
+    $async.Stream<$1.UploadFileChunk> request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createStreamingCall(_$uploadFile, request, options: options).single;
+  }
+
+  /// 列出远程目录文件
+  $grpc.ResponseFuture<$1.ListRemoteFilesResponse> listRemoteFiles(
+    $1.ListRemoteFilesRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$listRemoteFiles, request, options: options);
+  }
+
+  /// 删除远程文件
+  $grpc.ResponseFuture<$1.DeleteRemoteFileResponse> deleteRemoteFile(
+    $1.DeleteRemoteFileRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$deleteRemoteFile, request, options: options);
+  }
+
   /// 视频控制（WebRTC 信令）- 旧接口，保留兼容
   $grpc.ResponseFuture<$1.StartCameraResponse> startCamera(
     $1.StartCameraRequest request, {
@@ -115,6 +139,21 @@ class DataServiceClient extends $grpc.Client {
           '/robot.v1.DataService/DownloadFile',
           ($1.DownloadFileRequest value) => value.writeToBuffer(),
           $1.FileChunk.fromBuffer);
+  static final _$uploadFile =
+      $grpc.ClientMethod<$1.UploadFileChunk, $1.UploadFileResponse>(
+          '/robot.v1.DataService/UploadFile',
+          ($1.UploadFileChunk value) => value.writeToBuffer(),
+          $1.UploadFileResponse.fromBuffer);
+  static final _$listRemoteFiles =
+      $grpc.ClientMethod<$1.ListRemoteFilesRequest, $1.ListRemoteFilesResponse>(
+          '/robot.v1.DataService/ListRemoteFiles',
+          ($1.ListRemoteFilesRequest value) => value.writeToBuffer(),
+          $1.ListRemoteFilesResponse.fromBuffer);
+  static final _$deleteRemoteFile = $grpc.ClientMethod<
+          $1.DeleteRemoteFileRequest, $1.DeleteRemoteFileResponse>(
+      '/robot.v1.DataService/DeleteRemoteFile',
+      ($1.DeleteRemoteFileRequest value) => value.writeToBuffer(),
+      $1.DeleteRemoteFileResponse.fromBuffer);
   static final _$startCamera =
       $grpc.ClientMethod<$1.StartCameraRequest, $1.StartCameraResponse>(
           '/robot.v1.DataService/StartCamera',
@@ -168,6 +207,31 @@ abstract class DataServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $1.DownloadFileRequest.fromBuffer(value),
         ($1.FileChunk value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.UploadFileChunk, $1.UploadFileResponse>(
+        'UploadFile',
+        uploadFile,
+        true,
+        false,
+        ($core.List<$core.int> value) => $1.UploadFileChunk.fromBuffer(value),
+        ($1.UploadFileResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.ListRemoteFilesRequest,
+            $1.ListRemoteFilesResponse>(
+        'ListRemoteFiles',
+        listRemoteFiles_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $1.ListRemoteFilesRequest.fromBuffer(value),
+        ($1.ListRemoteFilesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.DeleteRemoteFileRequest,
+            $1.DeleteRemoteFileResponse>(
+        'DeleteRemoteFile',
+        deleteRemoteFile_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $1.DeleteRemoteFileRequest.fromBuffer(value),
+        ($1.DeleteRemoteFileResponse value) => value.writeToBuffer()));
     $addMethod(
         $grpc.ServiceMethod<$1.StartCameraRequest, $1.StartCameraResponse>(
             'StartCamera',
@@ -224,6 +288,27 @@ abstract class DataServiceBase extends $grpc.Service {
 
   $async.Stream<$1.FileChunk> downloadFile(
       $grpc.ServiceCall call, $1.DownloadFileRequest request);
+
+  $async.Future<$1.UploadFileResponse> uploadFile(
+      $grpc.ServiceCall call, $async.Stream<$1.UploadFileChunk> request);
+
+  $async.Future<$1.ListRemoteFilesResponse> listRemoteFiles_Pre(
+      $grpc.ServiceCall $call,
+      $async.Future<$1.ListRemoteFilesRequest> $request) async {
+    return listRemoteFiles($call, await $request);
+  }
+
+  $async.Future<$1.ListRemoteFilesResponse> listRemoteFiles(
+      $grpc.ServiceCall call, $1.ListRemoteFilesRequest request);
+
+  $async.Future<$1.DeleteRemoteFileResponse> deleteRemoteFile_Pre(
+      $grpc.ServiceCall $call,
+      $async.Future<$1.DeleteRemoteFileRequest> $request) async {
+    return deleteRemoteFile($call, await $request);
+  }
+
+  $async.Future<$1.DeleteRemoteFileResponse> deleteRemoteFile(
+      $grpc.ServiceCall call, $1.DeleteRemoteFileRequest request);
 
   $async.Future<$1.StartCameraResponse> startCamera_Pre($grpc.ServiceCall $call,
       $async.Future<$1.StartCameraRequest> $request) async {

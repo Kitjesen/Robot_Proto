@@ -354,6 +354,206 @@ final $typed_data.Uint8List fileChunkDescriptor = $convert.base64Decode(
     'CglGaWxlQ2h1bmsSFgoGb2Zmc2V0GAEgASgEUgZvZmZzZXQSEgoEZGF0YRgCIAEoDFIEZGF0YR'
     'IdCgp0b3RhbF9zaXplGAMgASgEUgl0b3RhbFNpemUSFwoHaXNfbGFzdBgEIAEoCFIGaXNMYXN0');
 
+@$core.Deprecated('Use uploadFileChunkDescriptor instead')
+const UploadFileChunk$json = {
+  '1': 'UploadFileChunk',
+  '2': [
+    {
+      '1': 'metadata',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.UploadFileMetadata',
+      '10': 'metadata'
+    },
+    {'1': 'offset', '3': 2, '4': 1, '5': 4, '10': 'offset'},
+    {'1': 'data', '3': 3, '4': 1, '5': 12, '10': 'data'},
+    {'1': 'is_last', '3': 4, '4': 1, '5': 8, '10': 'isLast'},
+  ],
+};
+
+/// Descriptor for `UploadFileChunk`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List uploadFileChunkDescriptor = $convert.base64Decode(
+    'Cg9VcGxvYWRGaWxlQ2h1bmsSOAoIbWV0YWRhdGEYASABKAsyHC5yb2JvdC52MS5VcGxvYWRGaW'
+    'xlTWV0YWRhdGFSCG1ldGFkYXRhEhYKBm9mZnNldBgCIAEoBFIGb2Zmc2V0EhIKBGRhdGEYAyAB'
+    'KAxSBGRhdGESFwoHaXNfbGFzdBgEIAEoCFIGaXNMYXN0');
+
+@$core.Deprecated('Use uploadFileMetadataDescriptor instead')
+const UploadFileMetadata$json = {
+  '1': 'UploadFileMetadata',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {'1': 'remote_path', '3': 2, '4': 1, '5': 9, '10': 'remotePath'},
+    {'1': 'filename', '3': 3, '4': 1, '5': 9, '10': 'filename'},
+    {'1': 'total_size', '3': 4, '4': 1, '5': 4, '10': 'totalSize'},
+    {'1': 'md5', '3': 5, '4': 1, '5': 9, '10': 'md5'},
+    {'1': 'overwrite', '3': 6, '4': 1, '5': 8, '10': 'overwrite'},
+    {'1': 'category', '3': 7, '4': 1, '5': 9, '10': 'category'},
+  ],
+};
+
+/// Descriptor for `UploadFileMetadata`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List uploadFileMetadataDescriptor = $convert.base64Decode(
+    'ChJVcGxvYWRGaWxlTWV0YWRhdGESKQoEYmFzZRgBIAEoCzIVLnJvYm90LnYxLlJlcXVlc3RCYX'
+    'NlUgRiYXNlEh8KC3JlbW90ZV9wYXRoGAIgASgJUgpyZW1vdGVQYXRoEhoKCGZpbGVuYW1lGAMg'
+    'ASgJUghmaWxlbmFtZRIdCgp0b3RhbF9zaXplGAQgASgEUgl0b3RhbFNpemUSEAoDbWQ1GAUgAS'
+    'gJUgNtZDUSHAoJb3ZlcndyaXRlGAYgASgIUglvdmVyd3JpdGUSGgoIY2F0ZWdvcnkYByABKAlS'
+    'CGNhdGVnb3J5');
+
+@$core.Deprecated('Use uploadFileResponseDescriptor instead')
+const UploadFileResponse$json = {
+  '1': 'UploadFileResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {'1': 'success', '3': 2, '4': 1, '5': 8, '10': 'success'},
+    {'1': 'remote_path', '3': 3, '4': 1, '5': 9, '10': 'remotePath'},
+    {'1': 'bytes_received', '3': 4, '4': 1, '5': 4, '10': 'bytesReceived'},
+    {'1': 'md5', '3': 5, '4': 1, '5': 9, '10': 'md5'},
+    {'1': 'message', '3': 6, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `UploadFileResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List uploadFileResponseDescriptor = $convert.base64Decode(
+    'ChJVcGxvYWRGaWxlUmVzcG9uc2USKgoEYmFzZRgBIAEoCzIWLnJvYm90LnYxLlJlc3BvbnNlQm'
+    'FzZVIEYmFzZRIYCgdzdWNjZXNzGAIgASgIUgdzdWNjZXNzEh8KC3JlbW90ZV9wYXRoGAMgASgJ'
+    'UgpyZW1vdGVQYXRoEiUKDmJ5dGVzX3JlY2VpdmVkGAQgASgEUg1ieXRlc1JlY2VpdmVkEhAKA2'
+    '1kNRgFIAEoCVIDbWQ1EhgKB21lc3NhZ2UYBiABKAlSB21lc3NhZ2U=');
+
+@$core.Deprecated('Use listRemoteFilesRequestDescriptor instead')
+const ListRemoteFilesRequest$json = {
+  '1': 'ListRemoteFilesRequest',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {'1': 'directory', '3': 2, '4': 1, '5': 9, '10': 'directory'},
+    {'1': 'category', '3': 3, '4': 1, '5': 9, '10': 'category'},
+  ],
+};
+
+/// Descriptor for `ListRemoteFilesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRemoteFilesRequestDescriptor = $convert.base64Decode(
+    'ChZMaXN0UmVtb3RlRmlsZXNSZXF1ZXN0EikKBGJhc2UYASABKAsyFS5yb2JvdC52MS5SZXF1ZX'
+    'N0QmFzZVIEYmFzZRIcCglkaXJlY3RvcnkYAiABKAlSCWRpcmVjdG9yeRIaCghjYXRlZ29yeRgD'
+    'IAEoCVIIY2F0ZWdvcnk=');
+
+@$core.Deprecated('Use remoteFileInfoDescriptor instead')
+const RemoteFileInfo$json = {
+  '1': 'RemoteFileInfo',
+  '2': [
+    {'1': 'path', '3': 1, '4': 1, '5': 9, '10': 'path'},
+    {'1': 'filename', '3': 2, '4': 1, '5': 9, '10': 'filename'},
+    {'1': 'size', '3': 3, '4': 1, '5': 4, '10': 'size'},
+    {'1': 'modified_time', '3': 4, '4': 1, '5': 9, '10': 'modifiedTime'},
+    {'1': 'category', '3': 5, '4': 1, '5': 9, '10': 'category'},
+    {'1': 'md5', '3': 6, '4': 1, '5': 9, '10': 'md5'},
+  ],
+};
+
+/// Descriptor for `RemoteFileInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List remoteFileInfoDescriptor = $convert.base64Decode(
+    'Cg5SZW1vdGVGaWxlSW5mbxISCgRwYXRoGAEgASgJUgRwYXRoEhoKCGZpbGVuYW1lGAIgASgJUg'
+    'hmaWxlbmFtZRISCgRzaXplGAMgASgEUgRzaXplEiMKDW1vZGlmaWVkX3RpbWUYBCABKAlSDG1v'
+    'ZGlmaWVkVGltZRIaCghjYXRlZ29yeRgFIAEoCVIIY2F0ZWdvcnkSEAoDbWQ1GAYgASgJUgNtZD'
+    'U=');
+
+@$core.Deprecated('Use listRemoteFilesResponseDescriptor instead')
+const ListRemoteFilesResponse$json = {
+  '1': 'ListRemoteFilesResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {
+      '1': 'files',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.robot.v1.RemoteFileInfo',
+      '10': 'files'
+    },
+    {'1': 'total_size', '3': 3, '4': 1, '5': 4, '10': 'totalSize'},
+    {'1': 'free_space', '3': 4, '4': 1, '5': 4, '10': 'freeSpace'},
+  ],
+};
+
+/// Descriptor for `ListRemoteFilesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRemoteFilesResponseDescriptor = $convert.base64Decode(
+    'ChdMaXN0UmVtb3RlRmlsZXNSZXNwb25zZRIqCgRiYXNlGAEgASgLMhYucm9ib3QudjEuUmVzcG'
+    '9uc2VCYXNlUgRiYXNlEi4KBWZpbGVzGAIgAygLMhgucm9ib3QudjEuUmVtb3RlRmlsZUluZm9S'
+    'BWZpbGVzEh0KCnRvdGFsX3NpemUYAyABKARSCXRvdGFsU2l6ZRIdCgpmcmVlX3NwYWNlGAQgAS'
+    'gEUglmcmVlU3BhY2U=');
+
+@$core.Deprecated('Use deleteRemoteFileRequestDescriptor instead')
+const DeleteRemoteFileRequest$json = {
+  '1': 'DeleteRemoteFileRequest',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {'1': 'remote_path', '3': 2, '4': 1, '5': 9, '10': 'remotePath'},
+  ],
+};
+
+/// Descriptor for `DeleteRemoteFileRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteRemoteFileRequestDescriptor =
+    $convert.base64Decode(
+        'ChdEZWxldGVSZW1vdGVGaWxlUmVxdWVzdBIpCgRiYXNlGAEgASgLMhUucm9ib3QudjEuUmVxdW'
+        'VzdEJhc2VSBGJhc2USHwoLcmVtb3RlX3BhdGgYAiABKAlSCnJlbW90ZVBhdGg=');
+
+@$core.Deprecated('Use deleteRemoteFileResponseDescriptor instead')
+const DeleteRemoteFileResponse$json = {
+  '1': 'DeleteRemoteFileResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {'1': 'success', '3': 2, '4': 1, '5': 8, '10': 'success'},
+    {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `DeleteRemoteFileResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteRemoteFileResponseDescriptor = $convert.base64Decode(
+    'ChhEZWxldGVSZW1vdGVGaWxlUmVzcG9uc2USKgoEYmFzZRgBIAEoCzIWLnJvYm90LnYxLlJlc3'
+    'BvbnNlQmFzZVIEYmFzZRIYCgdzdWNjZXNzGAIgASgIUgdzdWNjZXNzEhgKB21lc3NhZ2UYAyAB'
+    'KAlSB21lc3NhZ2U=');
+
 @$core.Deprecated('Use startCameraRequestDescriptor instead')
 const StartCameraRequest$json = {
   '1': 'StartCameraRequest',

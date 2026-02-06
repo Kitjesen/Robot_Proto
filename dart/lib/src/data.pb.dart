@@ -947,6 +947,794 @@ class FileChunk extends $pb.GeneratedMessage {
   void clearIsLast() => $_clearField(4);
 }
 
+class UploadFileChunk extends $pb.GeneratedMessage {
+  factory UploadFileChunk({
+    UploadFileMetadata? metadata,
+    $fixnum.Int64? offset,
+    $core.List<$core.int>? data,
+    $core.bool? isLast,
+  }) {
+    final result = create();
+    if (metadata != null) result.metadata = metadata;
+    if (offset != null) result.offset = offset;
+    if (data != null) result.data = data;
+    if (isLast != null) result.isLast = isLast;
+    return result;
+  }
+
+  UploadFileChunk._();
+
+  factory UploadFileChunk.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory UploadFileChunk.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'UploadFileChunk',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<UploadFileMetadata>(1, _omitFieldNames ? '' : 'metadata',
+        subBuilder: UploadFileMetadata.create)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.List<$core.int>>(
+        3, _omitFieldNames ? '' : 'data', $pb.PbFieldType.OY)
+    ..aOB(4, _omitFieldNames ? '' : 'isLast')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UploadFileChunk clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UploadFileChunk copyWith(void Function(UploadFileChunk) updates) =>
+      super.copyWith((message) => updates(message as UploadFileChunk))
+          as UploadFileChunk;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UploadFileChunk create() => UploadFileChunk._();
+  @$core.override
+  UploadFileChunk createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static UploadFileChunk getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UploadFileChunk>(create);
+  static UploadFileChunk? _defaultInstance;
+
+  /// 第一个 chunk 必须包含 metadata
+  @$pb.TagNumber(1)
+  UploadFileMetadata get metadata => $_getN(0);
+  @$pb.TagNumber(1)
+  set metadata(UploadFileMetadata value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMetadata() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMetadata() => $_clearField(1);
+  @$pb.TagNumber(1)
+  UploadFileMetadata ensureMetadata() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get offset => $_getI64(1);
+  @$pb.TagNumber(2)
+  set offset($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.int> get data => $_getN(2);
+  @$pb.TagNumber(3)
+  set data($core.List<$core.int> value) => $_setBytes(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasData() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearData() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.bool get isLast => $_getBF(3);
+  @$pb.TagNumber(4)
+  set isLast($core.bool value) => $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasIsLast() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearIsLast() => $_clearField(4);
+}
+
+class UploadFileMetadata extends $pb.GeneratedMessage {
+  factory UploadFileMetadata({
+    $2.RequestBase? base,
+    $core.String? remotePath,
+    $core.String? filename,
+    $fixnum.Int64? totalSize,
+    $core.String? md5,
+    $core.bool? overwrite,
+    $core.String? category,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (remotePath != null) result.remotePath = remotePath;
+    if (filename != null) result.filename = filename;
+    if (totalSize != null) result.totalSize = totalSize;
+    if (md5 != null) result.md5 = md5;
+    if (overwrite != null) result.overwrite = overwrite;
+    if (category != null) result.category = category;
+    return result;
+  }
+
+  UploadFileMetadata._();
+
+  factory UploadFileMetadata.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory UploadFileMetadata.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'UploadFileMetadata',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'remotePath')
+    ..aOS(3, _omitFieldNames ? '' : 'filename')
+    ..a<$fixnum.Int64>(
+        4, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(5, _omitFieldNames ? '' : 'md5')
+    ..aOB(6, _omitFieldNames ? '' : 'overwrite')
+    ..aOS(7, _omitFieldNames ? '' : 'category')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UploadFileMetadata clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UploadFileMetadata copyWith(void Function(UploadFileMetadata) updates) =>
+      super.copyWith((message) => updates(message as UploadFileMetadata))
+          as UploadFileMetadata;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UploadFileMetadata create() => UploadFileMetadata._();
+  @$core.override
+  UploadFileMetadata createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static UploadFileMetadata getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UploadFileMetadata>(create);
+  static UploadFileMetadata? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get remotePath => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set remotePath($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasRemotePath() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRemotePath() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get filename => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set filename($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFilename() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFilename() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get totalSize => $_getI64(3);
+  @$pb.TagNumber(4)
+  set totalSize($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTotalSize() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTotalSize() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get md5 => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set md5($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMd5() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMd5() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.bool get overwrite => $_getBF(5);
+  @$pb.TagNumber(6)
+  set overwrite($core.bool value) => $_setBool(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasOverwrite() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearOverwrite() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get category => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set category($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasCategory() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCategory() => $_clearField(7);
+}
+
+class UploadFileResponse extends $pb.GeneratedMessage {
+  factory UploadFileResponse({
+    $2.ResponseBase? base,
+    $core.bool? success,
+    $core.String? remotePath,
+    $fixnum.Int64? bytesReceived,
+    $core.String? md5,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (success != null) result.success = success;
+    if (remotePath != null) result.remotePath = remotePath;
+    if (bytesReceived != null) result.bytesReceived = bytesReceived;
+    if (md5 != null) result.md5 = md5;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  UploadFileResponse._();
+
+  factory UploadFileResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory UploadFileResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'UploadFileResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..aOB(2, _omitFieldNames ? '' : 'success')
+    ..aOS(3, _omitFieldNames ? '' : 'remotePath')
+    ..a<$fixnum.Int64>(
+        4, _omitFieldNames ? '' : 'bytesReceived', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(5, _omitFieldNames ? '' : 'md5')
+    ..aOS(6, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UploadFileResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UploadFileResponse copyWith(void Function(UploadFileResponse) updates) =>
+      super.copyWith((message) => updates(message as UploadFileResponse))
+          as UploadFileResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UploadFileResponse create() => UploadFileResponse._();
+  @$core.override
+  UploadFileResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static UploadFileResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UploadFileResponse>(create);
+  static UploadFileResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get success => $_getBF(1);
+  @$pb.TagNumber(2)
+  set success($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSuccess() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSuccess() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get remotePath => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set remotePath($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasRemotePath() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRemotePath() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get bytesReceived => $_getI64(3);
+  @$pb.TagNumber(4)
+  set bytesReceived($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBytesReceived() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBytesReceived() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get md5 => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set md5($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMd5() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMd5() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get message => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set message($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasMessage() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearMessage() => $_clearField(6);
+}
+
+class ListRemoteFilesRequest extends $pb.GeneratedMessage {
+  factory ListRemoteFilesRequest({
+    $2.RequestBase? base,
+    $core.String? directory,
+    $core.String? category,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (directory != null) result.directory = directory;
+    if (category != null) result.category = category;
+    return result;
+  }
+
+  ListRemoteFilesRequest._();
+
+  factory ListRemoteFilesRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ListRemoteFilesRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ListRemoteFilesRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'directory')
+    ..aOS(3, _omitFieldNames ? '' : 'category')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListRemoteFilesRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListRemoteFilesRequest copyWith(
+          void Function(ListRemoteFilesRequest) updates) =>
+      super.copyWith((message) => updates(message as ListRemoteFilesRequest))
+          as ListRemoteFilesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListRemoteFilesRequest create() => ListRemoteFilesRequest._();
+  @$core.override
+  ListRemoteFilesRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ListRemoteFilesRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListRemoteFilesRequest>(create);
+  static ListRemoteFilesRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get directory => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set directory($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDirectory() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDirectory() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get category => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set category($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCategory() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCategory() => $_clearField(3);
+}
+
+class RemoteFileInfo extends $pb.GeneratedMessage {
+  factory RemoteFileInfo({
+    $core.String? path,
+    $core.String? filename,
+    $fixnum.Int64? size,
+    $core.String? modifiedTime,
+    $core.String? category,
+    $core.String? md5,
+  }) {
+    final result = create();
+    if (path != null) result.path = path;
+    if (filename != null) result.filename = filename;
+    if (size != null) result.size = size;
+    if (modifiedTime != null) result.modifiedTime = modifiedTime;
+    if (category != null) result.category = category;
+    if (md5 != null) result.md5 = md5;
+    return result;
+  }
+
+  RemoteFileInfo._();
+
+  factory RemoteFileInfo.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory RemoteFileInfo.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'RemoteFileInfo',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'path')
+    ..aOS(2, _omitFieldNames ? '' : 'filename')
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'size', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(4, _omitFieldNames ? '' : 'modifiedTime')
+    ..aOS(5, _omitFieldNames ? '' : 'category')
+    ..aOS(6, _omitFieldNames ? '' : 'md5')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RemoteFileInfo clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RemoteFileInfo copyWith(void Function(RemoteFileInfo) updates) =>
+      super.copyWith((message) => updates(message as RemoteFileInfo))
+          as RemoteFileInfo;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RemoteFileInfo create() => RemoteFileInfo._();
+  @$core.override
+  RemoteFileInfo createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static RemoteFileInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RemoteFileInfo>(create);
+  static RemoteFileInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get path => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set path($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPath() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPath() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get filename => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set filename($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFilename() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFilename() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get size => $_getI64(2);
+  @$pb.TagNumber(3)
+  set size($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSize() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSize() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get modifiedTime => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set modifiedTime($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasModifiedTime() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearModifiedTime() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get category => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set category($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCategory() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCategory() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get md5 => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set md5($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasMd5() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearMd5() => $_clearField(6);
+}
+
+class ListRemoteFilesResponse extends $pb.GeneratedMessage {
+  factory ListRemoteFilesResponse({
+    $2.ResponseBase? base,
+    $core.Iterable<RemoteFileInfo>? files,
+    $fixnum.Int64? totalSize,
+    $fixnum.Int64? freeSpace,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (files != null) result.files.addAll(files);
+    if (totalSize != null) result.totalSize = totalSize;
+    if (freeSpace != null) result.freeSpace = freeSpace;
+    return result;
+  }
+
+  ListRemoteFilesResponse._();
+
+  factory ListRemoteFilesResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ListRemoteFilesResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ListRemoteFilesResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..pPM<RemoteFileInfo>(2, _omitFieldNames ? '' : 'files',
+        subBuilder: RemoteFileInfo.create)
+    ..a<$fixnum.Int64>(
+        3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(
+        4, _omitFieldNames ? '' : 'freeSpace', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListRemoteFilesResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListRemoteFilesResponse copyWith(
+          void Function(ListRemoteFilesResponse) updates) =>
+      super.copyWith((message) => updates(message as ListRemoteFilesResponse))
+          as ListRemoteFilesResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListRemoteFilesResponse create() => ListRemoteFilesResponse._();
+  @$core.override
+  ListRemoteFilesResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ListRemoteFilesResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListRemoteFilesResponse>(create);
+  static ListRemoteFilesResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $pb.PbList<RemoteFileInfo> get files => $_getList(1);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get totalSize => $_getI64(2);
+  @$pb.TagNumber(3)
+  set totalSize($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTotalSize() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTotalSize() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get freeSpace => $_getI64(3);
+  @$pb.TagNumber(4)
+  set freeSpace($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasFreeSpace() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFreeSpace() => $_clearField(4);
+}
+
+class DeleteRemoteFileRequest extends $pb.GeneratedMessage {
+  factory DeleteRemoteFileRequest({
+    $2.RequestBase? base,
+    $core.String? remotePath,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (remotePath != null) result.remotePath = remotePath;
+    return result;
+  }
+
+  DeleteRemoteFileRequest._();
+
+  factory DeleteRemoteFileRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory DeleteRemoteFileRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'DeleteRemoteFileRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'remotePath')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteRemoteFileRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteRemoteFileRequest copyWith(
+          void Function(DeleteRemoteFileRequest) updates) =>
+      super.copyWith((message) => updates(message as DeleteRemoteFileRequest))
+          as DeleteRemoteFileRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteRemoteFileRequest create() => DeleteRemoteFileRequest._();
+  @$core.override
+  DeleteRemoteFileRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static DeleteRemoteFileRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeleteRemoteFileRequest>(create);
+  static DeleteRemoteFileRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get remotePath => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set remotePath($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasRemotePath() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRemotePath() => $_clearField(2);
+}
+
+class DeleteRemoteFileResponse extends $pb.GeneratedMessage {
+  factory DeleteRemoteFileResponse({
+    $2.ResponseBase? base,
+    $core.bool? success,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (success != null) result.success = success;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  DeleteRemoteFileResponse._();
+
+  factory DeleteRemoteFileResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory DeleteRemoteFileResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'DeleteRemoteFileResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..aOB(2, _omitFieldNames ? '' : 'success')
+    ..aOS(3, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteRemoteFileResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteRemoteFileResponse copyWith(
+          void Function(DeleteRemoteFileResponse) updates) =>
+      super.copyWith((message) => updates(message as DeleteRemoteFileResponse))
+          as DeleteRemoteFileResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteRemoteFileResponse create() => DeleteRemoteFileResponse._();
+  @$core.override
+  DeleteRemoteFileResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static DeleteRemoteFileResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeleteRemoteFileResponse>(create);
+  static DeleteRemoteFileResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get success => $_getBF(1);
+  @$pb.TagNumber(2)
+  set success($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSuccess() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSuccess() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get message => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set message($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessage() => $_clearField(3);
+}
+
 class StartCameraRequest extends $pb.GeneratedMessage {
   factory StartCameraRequest({
     $2.RequestBase? base,

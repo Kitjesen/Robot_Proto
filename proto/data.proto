@@ -23,6 +23,15 @@ service DataService {
   // 文件下载（分块）
   rpc DownloadFile(DownloadFileRequest) returns (stream FileChunk);
   
+  // 文件上传（分块）- 用于 OTA 部署模型/配置到机器人
+  rpc UploadFile(stream UploadFileChunk) returns (UploadFileResponse);
+  
+  // 列出远程目录文件
+  rpc ListRemoteFiles(ListRemoteFilesRequest) returns (ListRemoteFilesResponse);
+  
+  // 删除远程文件
+  rpc DeleteRemoteFile(DeleteRemoteFileRequest) returns (DeleteRemoteFileResponse);
+  
   // 视频控制（WebRTC 信令）- 旧接口，保留兼容
   rpc StartCamera(StartCameraRequest) returns (StartCameraResponse);
   rpc StopCamera(StopCameraRequest) returns (StopCameraResponse);
@@ -108,6 +117,70 @@ message FileChunk {
   bytes data = 2;
   uint64 total_size = 3;
   bool is_last = 4;
+}
+
+// ==================== 文件上传 (OTA) ====================
+
+message UploadFileChunk {
+  // 第一个 chunk 必须包含 metadata
+  UploadFileMetadata metadata = 1;  // 仅第一个 chunk 填充
+  uint64 offset = 2;
+  bytes data = 3;
+  bool is_last = 4;
+}
+
+message UploadFileMetadata {
+  RequestBase base = 1;
+  string remote_path = 2;       // 目标路径, 如 "/home/sunrise/models/yolo.pt"
+  string filename = 3;          // 原始文件名
+  uint64 total_size = 4;        // 文件总大小(bytes)
+  string md5 = 5;               // MD5 校验 (可选)
+  bool overwrite = 6;           // 是否覆盖已存在文件
+  string category = 7;          // 分类: "model", "map", "config", "firmware"
+}
+
+message UploadFileResponse {
+  ResponseBase base = 1;
+  bool success = 2;
+  string remote_path = 3;       // 最终保存路径
+  uint64 bytes_received = 4;
+  string md5 = 5;               // 服务端计算的 MD5
+  string message = 6;
+}
+
+// ==================== 远程文件管理 ====================
+
+message ListRemoteFilesRequest {
+  RequestBase base = 1;
+  string directory = 2;         // 远程目录, 如 "/home/sunrise/models/"
+  string category = 3;          // 可选过滤: "model", "map", "config"
+}
+
+message RemoteFileInfo {
+  string path = 1;
+  string filename = 2;
+  uint64 size = 3;
+  string modified_time = 4;     // ISO 8601
+  string category = 5;
+  string md5 = 6;
+}
+
+message ListRemoteFilesResponse {
+  ResponseBase base = 1;
+  repeated RemoteFileInfo files = 2;
+  uint64 total_size = 3;        // 目录总大小
+  uint64 free_space = 4;        // 磁盘剩余空间
+}
+
+message DeleteRemoteFileRequest {
+  RequestBase base = 1;
+  string remote_path = 2;
+}
+
+message DeleteRemoteFileResponse {
+  ResponseBase base = 1;
+  bool success = 2;
+  string message = 3;
 }
 
 // ==================== 视频控制 ====================
