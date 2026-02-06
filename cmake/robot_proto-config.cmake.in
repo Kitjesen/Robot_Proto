@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(Protobuf REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GRPC  REQUIRED IMPORTED_TARGET grpc++)
+pkg_check_modules(GRPCPP REQUIRED IMPORTED_TARGET grpc++>=1.22.0)
+
+include("${CMAKE_CURRENT_LIST_DIR}/robot_proto_targets.cmake")
+
+# Convenience: proto source directory (for codegen tools)
+set(robot_proto_PROTO_DIR "${PACKAGE_PREFIX_DIR}/share/robot_proto/proto")

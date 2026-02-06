@@ -1,0 +1,18 @@
+# Build artifacts
+build/
+install/
+log/
+
+# Generated C++ (rebuilt by CMake)
+generated/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

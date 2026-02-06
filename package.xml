@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>robot_proto</name>
+  <version>1.0.0</version>
+  <description>
+    gRPC/Protobuf interface definitions for the robot remote monitoring system.
+    This is the single source of truth for all .proto files.
+    C++ library (librobot_proto) is exported for downstream packages.
+    Raw .proto files are installed to share/ for client codegen (Dart, Python, etc.).
+  </description>
+  <maintainer email="dev@robot.local">sunrise</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>libprotobuf-dev</depend>
+  <build_depend>protobuf-compiler</build_depend>
+  <build_depend>protobuf-compiler-grpc</build_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

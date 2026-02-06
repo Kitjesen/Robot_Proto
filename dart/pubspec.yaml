@@ -1,0 +1,15 @@
+name: robot_proto
+description: >
+  gRPC/Protobuf generated Dart stubs for the robot remote monitoring system.
+  Source .proto files are in ../proto/.
+  Regenerate with: ../../scripts/proto_gen.sh
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  grpc: ^5.1.0
+  protobuf: ^6.0.0
+  fixnum: ^1.1.0
