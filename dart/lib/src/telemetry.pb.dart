@@ -82,6 +82,7 @@ class FastState extends $pb.GeneratedMessage {
     $1.Vector3? angularVelocity,
     $1.Vector3? rpyDeg,
     $core.bool? tfOk,
+    $core.Iterable<$core.double>? jointAngles,
   }) {
     final result = create();
     if (header != null) result.header = header;
@@ -92,6 +93,7 @@ class FastState extends $pb.GeneratedMessage {
     if (angularVelocity != null) result.angularVelocity = angularVelocity;
     if (rpyDeg != null) result.rpyDeg = rpyDeg;
     if (tfOk != null) result.tfOk = tfOk;
+    if (jointAngles != null) result.jointAngles.addAll(jointAngles);
     return result;
   }
 
@@ -120,6 +122,8 @@ class FastState extends $pb.GeneratedMessage {
     ..aOM<$1.Vector3>(6, _omitFieldNames ? '' : 'rpyDeg',
         subBuilder: $1.Vector3.create)
     ..aOB(7, _omitFieldNames ? '' : 'tfOk')
+    ..p<$core.double>(
+        8, _omitFieldNames ? '' : 'jointAngles', $pb.PbFieldType.KF)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -219,6 +223,13 @@ class FastState extends $pb.GeneratedMessage {
   $core.bool hasTfOk() => $_has(6);
   @$pb.TagNumber(7)
   void clearTfOk() => $_clearField(7);
+
+  /// 关节角度 (rad)
+  /// 16 个值: 每条腿 4 个 (hip, thigh, calf, foot)
+  /// 顺序: FR(0-3), FL(4-7), RR(8-11), RL(12-15)
+  /// 12-DOF 机器人 foot 值为 0
+  @$pb.TagNumber(8)
+  $pb.PbList<$core.double> get jointAngles => $_getList(7);
 }
 
 class SlowStateRequest extends $pb.GeneratedMessage {
@@ -268,6 +279,8 @@ class SlowState extends $pb.GeneratedMessage {
     $1.ConnectionQuality? network,
     TopicRates? topicRates,
     NavigationStatus? navigation,
+    HealthStatus? health,
+    GeofenceStatus? geofence,
   }) {
     final result = create();
     if (header != null) result.header = header;
@@ -277,6 +290,8 @@ class SlowState extends $pb.GeneratedMessage {
     if (network != null) result.network = network;
     if (topicRates != null) result.topicRates = topicRates;
     if (navigation != null) result.navigation = navigation;
+    if (health != null) result.health = health;
+    if (geofence != null) result.geofence = geofence;
     return result;
   }
 
@@ -306,6 +321,10 @@ class SlowState extends $pb.GeneratedMessage {
         subBuilder: TopicRates.create)
     ..aOM<NavigationStatus>(7, _omitFieldNames ? '' : 'navigation',
         subBuilder: NavigationStatus.create)
+    ..aOM<HealthStatus>(8, _omitFieldNames ? '' : 'health',
+        subBuilder: HealthStatus.create)
+    ..aOM<GeofenceStatus>(9, _omitFieldNames ? '' : 'geofence',
+        subBuilder: GeofenceStatus.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -406,6 +425,30 @@ class SlowState extends $pb.GeneratedMessage {
   void clearNavigation() => $_clearField(7);
   @$pb.TagNumber(7)
   NavigationStatus ensureNavigation() => $_ensure(6);
+
+  /// 健康状态（综合诊断）
+  @$pb.TagNumber(8)
+  HealthStatus get health => $_getN(7);
+  @$pb.TagNumber(8)
+  set health(HealthStatus value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasHealth() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearHealth() => $_clearField(8);
+  @$pb.TagNumber(8)
+  HealthStatus ensureHealth() => $_ensure(7);
+
+  /// 围栏状态
+  @$pb.TagNumber(9)
+  GeofenceStatus get geofence => $_getN(8);
+  @$pb.TagNumber(9)
+  set geofence(GeofenceStatus value) => $_setField(9, value);
+  @$pb.TagNumber(9)
+  $core.bool hasGeofence() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearGeofence() => $_clearField(9);
+  @$pb.TagNumber(9)
+  GeofenceStatus ensureGeofence() => $_ensure(8);
 }
 
 class SystemResource extends $pb.GeneratedMessage {
@@ -623,6 +666,266 @@ class TopicRates extends $pb.GeneratedMessage {
   $core.bool hasGlobalPathHz() => $_has(5);
   @$pb.TagNumber(6)
   void clearGlobalPathHz() => $_clearField(6);
+}
+
+class HealthStatus extends $pb.GeneratedMessage {
+  factory HealthStatus({
+    $core.String? overallLevel,
+    $core.Iterable<SubsystemHealth>? subsystems,
+    $core.double? localizationScore,
+  }) {
+    final result = create();
+    if (overallLevel != null) result.overallLevel = overallLevel;
+    if (subsystems != null) result.subsystems.addAll(subsystems);
+    if (localizationScore != null) result.localizationScore = localizationScore;
+    return result;
+  }
+
+  HealthStatus._();
+
+  factory HealthStatus.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory HealthStatus.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'HealthStatus',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'overallLevel')
+    ..pPM<SubsystemHealth>(2, _omitFieldNames ? '' : 'subsystems',
+        subBuilder: SubsystemHealth.create)
+    ..aD(3, _omitFieldNames ? '' : 'localizationScore',
+        fieldType: $pb.PbFieldType.OF)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  HealthStatus clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  HealthStatus copyWith(void Function(HealthStatus) updates) =>
+      super.copyWith((message) => updates(message as HealthStatus))
+          as HealthStatus;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static HealthStatus create() => HealthStatus._();
+  @$core.override
+  HealthStatus createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static HealthStatus getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<HealthStatus>(create);
+  static HealthStatus? _defaultInstance;
+
+  /// 综合健康等级: "OK", "DEGRADED", "CRITICAL", "FAULT"
+  @$pb.TagNumber(1)
+  $core.String get overallLevel => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set overallLevel($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOverallLevel() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOverallLevel() => $_clearField(1);
+
+  /// 各子系统状态
+  @$pb.TagNumber(2)
+  $pb.PbList<SubsystemHealth> get subsystems => $_getList(1);
+
+  /// 定位质量 (ICP fitness score, 越低越好, -1=不可用)
+  @$pb.TagNumber(3)
+  $core.double get localizationScore => $_getN(2);
+  @$pb.TagNumber(3)
+  set localizationScore($core.double value) => $_setFloat(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLocalizationScore() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLocalizationScore() => $_clearField(3);
+}
+
+class SubsystemHealth extends $pb.GeneratedMessage {
+  factory SubsystemHealth({
+    $core.String? name,
+    $core.String? level,
+    $core.String? message,
+    $core.double? expectedHz,
+    $core.double? actualHz,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    if (level != null) result.level = level;
+    if (message != null) result.message = message;
+    if (expectedHz != null) result.expectedHz = expectedHz;
+    if (actualHz != null) result.actualHz = actualHz;
+    return result;
+  }
+
+  SubsystemHealth._();
+
+  factory SubsystemHealth.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory SubsystemHealth.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'SubsystemHealth',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aOS(2, _omitFieldNames ? '' : 'level')
+    ..aOS(3, _omitFieldNames ? '' : 'message')
+    ..aD(4, _omitFieldNames ? '' : 'expectedHz')
+    ..aD(5, _omitFieldNames ? '' : 'actualHz')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubsystemHealth clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubsystemHealth copyWith(void Function(SubsystemHealth) updates) =>
+      super.copyWith((message) => updates(message as SubsystemHealth))
+          as SubsystemHealth;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SubsystemHealth create() => SubsystemHealth._();
+  @$core.override
+  SubsystemHealth createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static SubsystemHealth getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SubsystemHealth>(create);
+  static SubsystemHealth? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get level => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set level($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasLevel() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLevel() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get message => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set message($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessage() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get expectedHz => $_getN(3);
+  @$pb.TagNumber(4)
+  set expectedHz($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasExpectedHz() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExpectedHz() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get actualHz => $_getN(4);
+  @$pb.TagNumber(5)
+  set actualHz($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasActualHz() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearActualHz() => $_clearField(5);
+}
+
+class GeofenceStatus extends $pb.GeneratedMessage {
+  factory GeofenceStatus({
+    $core.String? state,
+    $core.bool? hasFence,
+    $core.double? marginDistance,
+  }) {
+    final result = create();
+    if (state != null) result.state = state;
+    if (hasFence != null) result.hasFence = hasFence;
+    if (marginDistance != null) result.marginDistance = marginDistance;
+    return result;
+  }
+
+  GeofenceStatus._();
+
+  factory GeofenceStatus.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GeofenceStatus.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GeofenceStatus',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'state')
+    ..aOB(2, _omitFieldNames ? '' : 'hasFence')
+    ..aD(3, _omitFieldNames ? '' : 'marginDistance')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GeofenceStatus clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GeofenceStatus copyWith(void Function(GeofenceStatus) updates) =>
+      super.copyWith((message) => updates(message as GeofenceStatus))
+          as GeofenceStatus;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GeofenceStatus create() => GeofenceStatus._();
+  @$core.override
+  GeofenceStatus createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static GeofenceStatus getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GeofenceStatus>(create);
+  static GeofenceStatus? _defaultInstance;
+
+  /// 围栏状态: "NO_FENCE", "SAFE", "WARNING", "VIOLATION"
+  @$pb.TagNumber(1)
+  $core.String get state => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set state($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasState() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearState() => $_clearField(1);
+
+  /// 是否已设置围栏
+  @$pb.TagNumber(2)
+  $core.bool get hasFence => $_getBF(1);
+  @$pb.TagNumber(2)
+  set hasFence($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasHasFence() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearHasFence() => $_clearField(2);
+
+  /// 到最近围栏边的距离 (m), 负值表示越界
+  @$pb.TagNumber(3)
+  $core.double get marginDistance => $_getN(2);
+  @$pb.TagNumber(3)
+  set marginDistance($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMarginDistance() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMarginDistance() => $_clearField(3);
 }
 
 class NavigationStatus extends $pb.GeneratedMessage {

@@ -48,7 +48,11 @@ message FastState {
   
   // TF 状态
   bool tf_ok = 7;
-  // 关节角度（16 个值：4 条腿 × 4 关节 [hip, thigh, calf, foot]）
+
+  // 关节角度 (rad)
+  // 16 个值: 每条腿 4 个 (hip, thigh, calf, foot)
+  // 顺序: FR(0-3), FL(4-7), RR(8-11), RL(12-15)
+  // 12-DOF 机器人 foot 值为 0
   repeated float joint_angles = 8;
 }
 

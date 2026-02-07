@@ -73,6 +73,7 @@ const FastState$json = {
       '10': 'rpyDeg'
     },
     {'1': 'tf_ok', '3': 7, '4': 1, '5': 8, '10': 'tfOk'},
+    {'1': 'joint_angles', '3': 8, '4': 3, '5': 2, '10': 'jointAngles'},
   ],
 };
 
@@ -83,7 +84,8 @@ final $typed_data.Uint8List fastStateDescriptor = $convert.base64Decode(
     'b2JvdC52MS5Ud2lzdFIIdmVsb2NpdHkSQgoTbGluZWFyX2FjY2VsZXJhdGlvbhgEIAEoCzIRLn'
     'JvYm90LnYxLlZlY3RvcjNSEmxpbmVhckFjY2VsZXJhdGlvbhI8ChBhbmd1bGFyX3ZlbG9jaXR5'
     'GAUgASgLMhEucm9ib3QudjEuVmVjdG9yM1IPYW5ndWxhclZlbG9jaXR5EioKB3JweV9kZWcYBi'
-    'ABKAsyES5yb2JvdC52MS5WZWN0b3IzUgZycHlEZWcSEwoFdGZfb2sYByABKAhSBHRmT2s=');
+    'ABKAsyES5yb2JvdC52MS5WZWN0b3IzUgZycHlEZWcSEwoFdGZfb2sYByABKAhSBHRmT2sSIQoM'
+    'am9pbnRfYW5nbGVzGAggAygCUgtqb2ludEFuZ2xlcw==');
 
 @$core.Deprecated('Use slowStateRequestDescriptor instead')
 const SlowStateRequest$json = {
@@ -147,6 +149,22 @@ const SlowState$json = {
       '6': '.robot.v1.NavigationStatus',
       '10': 'navigation'
     },
+    {
+      '1': 'health',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.HealthStatus',
+      '10': 'health'
+    },
+    {
+      '1': 'geofence',
+      '3': 9,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.GeofenceStatus',
+      '10': 'geofence'
+    },
   ],
 };
 
@@ -158,7 +176,9 @@ final $typed_data.Uint8List slowStateDescriptor = $convert.base64Decode(
     'EuU3lzdGVtUmVzb3VyY2VSCXJlc291cmNlcxI1CgduZXR3b3JrGAUgASgLMhsucm9ib3QudjEu'
     'Q29ubmVjdGlvblF1YWxpdHlSB25ldHdvcmsSNQoLdG9waWNfcmF0ZXMYBiABKAsyFC5yb2JvdC'
     '52MS5Ub3BpY1JhdGVzUgp0b3BpY1JhdGVzEjoKCm5hdmlnYXRpb24YByABKAsyGi5yb2JvdC52'
-    'MS5OYXZpZ2F0aW9uU3RhdHVzUgpuYXZpZ2F0aW9u');
+    'MS5OYXZpZ2F0aW9uU3RhdHVzUgpuYXZpZ2F0aW9uEi4KBmhlYWx0aBgIIAEoCzIWLnJvYm90Ln'
+    'YxLkhlYWx0aFN0YXR1c1IGaGVhbHRoEjQKCGdlb2ZlbmNlGAkgASgLMhgucm9ib3QudjEuR2Vv'
+    'ZmVuY2VTdGF0dXNSCGdlb2ZlbmNl');
 
 @$core.Deprecated('Use systemResourceDescriptor instead')
 const SystemResource$json = {
@@ -198,6 +218,68 @@ final $typed_data.Uint8List topicRatesDescriptor = $convert.base64Decode(
     'gCIAEoAlIMdGVycmFpbk1hcEh6EhcKB3BhdGhfaHoYAyABKAJSBnBhdGhIehIZCghsaWRhcl9o'
     'ehgEIAEoAlIHbGlkYXJIehIcCgpjbWRfdmVsX2h6GAUgASgCUghjbWRWZWxIehIkCg5nbG9iYW'
     'xfcGF0aF9oehgGIAEoAlIMZ2xvYmFsUGF0aEh6');
+
+@$core.Deprecated('Use healthStatusDescriptor instead')
+const HealthStatus$json = {
+  '1': 'HealthStatus',
+  '2': [
+    {'1': 'overall_level', '3': 1, '4': 1, '5': 9, '10': 'overallLevel'},
+    {
+      '1': 'subsystems',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.robot.v1.SubsystemHealth',
+      '10': 'subsystems'
+    },
+    {
+      '1': 'localization_score',
+      '3': 3,
+      '4': 1,
+      '5': 2,
+      '10': 'localizationScore'
+    },
+  ],
+};
+
+/// Descriptor for `HealthStatus`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List healthStatusDescriptor = $convert.base64Decode(
+    'CgxIZWFsdGhTdGF0dXMSIwoNb3ZlcmFsbF9sZXZlbBgBIAEoCVIMb3ZlcmFsbExldmVsEjkKCn'
+    'N1YnN5c3RlbXMYAiADKAsyGS5yb2JvdC52MS5TdWJzeXN0ZW1IZWFsdGhSCnN1YnN5c3RlbXMS'
+    'LQoSbG9jYWxpemF0aW9uX3Njb3JlGAMgASgCUhFsb2NhbGl6YXRpb25TY29yZQ==');
+
+@$core.Deprecated('Use subsystemHealthDescriptor instead')
+const SubsystemHealth$json = {
+  '1': 'SubsystemHealth',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'level', '3': 2, '4': 1, '5': 9, '10': 'level'},
+    {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
+    {'1': 'expected_hz', '3': 4, '4': 1, '5': 1, '10': 'expectedHz'},
+    {'1': 'actual_hz', '3': 5, '4': 1, '5': 1, '10': 'actualHz'},
+  ],
+};
+
+/// Descriptor for `SubsystemHealth`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List subsystemHealthDescriptor = $convert.base64Decode(
+    'Cg9TdWJzeXN0ZW1IZWFsdGgSEgoEbmFtZRgBIAEoCVIEbmFtZRIUCgVsZXZlbBgCIAEoCVIFbG'
+    'V2ZWwSGAoHbWVzc2FnZRgDIAEoCVIHbWVzc2FnZRIfCgtleHBlY3RlZF9oehgEIAEoAVIKZXhw'
+    'ZWN0ZWRIehIbCglhY3R1YWxfaHoYBSABKAFSCGFjdHVhbEh6');
+
+@$core.Deprecated('Use geofenceStatusDescriptor instead')
+const GeofenceStatus$json = {
+  '1': 'GeofenceStatus',
+  '2': [
+    {'1': 'state', '3': 1, '4': 1, '5': 9, '10': 'state'},
+    {'1': 'has_fence', '3': 2, '4': 1, '5': 8, '10': 'hasFence'},
+    {'1': 'margin_distance', '3': 3, '4': 1, '5': 1, '10': 'marginDistance'},
+  ],
+};
+
+/// Descriptor for `GeofenceStatus`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List geofenceStatusDescriptor = $convert.base64Decode(
+    'Cg5HZW9mZW5jZVN0YXR1cxIUCgVzdGF0ZRgBIAEoCVIFc3RhdGUSGwoJaGFzX2ZlbmNlGAIgAS'
+    'gIUghoYXNGZW5jZRInCg9tYXJnaW5fZGlzdGFuY2UYAyABKAFSDm1hcmdpbkRpc3RhbmNl');
 
 @$core.Deprecated('Use navigationStatusDescriptor instead')
 const NavigationStatus$json = {

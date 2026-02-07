@@ -58,6 +58,9 @@ service DataService {
   
   // WebRTC 双向信令流（新接口，支持实时视频/音频）
   rpc WebRTCSignaling(stream WebRTCSignal) returns (stream WebRTCSignal);
+  
+  // 应用固件更新（上传完成后调用，触发外部刷写脚本）
+  rpc ApplyFirmware(ApplyFirmwareRequest) returns (ApplyFirmwareResponse);
 }
 
 // ==================== 资源列举 ====================
@@ -437,4 +440,19 @@ message AudioProfile {
   uint32 channels = 2;                // 通道数 (1=mono, 2=stereo)
   string codec = 3;                   // 编码器 ("opus")
   uint32 bitrate_kbps = 4;            // 比特率
+}
+
+// ==================== 固件更新 ====================
+
+// 固件刷写请求（上传完成后调用）
+message ApplyFirmwareRequest {
+  RequestBase base = 1;
+  string firmware_path = 2;           // 已上传的固件文件路径
+}
+
+// 固件刷写响应
+message ApplyFirmwareResponse {
+  ResponseBase base = 1;
+  bool success = 2;
+  string message = 3;                 // 结果描述（成功/失败原因）
 }

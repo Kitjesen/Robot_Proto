@@ -1049,18 +1049,20 @@ class UploadFileMetadata extends $pb.GeneratedMessage {
     $core.String? remotePath,
     $core.String? filename,
     $fixnum.Int64? totalSize,
-    $core.String? md5,
+    $core.String? sha256,
     $core.bool? overwrite,
     $core.String? category,
+    $fixnum.Int64? resumeFromOffset,
   }) {
     final result = create();
     if (base != null) result.base = base;
     if (remotePath != null) result.remotePath = remotePath;
     if (filename != null) result.filename = filename;
     if (totalSize != null) result.totalSize = totalSize;
-    if (md5 != null) result.md5 = md5;
+    if (sha256 != null) result.sha256 = sha256;
     if (overwrite != null) result.overwrite = overwrite;
     if (category != null) result.category = category;
+    if (resumeFromOffset != null) result.resumeFromOffset = resumeFromOffset;
     return result;
   }
 
@@ -1084,9 +1086,12 @@ class UploadFileMetadata extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(
         4, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(5, _omitFieldNames ? '' : 'md5')
+    ..aOS(5, _omitFieldNames ? '' : 'sha256')
     ..aOB(6, _omitFieldNames ? '' : 'overwrite')
     ..aOS(7, _omitFieldNames ? '' : 'category')
+    ..a<$fixnum.Int64>(
+        8, _omitFieldNames ? '' : 'resumeFromOffset', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1147,13 +1152,13 @@ class UploadFileMetadata extends $pb.GeneratedMessage {
   void clearTotalSize() => $_clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get md5 => $_getSZ(4);
+  $core.String get sha256 => $_getSZ(4);
   @$pb.TagNumber(5)
-  set md5($core.String value) => $_setString(4, value);
+  set sha256($core.String value) => $_setString(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasMd5() => $_has(4);
+  $core.bool hasSha256() => $_has(4);
   @$pb.TagNumber(5)
-  void clearMd5() => $_clearField(5);
+  void clearSha256() => $_clearField(5);
 
   @$pb.TagNumber(6)
   $core.bool get overwrite => $_getBF(5);
@@ -1172,6 +1177,15 @@ class UploadFileMetadata extends $pb.GeneratedMessage {
   $core.bool hasCategory() => $_has(6);
   @$pb.TagNumber(7)
   void clearCategory() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get resumeFromOffset => $_getI64(7);
+  @$pb.TagNumber(8)
+  set resumeFromOffset($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasResumeFromOffset() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearResumeFromOffset() => $_clearField(8);
 }
 
 class UploadFileResponse extends $pb.GeneratedMessage {
@@ -1180,16 +1194,18 @@ class UploadFileResponse extends $pb.GeneratedMessage {
     $core.bool? success,
     $core.String? remotePath,
     $fixnum.Int64? bytesReceived,
-    $core.String? md5,
+    $core.String? sha256,
     $core.String? message,
+    $fixnum.Int64? resumedFrom,
   }) {
     final result = create();
     if (base != null) result.base = base;
     if (success != null) result.success = success;
     if (remotePath != null) result.remotePath = remotePath;
     if (bytesReceived != null) result.bytesReceived = bytesReceived;
-    if (md5 != null) result.md5 = md5;
+    if (sha256 != null) result.sha256 = sha256;
     if (message != null) result.message = message;
+    if (resumedFrom != null) result.resumedFrom = resumedFrom;
     return result;
   }
 
@@ -1213,8 +1229,11 @@ class UploadFileResponse extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(
         4, _omitFieldNames ? '' : 'bytesReceived', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(5, _omitFieldNames ? '' : 'md5')
+    ..aOS(5, _omitFieldNames ? '' : 'sha256')
     ..aOS(6, _omitFieldNames ? '' : 'message')
+    ..a<$fixnum.Int64>(
+        7, _omitFieldNames ? '' : 'resumedFrom', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1275,13 +1294,13 @@ class UploadFileResponse extends $pb.GeneratedMessage {
   void clearBytesReceived() => $_clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get md5 => $_getSZ(4);
+  $core.String get sha256 => $_getSZ(4);
   @$pb.TagNumber(5)
-  set md5($core.String value) => $_setString(4, value);
+  set sha256($core.String value) => $_setString(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasMd5() => $_has(4);
+  $core.bool hasSha256() => $_has(4);
   @$pb.TagNumber(5)
-  void clearMd5() => $_clearField(5);
+  void clearSha256() => $_clearField(5);
 
   @$pb.TagNumber(6)
   $core.String get message => $_getSZ(5);
@@ -1291,6 +1310,15 @@ class UploadFileResponse extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(5);
   @$pb.TagNumber(6)
   void clearMessage() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get resumedFrom => $_getI64(6);
+  @$pb.TagNumber(7)
+  set resumedFrom($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasResumedFrom() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearResumedFrom() => $_clearField(7);
 }
 
 class ListRemoteFilesRequest extends $pb.GeneratedMessage {
@@ -1733,6 +1761,1462 @@ class DeleteRemoteFileResponse extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(2);
   @$pb.TagNumber(3)
   void clearMessage() => $_clearField(3);
+}
+
+/// 单个 OTA 制品描述 (来自云端 manifest)
+class OtaArtifact extends $pb.GeneratedMessage {
+  factory OtaArtifact({
+    $core.String? name,
+    OtaCategory? category,
+    $core.String? version,
+    $core.String? filename,
+    $core.String? sha256,
+    $fixnum.Int64? size,
+    $core.String? targetPath,
+    $core.String? targetBoard,
+    $core.Iterable<$core.String>? hwCompat,
+    OtaApplyAction? applyAction,
+    $core.bool? requiresReboot,
+    $core.int? minBatteryPercent,
+    $core.String? changelog,
+    $core.bool? rollbackSafe,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    if (category != null) result.category = category;
+    if (version != null) result.version = version;
+    if (filename != null) result.filename = filename;
+    if (sha256 != null) result.sha256 = sha256;
+    if (size != null) result.size = size;
+    if (targetPath != null) result.targetPath = targetPath;
+    if (targetBoard != null) result.targetBoard = targetBoard;
+    if (hwCompat != null) result.hwCompat.addAll(hwCompat);
+    if (applyAction != null) result.applyAction = applyAction;
+    if (requiresReboot != null) result.requiresReboot = requiresReboot;
+    if (minBatteryPercent != null) result.minBatteryPercent = minBatteryPercent;
+    if (changelog != null) result.changelog = changelog;
+    if (rollbackSafe != null) result.rollbackSafe = rollbackSafe;
+    return result;
+  }
+
+  OtaArtifact._();
+
+  factory OtaArtifact.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory OtaArtifact.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'OtaArtifact',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aE<OtaCategory>(2, _omitFieldNames ? '' : 'category',
+        enumValues: OtaCategory.values)
+    ..aOS(3, _omitFieldNames ? '' : 'version')
+    ..aOS(4, _omitFieldNames ? '' : 'filename')
+    ..aOS(5, _omitFieldNames ? '' : 'sha256')
+    ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'size', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(7, _omitFieldNames ? '' : 'targetPath')
+    ..aOS(8, _omitFieldNames ? '' : 'targetBoard')
+    ..pPS(9, _omitFieldNames ? '' : 'hwCompat')
+    ..aE<OtaApplyAction>(10, _omitFieldNames ? '' : 'applyAction',
+        enumValues: OtaApplyAction.values)
+    ..aOB(11, _omitFieldNames ? '' : 'requiresReboot')
+    ..aI(12, _omitFieldNames ? '' : 'minBatteryPercent',
+        fieldType: $pb.PbFieldType.OU3)
+    ..aOS(13, _omitFieldNames ? '' : 'changelog')
+    ..aOB(14, _omitFieldNames ? '' : 'rollbackSafe')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OtaArtifact clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OtaArtifact copyWith(void Function(OtaArtifact) updates) =>
+      super.copyWith((message) => updates(message as OtaArtifact))
+          as OtaArtifact;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static OtaArtifact create() => OtaArtifact._();
+  @$core.override
+  OtaArtifact createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static OtaArtifact getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<OtaArtifact>(create);
+  static OtaArtifact? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  OtaCategory get category => $_getN(1);
+  @$pb.TagNumber(2)
+  set category(OtaCategory value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasCategory() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCategory() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get version => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set version($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasVersion() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearVersion() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get filename => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set filename($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasFilename() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFilename() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get sha256 => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set sha256($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSha256() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSha256() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get size => $_getI64(5);
+  @$pb.TagNumber(6)
+  set size($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSize() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSize() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get targetPath => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set targetPath($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasTargetPath() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearTargetPath() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get targetBoard => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set targetBoard($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasTargetBoard() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearTargetBoard() => $_clearField(8);
+
+  @$pb.TagNumber(9)
+  $pb.PbList<$core.String> get hwCompat => $_getList(8);
+
+  @$pb.TagNumber(10)
+  OtaApplyAction get applyAction => $_getN(9);
+  @$pb.TagNumber(10)
+  set applyAction(OtaApplyAction value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasApplyAction() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearApplyAction() => $_clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.bool get requiresReboot => $_getBF(10);
+  @$pb.TagNumber(11)
+  set requiresReboot($core.bool value) => $_setBool(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasRequiresReboot() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearRequiresReboot() => $_clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.int get minBatteryPercent => $_getIZ(11);
+  @$pb.TagNumber(12)
+  set minBatteryPercent($core.int value) => $_setUnsignedInt32(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasMinBatteryPercent() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearMinBatteryPercent() => $_clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get changelog => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set changelog($core.String value) => $_setString(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasChangelog() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearChangelog() => $_clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.bool get rollbackSafe => $_getBF(13);
+  @$pb.TagNumber(14)
+  set rollbackSafe($core.bool value) => $_setBool(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasRollbackSafe() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearRollbackSafe() => $_clearField(14);
+}
+
+/// 已安装的版本信息
+class InstalledArtifact extends $pb.GeneratedMessage {
+  factory InstalledArtifact({
+    $core.String? name,
+    OtaCategory? category,
+    $core.String? version,
+    $core.String? path,
+    $core.String? sha256,
+    $core.String? installedAt,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    if (category != null) result.category = category;
+    if (version != null) result.version = version;
+    if (path != null) result.path = path;
+    if (sha256 != null) result.sha256 = sha256;
+    if (installedAt != null) result.installedAt = installedAt;
+    return result;
+  }
+
+  InstalledArtifact._();
+
+  factory InstalledArtifact.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory InstalledArtifact.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'InstalledArtifact',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aE<OtaCategory>(2, _omitFieldNames ? '' : 'category',
+        enumValues: OtaCategory.values)
+    ..aOS(3, _omitFieldNames ? '' : 'version')
+    ..aOS(4, _omitFieldNames ? '' : 'path')
+    ..aOS(5, _omitFieldNames ? '' : 'sha256')
+    ..aOS(6, _omitFieldNames ? '' : 'installedAt')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  InstalledArtifact clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  InstalledArtifact copyWith(void Function(InstalledArtifact) updates) =>
+      super.copyWith((message) => updates(message as InstalledArtifact))
+          as InstalledArtifact;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static InstalledArtifact create() => InstalledArtifact._();
+  @$core.override
+  InstalledArtifact createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static InstalledArtifact getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<InstalledArtifact>(create);
+  static InstalledArtifact? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  OtaCategory get category => $_getN(1);
+  @$pb.TagNumber(2)
+  set category(OtaCategory value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasCategory() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCategory() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get version => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set version($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasVersion() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearVersion() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get path => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set path($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasPath() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPath() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get sha256 => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set sha256($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSha256() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSha256() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get installedAt => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set installedAt($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasInstalledAt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearInstalledAt() => $_clearField(6);
+}
+
+/// 回滚快照
+class RollbackEntry extends $pb.GeneratedMessage {
+  factory RollbackEntry({
+    $core.String? name,
+    $core.String? version,
+    $core.String? backupPath,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    if (version != null) result.version = version;
+    if (backupPath != null) result.backupPath = backupPath;
+    return result;
+  }
+
+  RollbackEntry._();
+
+  factory RollbackEntry.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory RollbackEntry.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'RollbackEntry',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aOS(2, _omitFieldNames ? '' : 'version')
+    ..aOS(3, _omitFieldNames ? '' : 'backupPath')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RollbackEntry clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RollbackEntry copyWith(void Function(RollbackEntry) updates) =>
+      super.copyWith((message) => updates(message as RollbackEntry))
+          as RollbackEntry;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RollbackEntry create() => RollbackEntry._();
+  @$core.override
+  RollbackEntry createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static RollbackEntry getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RollbackEntry>(create);
+  static RollbackEntry? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get version => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set version($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasVersion() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearVersion() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get backupPath => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set backupPath($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBackupPath() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBackupPath() => $_clearField(3);
+}
+
+/// 应用 OTA 更新
+class ApplyUpdateRequest extends $pb.GeneratedMessage {
+  factory ApplyUpdateRequest({
+    $2.RequestBase? base,
+    OtaArtifact? artifact,
+    $core.String? stagedPath,
+    $core.bool? force,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (artifact != null) result.artifact = artifact;
+    if (stagedPath != null) result.stagedPath = stagedPath;
+    if (force != null) result.force = force;
+    return result;
+  }
+
+  ApplyUpdateRequest._();
+
+  factory ApplyUpdateRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ApplyUpdateRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ApplyUpdateRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aOM<OtaArtifact>(2, _omitFieldNames ? '' : 'artifact',
+        subBuilder: OtaArtifact.create)
+    ..aOS(3, _omitFieldNames ? '' : 'stagedPath')
+    ..aOB(4, _omitFieldNames ? '' : 'force')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ApplyUpdateRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ApplyUpdateRequest copyWith(void Function(ApplyUpdateRequest) updates) =>
+      super.copyWith((message) => updates(message as ApplyUpdateRequest))
+          as ApplyUpdateRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ApplyUpdateRequest create() => ApplyUpdateRequest._();
+  @$core.override
+  ApplyUpdateRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ApplyUpdateRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ApplyUpdateRequest>(create);
+  static ApplyUpdateRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  OtaArtifact get artifact => $_getN(1);
+  @$pb.TagNumber(2)
+  set artifact(OtaArtifact value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasArtifact() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearArtifact() => $_clearField(2);
+  @$pb.TagNumber(2)
+  OtaArtifact ensureArtifact() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $core.String get stagedPath => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set stagedPath($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStagedPath() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStagedPath() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.bool get force => $_getBF(3);
+  @$pb.TagNumber(4)
+  set force($core.bool value) => $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasForce() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearForce() => $_clearField(4);
+}
+
+class ApplyUpdateResponse extends $pb.GeneratedMessage {
+  factory ApplyUpdateResponse({
+    $2.ResponseBase? base,
+    $core.bool? success,
+    OtaUpdateStatus? status,
+    $core.String? message,
+    $core.String? installedPath,
+    $core.String? previousVersion,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (success != null) result.success = success;
+    if (status != null) result.status = status;
+    if (message != null) result.message = message;
+    if (installedPath != null) result.installedPath = installedPath;
+    if (previousVersion != null) result.previousVersion = previousVersion;
+    return result;
+  }
+
+  ApplyUpdateResponse._();
+
+  factory ApplyUpdateResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ApplyUpdateResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ApplyUpdateResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..aOB(2, _omitFieldNames ? '' : 'success')
+    ..aE<OtaUpdateStatus>(3, _omitFieldNames ? '' : 'status',
+        enumValues: OtaUpdateStatus.values)
+    ..aOS(4, _omitFieldNames ? '' : 'message')
+    ..aOS(5, _omitFieldNames ? '' : 'installedPath')
+    ..aOS(6, _omitFieldNames ? '' : 'previousVersion')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ApplyUpdateResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ApplyUpdateResponse copyWith(void Function(ApplyUpdateResponse) updates) =>
+      super.copyWith((message) => updates(message as ApplyUpdateResponse))
+          as ApplyUpdateResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ApplyUpdateResponse create() => ApplyUpdateResponse._();
+  @$core.override
+  ApplyUpdateResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ApplyUpdateResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ApplyUpdateResponse>(create);
+  static ApplyUpdateResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get success => $_getBF(1);
+  @$pb.TagNumber(2)
+  set success($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSuccess() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSuccess() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  OtaUpdateStatus get status => $_getN(2);
+  @$pb.TagNumber(3)
+  set status(OtaUpdateStatus value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStatus() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStatus() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get message => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set message($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasMessage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMessage() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get installedPath => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set installedPath($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasInstalledPath() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearInstalledPath() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get previousVersion => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set previousVersion($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasPreviousVersion() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPreviousVersion() => $_clearField(6);
+}
+
+/// 查询已安装版本
+class GetInstalledVersionsRequest extends $pb.GeneratedMessage {
+  factory GetInstalledVersionsRequest({
+    $2.RequestBase? base,
+    OtaCategory? categoryFilter,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (categoryFilter != null) result.categoryFilter = categoryFilter;
+    return result;
+  }
+
+  GetInstalledVersionsRequest._();
+
+  factory GetInstalledVersionsRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GetInstalledVersionsRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetInstalledVersionsRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aE<OtaCategory>(2, _omitFieldNames ? '' : 'categoryFilter',
+        enumValues: OtaCategory.values)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetInstalledVersionsRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetInstalledVersionsRequest copyWith(
+          void Function(GetInstalledVersionsRequest) updates) =>
+      super.copyWith(
+              (message) => updates(message as GetInstalledVersionsRequest))
+          as GetInstalledVersionsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetInstalledVersionsRequest create() =>
+      GetInstalledVersionsRequest._();
+  @$core.override
+  GetInstalledVersionsRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static GetInstalledVersionsRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetInstalledVersionsRequest>(create);
+  static GetInstalledVersionsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  OtaCategory get categoryFilter => $_getN(1);
+  @$pb.TagNumber(2)
+  set categoryFilter(OtaCategory value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasCategoryFilter() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCategoryFilter() => $_clearField(2);
+}
+
+class GetInstalledVersionsResponse extends $pb.GeneratedMessage {
+  factory GetInstalledVersionsResponse({
+    $2.ResponseBase? base,
+    $core.String? robotId,
+    $core.String? hwId,
+    $core.String? systemVersion,
+    $core.Iterable<InstalledArtifact>? installed,
+    $core.Iterable<RollbackEntry>? rollbackAvailable,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (robotId != null) result.robotId = robotId;
+    if (hwId != null) result.hwId = hwId;
+    if (systemVersion != null) result.systemVersion = systemVersion;
+    if (installed != null) result.installed.addAll(installed);
+    if (rollbackAvailable != null)
+      result.rollbackAvailable.addAll(rollbackAvailable);
+    return result;
+  }
+
+  GetInstalledVersionsResponse._();
+
+  factory GetInstalledVersionsResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GetInstalledVersionsResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetInstalledVersionsResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'robotId')
+    ..aOS(3, _omitFieldNames ? '' : 'hwId')
+    ..aOS(4, _omitFieldNames ? '' : 'systemVersion')
+    ..pPM<InstalledArtifact>(5, _omitFieldNames ? '' : 'installed',
+        subBuilder: InstalledArtifact.create)
+    ..pPM<RollbackEntry>(6, _omitFieldNames ? '' : 'rollbackAvailable',
+        subBuilder: RollbackEntry.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetInstalledVersionsResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetInstalledVersionsResponse copyWith(
+          void Function(GetInstalledVersionsResponse) updates) =>
+      super.copyWith(
+              (message) => updates(message as GetInstalledVersionsResponse))
+          as GetInstalledVersionsResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetInstalledVersionsResponse create() =>
+      GetInstalledVersionsResponse._();
+  @$core.override
+  GetInstalledVersionsResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static GetInstalledVersionsResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetInstalledVersionsResponse>(create);
+  static GetInstalledVersionsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get robotId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set robotId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasRobotId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRobotId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get hwId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set hwId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasHwId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHwId() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get systemVersion => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set systemVersion($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSystemVersion() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSystemVersion() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $pb.PbList<InstalledArtifact> get installed => $_getList(4);
+
+  @$pb.TagNumber(6)
+  $pb.PbList<RollbackEntry> get rollbackAvailable => $_getList(5);
+}
+
+/// 回滚到上一版本
+class RollbackRequest extends $pb.GeneratedMessage {
+  factory RollbackRequest({
+    $2.RequestBase? base,
+    $core.String? artifactName,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (artifactName != null) result.artifactName = artifactName;
+    return result;
+  }
+
+  RollbackRequest._();
+
+  factory RollbackRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory RollbackRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'RollbackRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'artifactName')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RollbackRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RollbackRequest copyWith(void Function(RollbackRequest) updates) =>
+      super.copyWith((message) => updates(message as RollbackRequest))
+          as RollbackRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RollbackRequest create() => RollbackRequest._();
+  @$core.override
+  RollbackRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static RollbackRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RollbackRequest>(create);
+  static RollbackRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get artifactName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set artifactName($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasArtifactName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearArtifactName() => $_clearField(2);
+}
+
+class RollbackResponse extends $pb.GeneratedMessage {
+  factory RollbackResponse({
+    $2.ResponseBase? base,
+    $core.bool? success,
+    $core.String? message,
+    $core.String? restoredVersion,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (success != null) result.success = success;
+    if (message != null) result.message = message;
+    if (restoredVersion != null) result.restoredVersion = restoredVersion;
+    return result;
+  }
+
+  RollbackResponse._();
+
+  factory RollbackResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory RollbackResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'RollbackResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..aOB(2, _omitFieldNames ? '' : 'success')
+    ..aOS(3, _omitFieldNames ? '' : 'message')
+    ..aOS(4, _omitFieldNames ? '' : 'restoredVersion')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RollbackResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RollbackResponse copyWith(void Function(RollbackResponse) updates) =>
+      super.copyWith((message) => updates(message as RollbackResponse))
+          as RollbackResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RollbackResponse create() => RollbackResponse._();
+  @$core.override
+  RollbackResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static RollbackResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RollbackResponse>(create);
+  static RollbackResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get success => $_getBF(1);
+  @$pb.TagNumber(2)
+  set success($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSuccess() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSuccess() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get message => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set message($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessage() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get restoredVersion => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set restoredVersion($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasRestoredVersion() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRestoredVersion() => $_clearField(4);
+}
+
+/// 机器人直接从 URL 下载文件（免手机中转）
+class DownloadFromUrlRequest extends $pb.GeneratedMessage {
+  factory DownloadFromUrlRequest({
+    $2.RequestBase? base,
+    $core.String? url,
+    $core.String? stagingPath,
+    $core.String? expectedSha256,
+    $fixnum.Int64? expectedSize,
+    $core.Iterable<$core.MapEntry<$core.String, $core.String>>? headers,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (url != null) result.url = url;
+    if (stagingPath != null) result.stagingPath = stagingPath;
+    if (expectedSha256 != null) result.expectedSha256 = expectedSha256;
+    if (expectedSize != null) result.expectedSize = expectedSize;
+    if (headers != null) result.headers.addEntries(headers);
+    return result;
+  }
+
+  DownloadFromUrlRequest._();
+
+  factory DownloadFromUrlRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory DownloadFromUrlRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'DownloadFromUrlRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'url')
+    ..aOS(3, _omitFieldNames ? '' : 'stagingPath')
+    ..aOS(4, _omitFieldNames ? '' : 'expectedSha256')
+    ..a<$fixnum.Int64>(
+        5, _omitFieldNames ? '' : 'expectedSize', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..m<$core.String, $core.String>(6, _omitFieldNames ? '' : 'headers',
+        entryClassName: 'DownloadFromUrlRequest.HeadersEntry',
+        keyFieldType: $pb.PbFieldType.OS,
+        valueFieldType: $pb.PbFieldType.OS,
+        packageName: const $pb.PackageName('robot.v1'))
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DownloadFromUrlRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DownloadFromUrlRequest copyWith(
+          void Function(DownloadFromUrlRequest) updates) =>
+      super.copyWith((message) => updates(message as DownloadFromUrlRequest))
+          as DownloadFromUrlRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DownloadFromUrlRequest create() => DownloadFromUrlRequest._();
+  @$core.override
+  DownloadFromUrlRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static DownloadFromUrlRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DownloadFromUrlRequest>(create);
+  static DownloadFromUrlRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get url => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set url($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasUrl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUrl() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get stagingPath => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set stagingPath($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStagingPath() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStagingPath() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get expectedSha256 => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set expectedSha256($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasExpectedSha256() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExpectedSha256() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get expectedSize => $_getI64(4);
+  @$pb.TagNumber(5)
+  set expectedSize($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasExpectedSize() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearExpectedSize() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $pb.PbMap<$core.String, $core.String> get headers => $_getMap(5);
+}
+
+/// OTA 进度事件（用于 DownloadFromUrl 流式返回）
+class OtaProgress extends $pb.GeneratedMessage {
+  factory OtaProgress({
+    OtaUpdateStatus? status,
+    $core.double? progressPercent,
+    $fixnum.Int64? bytesCompleted,
+    $fixnum.Int64? bytesTotal,
+    $core.String? message,
+    $core.double? speedBytesPerSec,
+    $core.double? etaSeconds,
+  }) {
+    final result = create();
+    if (status != null) result.status = status;
+    if (progressPercent != null) result.progressPercent = progressPercent;
+    if (bytesCompleted != null) result.bytesCompleted = bytesCompleted;
+    if (bytesTotal != null) result.bytesTotal = bytesTotal;
+    if (message != null) result.message = message;
+    if (speedBytesPerSec != null) result.speedBytesPerSec = speedBytesPerSec;
+    if (etaSeconds != null) result.etaSeconds = etaSeconds;
+    return result;
+  }
+
+  OtaProgress._();
+
+  factory OtaProgress.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory OtaProgress.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'OtaProgress',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aE<OtaUpdateStatus>(1, _omitFieldNames ? '' : 'status',
+        enumValues: OtaUpdateStatus.values)
+    ..aD(2, _omitFieldNames ? '' : 'progressPercent',
+        fieldType: $pb.PbFieldType.OF)
+    ..a<$fixnum.Int64>(
+        3, _omitFieldNames ? '' : 'bytesCompleted', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(
+        4, _omitFieldNames ? '' : 'bytesTotal', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(5, _omitFieldNames ? '' : 'message')
+    ..aD(6, _omitFieldNames ? '' : 'speedBytesPerSec')
+    ..aD(7, _omitFieldNames ? '' : 'etaSeconds')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OtaProgress clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OtaProgress copyWith(void Function(OtaProgress) updates) =>
+      super.copyWith((message) => updates(message as OtaProgress))
+          as OtaProgress;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static OtaProgress create() => OtaProgress._();
+  @$core.override
+  OtaProgress createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static OtaProgress getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<OtaProgress>(create);
+  static OtaProgress? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  OtaUpdateStatus get status => $_getN(0);
+  @$pb.TagNumber(1)
+  set status(OtaUpdateStatus value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get progressPercent => $_getN(1);
+  @$pb.TagNumber(2)
+  set progressPercent($core.double value) => $_setFloat(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasProgressPercent() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProgressPercent() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get bytesCompleted => $_getI64(2);
+  @$pb.TagNumber(3)
+  set bytesCompleted($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBytesCompleted() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBytesCompleted() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get bytesTotal => $_getI64(3);
+  @$pb.TagNumber(4)
+  set bytesTotal($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBytesTotal() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBytesTotal() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get message => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set message($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMessage() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMessage() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.double get speedBytesPerSec => $_getN(5);
+  @$pb.TagNumber(6)
+  set speedBytesPerSec($core.double value) => $_setDouble(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSpeedBytesPerSec() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSpeedBytesPerSec() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.double get etaSeconds => $_getN(6);
+  @$pb.TagNumber(7)
+  set etaSeconds($core.double value) => $_setDouble(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasEtaSeconds() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearEtaSeconds() => $_clearField(7);
+}
+
+/// 安装前预检查
+class CheckUpdateReadinessRequest extends $pb.GeneratedMessage {
+  factory CheckUpdateReadinessRequest({
+    $2.RequestBase? base,
+    $core.Iterable<OtaArtifact>? artifacts,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (artifacts != null) result.artifacts.addAll(artifacts);
+    return result;
+  }
+
+  CheckUpdateReadinessRequest._();
+
+  factory CheckUpdateReadinessRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory CheckUpdateReadinessRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'CheckUpdateReadinessRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..pPM<OtaArtifact>(2, _omitFieldNames ? '' : 'artifacts',
+        subBuilder: OtaArtifact.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CheckUpdateReadinessRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CheckUpdateReadinessRequest copyWith(
+          void Function(CheckUpdateReadinessRequest) updates) =>
+      super.copyWith(
+              (message) => updates(message as CheckUpdateReadinessRequest))
+          as CheckUpdateReadinessRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CheckUpdateReadinessRequest create() =>
+      CheckUpdateReadinessRequest._();
+  @$core.override
+  CheckUpdateReadinessRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static CheckUpdateReadinessRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CheckUpdateReadinessRequest>(create);
+  static CheckUpdateReadinessRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $pb.PbList<OtaArtifact> get artifacts => $_getList(1);
+}
+
+class CheckUpdateReadinessResponse extends $pb.GeneratedMessage {
+  factory CheckUpdateReadinessResponse({
+    $2.ResponseBase? base,
+    $core.bool? ready,
+    $core.Iterable<ReadinessCheck>? checks,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (ready != null) result.ready = ready;
+    if (checks != null) result.checks.addAll(checks);
+    return result;
+  }
+
+  CheckUpdateReadinessResponse._();
+
+  factory CheckUpdateReadinessResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory CheckUpdateReadinessResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'CheckUpdateReadinessResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..aOB(2, _omitFieldNames ? '' : 'ready')
+    ..pPM<ReadinessCheck>(3, _omitFieldNames ? '' : 'checks',
+        subBuilder: ReadinessCheck.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CheckUpdateReadinessResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CheckUpdateReadinessResponse copyWith(
+          void Function(CheckUpdateReadinessResponse) updates) =>
+      super.copyWith(
+              (message) => updates(message as CheckUpdateReadinessResponse))
+          as CheckUpdateReadinessResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CheckUpdateReadinessResponse create() =>
+      CheckUpdateReadinessResponse._();
+  @$core.override
+  CheckUpdateReadinessResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static CheckUpdateReadinessResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CheckUpdateReadinessResponse>(create);
+  static CheckUpdateReadinessResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get ready => $_getBF(1);
+  @$pb.TagNumber(2)
+  set ready($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasReady() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReady() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $pb.PbList<ReadinessCheck> get checks => $_getList(2);
+}
+
+class ReadinessCheck extends $pb.GeneratedMessage {
+  factory ReadinessCheck({
+    $core.String? checkName,
+    $core.bool? passed,
+    $core.String? message,
+    $core.String? detail,
+  }) {
+    final result = create();
+    if (checkName != null) result.checkName = checkName;
+    if (passed != null) result.passed = passed;
+    if (message != null) result.message = message;
+    if (detail != null) result.detail = detail;
+    return result;
+  }
+
+  ReadinessCheck._();
+
+  factory ReadinessCheck.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ReadinessCheck.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ReadinessCheck',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'checkName')
+    ..aOB(2, _omitFieldNames ? '' : 'passed')
+    ..aOS(3, _omitFieldNames ? '' : 'message')
+    ..aOS(4, _omitFieldNames ? '' : 'detail')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ReadinessCheck clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ReadinessCheck copyWith(void Function(ReadinessCheck) updates) =>
+      super.copyWith((message) => updates(message as ReadinessCheck))
+          as ReadinessCheck;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ReadinessCheck create() => ReadinessCheck._();
+  @$core.override
+  ReadinessCheck createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ReadinessCheck getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ReadinessCheck>(create);
+  static ReadinessCheck? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get checkName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set checkName($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCheckName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCheckName() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.bool get passed => $_getBF(1);
+  @$pb.TagNumber(2)
+  set passed($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPassed() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPassed() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get message => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set message($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessage() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get detail => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set detail($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasDetail() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDetail() => $_clearField(4);
 }
 
 class StartCameraRequest extends $pb.GeneratedMessage {
@@ -2468,6 +3952,159 @@ class AudioProfile extends $pb.GeneratedMessage {
   $core.bool hasBitrateKbps() => $_has(3);
   @$pb.TagNumber(4)
   void clearBitrateKbps() => $_clearField(4);
+}
+
+/// 固件刷写请求（上传完成后调用）
+class ApplyFirmwareRequest extends $pb.GeneratedMessage {
+  factory ApplyFirmwareRequest({
+    $2.RequestBase? base,
+    $core.String? firmwarePath,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (firmwarePath != null) result.firmwarePath = firmwarePath;
+    return result;
+  }
+
+  ApplyFirmwareRequest._();
+
+  factory ApplyFirmwareRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ApplyFirmwareRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ApplyFirmwareRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'firmwarePath')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ApplyFirmwareRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ApplyFirmwareRequest copyWith(void Function(ApplyFirmwareRequest) updates) =>
+      super.copyWith((message) => updates(message as ApplyFirmwareRequest))
+          as ApplyFirmwareRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ApplyFirmwareRequest create() => ApplyFirmwareRequest._();
+  @$core.override
+  ApplyFirmwareRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ApplyFirmwareRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ApplyFirmwareRequest>(create);
+  static ApplyFirmwareRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get firmwarePath => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set firmwarePath($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFirmwarePath() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFirmwarePath() => $_clearField(2);
+}
+
+/// 固件刷写响应
+class ApplyFirmwareResponse extends $pb.GeneratedMessage {
+  factory ApplyFirmwareResponse({
+    $2.ResponseBase? base,
+    $core.bool? success,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (success != null) result.success = success;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  ApplyFirmwareResponse._();
+
+  factory ApplyFirmwareResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ApplyFirmwareResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ApplyFirmwareResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..aOB(2, _omitFieldNames ? '' : 'success')
+    ..aOS(3, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ApplyFirmwareResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ApplyFirmwareResponse copyWith(
+          void Function(ApplyFirmwareResponse) updates) =>
+      super.copyWith((message) => updates(message as ApplyFirmwareResponse))
+          as ApplyFirmwareResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ApplyFirmwareResponse create() => ApplyFirmwareResponse._();
+  @$core.override
+  ApplyFirmwareResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ApplyFirmwareResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ApplyFirmwareResponse>(create);
+  static ApplyFirmwareResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get success => $_getBF(1);
+  @$pb.TagNumber(2)
+  set success($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSuccess() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSuccess() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get message => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set message($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessage() => $_clearField(3);
 }
 
 const $core.bool _omitFieldNames =
