@@ -48,6 +48,8 @@ message FastState {
   
   // TF 状态
   bool tf_ok = 7;
+  // 关节角度（16 个值：4 条腿 × 4 关节 [hip, thigh, calf, foot]）
+  repeated float joint_angles = 8;
 }
 
 // ==================== 慢速状态 ====================

@@ -32,6 +32,26 @@ service DataService {
   // 删除远程文件
   rpc DeleteRemoteFile(DeleteRemoteFileRequest) returns (DeleteRemoteFileResponse);
   
+  // ---- OTA 更新管理 ----
+
+  // 应用 OTA 更新（上传后调用）
+  rpc ApplyUpdate(ApplyUpdateRequest) returns (ApplyUpdateResponse);
+
+  // 查询已安装版本
+  rpc GetInstalledVersions(GetInstalledVersionsRequest) returns (GetInstalledVersionsResponse);
+
+  // 回滚到上一版本
+  rpc Rollback(RollbackRequest) returns (RollbackResponse);
+
+  // 机器人直接从 URL 下载（免手机中转，适合大文件如 ONNX 模型）
+  // 返回下载进度流，客户端可实时显示进度条
+  rpc DownloadFromUrl(DownloadFromUrlRequest) returns (stream OtaProgress);
+
+  // 安装前预检查（磁盘空间、电量、兼容性）
+  rpc CheckUpdateReadiness(CheckUpdateReadinessRequest) returns (CheckUpdateReadinessResponse);
+
+  // ---- 视频控制 ----
+
   // 视频控制（WebRTC 信令）- 旧接口，保留兼容
   rpc StartCamera(StartCameraRequest) returns (StartCameraResponse);
   rpc StopCamera(StopCameraRequest) returns (StopCameraResponse);
@@ -134,9 +154,10 @@ message UploadFileMetadata {
   string remote_path = 2;       // 目标路径, 如 "/home/sunrise/models/yolo.pt"
   string filename = 3;          // 原始文件名
   uint64 total_size = 4;        // 文件总大小(bytes)
-  string md5 = 5;               // MD5 校验 (可选)
+  string sha256 = 5;            // SHA256 校验 (推荐)
   bool overwrite = 6;           // 是否覆盖已存在文件
   string category = 7;          // 分类: "model", "map", "config", "firmware"
+  uint64 resume_from_offset = 8; // 断点续传: 从此偏移量继续 (0=全新上传)
 }
 
 message UploadFileResponse {
@@ -144,8 +165,9 @@ message UploadFileResponse {
   bool success = 2;
   string remote_path = 3;       // 最终保存路径
   uint64 bytes_received = 4;
-  string md5 = 5;               // 服务端计算的 MD5
+  string sha256 = 5;            // 服务端计算的 SHA256
   string message = 6;
+  uint64 resumed_from = 7;      // 实际续传起始偏移量 (0=全新)
 }
 
 // ==================== 远程文件管理 ====================
@@ -181,6 +203,162 @@ message DeleteRemoteFileResponse {
   ResponseBase base = 1;
   bool success = 2;
   string message = 3;
+}
+
+// ==================== OTA 更新管理 ====================
+
+// OTA 资源分类
+enum OtaCategory {
+  OTA_CATEGORY_UNSPECIFIED = 0;
+  OTA_CATEGORY_MODEL = 1;       // ONNX/PT/TFLite 模型
+  OTA_CATEGORY_FIRMWARE = 2;    // 系统固件 (deb/bin/hex/img)
+  OTA_CATEGORY_MAP = 3;         // 导航地图 (pcd/pickle/pgm)
+  OTA_CATEGORY_CONFIG = 4;      // 配置文件 (yaml/json)
+}
+
+// OTA 安装动作
+enum OtaApplyAction {
+  OTA_APPLY_ACTION_UNSPECIFIED = 0;
+  OTA_APPLY_ACTION_COPY_ONLY = 1;         // 仅复制到目标路径
+  OTA_APPLY_ACTION_RELOAD_MODEL = 2;      // 复制后通知 Dog Board 热加载
+  OTA_APPLY_ACTION_INSTALL_DEB = 3;       // dpkg 安装
+  OTA_APPLY_ACTION_FLASH_MCU = 4;         // 串口刷写 (stm32flash)
+  OTA_APPLY_ACTION_INSTALL_SCRIPT = 5;    // 执行自定义安装脚本
+}
+
+// OTA 更新状态
+enum OtaUpdateStatus {
+  OTA_UPDATE_STATUS_UNSPECIFIED = 0;
+  OTA_UPDATE_STATUS_PENDING = 1;          // 等待安装
+  OTA_UPDATE_STATUS_VERIFYING = 2;        // 校验中
+  OTA_UPDATE_STATUS_BACKING_UP = 3;       // 备份旧版本中
+  OTA_UPDATE_STATUS_INSTALLING = 4;       // 安装中
+  OTA_UPDATE_STATUS_VALIDATING = 5;       // 安装后验证中
+  OTA_UPDATE_STATUS_SUCCESS = 6;          // 安装成功
+  OTA_UPDATE_STATUS_FAILED = 7;           // 安装失败
+  OTA_UPDATE_STATUS_ROLLED_BACK = 8;      // 已回滚
+}
+
+// 单个 OTA 制品描述 (来自云端 manifest)
+message OtaArtifact {
+  string name = 1;                        // 制品名称, 如 "policy_walk"
+  OtaCategory category = 2;
+  string version = 3;                     // semver, 如 "2.3.0"
+  string filename = 4;                    // 文件名, 如 "policy_walk_v2.3.onnx"
+  string sha256 = 5;                      // 完整性校验
+  uint64 size = 6;
+  string target_path = 7;                 // 安装路径, 如 "/opt/robot/models/policy_walk.onnx"
+  string target_board = 8;                // "nav" / "dog"
+  repeated string hw_compat = 9;          // 兼容硬件 ["dog_v2", "dog_v3"], "*" = 全部
+  OtaApplyAction apply_action = 10;
+  bool requires_reboot = 11;
+  uint32 min_battery_percent = 12;        // 最低电量要求 (0=不限)
+  string changelog = 13;
+  bool rollback_safe = 14;                // 是否支持回滚
+}
+
+// 已安装的版本信息
+message InstalledArtifact {
+  string name = 1;
+  OtaCategory category = 2;
+  string version = 3;
+  string path = 4;
+  string sha256 = 5;
+  string installed_at = 6;                // ISO 8601
+}
+
+// 回滚快照
+message RollbackEntry {
+  string name = 1;
+  string version = 2;
+  string backup_path = 3;
+}
+
+// ---- RPC 请求/响应 ----
+
+// 应用 OTA 更新
+message ApplyUpdateRequest {
+  RequestBase base = 1;
+  OtaArtifact artifact = 2;              // 要安装的制品描述
+  string staged_path = 3;                // 已上传文件在机器人上的路径 (staging)
+  bool force = 4;                        // 跳过兼容性检查
+}
+
+message ApplyUpdateResponse {
+  ResponseBase base = 1;
+  bool success = 2;
+  OtaUpdateStatus status = 3;
+  string message = 4;
+  string installed_path = 5;              // 最终安装路径
+  string previous_version = 6;            // 被替换的旧版本
+}
+
+// 查询已安装版本
+message GetInstalledVersionsRequest {
+  RequestBase base = 1;
+  OtaCategory category_filter = 2;       // 可选过滤, 0=全部
+}
+
+message GetInstalledVersionsResponse {
+  ResponseBase base = 1;
+  string robot_id = 2;
+  string hw_id = 3;
+  string system_version = 4;
+  repeated InstalledArtifact installed = 5;
+  repeated RollbackEntry rollback_available = 6;
+}
+
+// 回滚到上一版本
+message RollbackRequest {
+  RequestBase base = 1;
+  string artifact_name = 2;              // 要回滚的制品名称
+}
+
+message RollbackResponse {
+  ResponseBase base = 1;
+  bool success = 2;
+  string message = 3;
+  string restored_version = 4;
+}
+
+// 机器人直接从 URL 下载文件（免手机中转）
+message DownloadFromUrlRequest {
+  RequestBase base = 1;
+  string url = 2;                         // 下载 URL (GitHub Release asset URL)
+  string staging_path = 3;                // 保存到机器人的路径
+  string expected_sha256 = 4;             // 期望的 SHA256 (下载后校验)
+  uint64 expected_size = 5;               // 期望文件大小 (用于进度计算)
+  map<string, string> headers = 6;        // HTTP 请求头 (如 Authorization)
+}
+
+// OTA 进度事件（用于 DownloadFromUrl 流式返回）
+message OtaProgress {
+  OtaUpdateStatus status = 1;
+  float progress_percent = 2;             // 0.0 ~ 100.0
+  uint64 bytes_completed = 3;
+  uint64 bytes_total = 4;
+  string message = 5;
+  double speed_bytes_per_sec = 6;         // 当前传输速率
+  double eta_seconds = 7;                 // 预计剩余时间 (秒)
+}
+
+// 安装前预检查
+message CheckUpdateReadinessRequest {
+  RequestBase base = 1;
+  repeated OtaArtifact artifacts = 2;     // 待安装制品列表
+}
+
+message CheckUpdateReadinessResponse {
+  ResponseBase base = 1;
+  bool ready = 2;                         // 是否全部通过
+  repeated ReadinessCheck checks = 3;
+}
+
+message ReadinessCheck {
+  string check_name = 1;                  // "disk_space", "battery", "hw_compat", "running_tasks"
+  bool passed = 2;
+  string message = 3;                     // 人可读描述
+  string detail = 4;                      // 机器可读详情 (如 "free=2048MB required=512MB")
 }
 
 // ==================== 视频控制 ====================
