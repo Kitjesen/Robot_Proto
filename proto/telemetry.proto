@@ -74,6 +74,12 @@ message SlowState {
   
   // 导航状态（扩展）
   NavigationStatus navigation = 7;
+
+  // 健康状态（综合诊断）
+  HealthStatus health = 8;
+
+  // 围栏状态
+  GeofenceStatus geofence = 9;
 }
 
 message SystemResource {
@@ -91,6 +97,40 @@ message TopicRates {
   float lidar_hz = 4;
   float cmd_vel_hz = 5;
   float global_path_hz = 6;
+}
+
+// ==================== 健康状态 ====================
+
+message HealthStatus {
+  // 综合健康等级: "OK", "DEGRADED", "CRITICAL", "FAULT"
+  string overall_level = 1;
+
+  // 各子系统状态
+  repeated SubsystemHealth subsystems = 2;
+
+  // 定位质量 (ICP fitness score, 越低越好, -1=不可用)
+  float localization_score = 3;
+}
+
+message SubsystemHealth {
+  string name = 1;             // 子系统名 (slam, terrain_analysis, local_planner, tf_chain, localization)
+  string level = 2;            // "OK", "DEGRADED", "CRITICAL", "FAULT"
+  string message = 3;          // 人类可读描述
+  double expected_hz = 4;      // 期望频率 (0=非频率指标)
+  double actual_hz = 5;        // 实际频率
+}
+
+// ==================== 围栏状态 ====================
+
+message GeofenceStatus {
+  // 围栏状态: "NO_FENCE", "SAFE", "WARNING", "VIOLATION"
+  string state = 1;
+
+  // 是否已设置围栏
+  bool has_fence = 2;
+
+  // 到最近围栏边的距离 (m), 负值表示越界
+  double margin_distance = 3;
 }
 
 // ==================== 导航状态扩展 ====================
