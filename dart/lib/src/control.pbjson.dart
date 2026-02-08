@@ -386,6 +386,97 @@ final $typed_data.Uint8List safetyStatusDescriptor = $convert.base64Decode(
     'RlZBIqChFtYXhfYWxsb3dlZF9zcGVlZBgFIAEoAVIPbWF4QWxsb3dlZFNwZWVkEiUKDnNhZmV0'
     'eV9tZXNzYWdlGAYgASgJUg1zYWZldHlNZXNzYWdl');
 
+@$core.Deprecated('Use navigationGoalDescriptor instead')
+const NavigationGoal$json = {
+  '1': 'NavigationGoal',
+  '2': [
+    {
+      '1': 'position',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.Vector3',
+      '10': 'position'
+    },
+    {'1': 'yaw', '3': 2, '4': 1, '5': 1, '10': 'yaw'},
+    {'1': 'label', '3': 3, '4': 1, '5': 9, '10': 'label'},
+    {'1': 'arrival_radius', '3': 4, '4': 1, '5': 1, '10': 'arrivalRadius'},
+  ],
+};
+
+/// Descriptor for `NavigationGoal`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List navigationGoalDescriptor = $convert.base64Decode(
+    'Cg5OYXZpZ2F0aW9uR29hbBItCghwb3NpdGlvbhgBIAEoCzIRLnJvYm90LnYxLlZlY3RvcjNSCH'
+    'Bvc2l0aW9uEhAKA3lhdxgCIAEoAVIDeWF3EhQKBWxhYmVsGAMgASgJUgVsYWJlbBIlCg5hcnJp'
+    'dmFsX3JhZGl1cxgEIAEoAVINYXJyaXZhbFJhZGl1cw==');
+
+@$core.Deprecated('Use navigationParamsDescriptor instead')
+const NavigationParams$json = {
+  '1': 'NavigationParams',
+  '2': [
+    {
+      '1': 'waypoints',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.robot.v1.NavigationGoal',
+      '10': 'waypoints'
+    },
+    {'1': 'loop', '3': 2, '4': 1, '5': 8, '10': 'loop'},
+    {'1': 'max_speed', '3': 3, '4': 1, '5': 1, '10': 'maxSpeed'},
+  ],
+};
+
+/// Descriptor for `NavigationParams`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List navigationParamsDescriptor = $convert.base64Decode(
+    'ChBOYXZpZ2F0aW9uUGFyYW1zEjYKCXdheXBvaW50cxgBIAMoCzIYLnJvYm90LnYxLk5hdmlnYX'
+    'Rpb25Hb2FsUgl3YXlwb2ludHMSEgoEbG9vcBgCIAEoCFIEbG9vcBIbCgltYXhfc3BlZWQYAyAB'
+    'KAFSCG1heFNwZWVk');
+
+@$core.Deprecated('Use mappingParamsDescriptor instead')
+const MappingParams$json = {
+  '1': 'MappingParams',
+  '2': [
+    {'1': 'map_name', '3': 1, '4': 1, '5': 9, '10': 'mapName'},
+    {'1': 'save_on_complete', '3': 2, '4': 1, '5': 8, '10': 'saveOnComplete'},
+    {'1': 'resolution', '3': 3, '4': 1, '5': 1, '10': 'resolution'},
+  ],
+};
+
+/// Descriptor for `MappingParams`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mappingParamsDescriptor = $convert.base64Decode(
+    'Cg1NYXBwaW5nUGFyYW1zEhkKCG1hcF9uYW1lGAEgASgJUgdtYXBOYW1lEigKEHNhdmVfb25fY2'
+    '9tcGxldGUYAiABKAhSDnNhdmVPbkNvbXBsZXRlEh4KCnJlc29sdXRpb24YAyABKAFSCnJlc29s'
+    'dXRpb24=');
+
+@$core.Deprecated('Use followPathParamsDescriptor instead')
+const FollowPathParams$json = {
+  '1': 'FollowPathParams',
+  '2': [
+    {
+      '1': 'waypoints',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.robot.v1.NavigationGoal',
+      '10': 'waypoints'
+    },
+    {
+      '1': 'tracking_tolerance',
+      '3': 2,
+      '4': 1,
+      '5': 1,
+      '10': 'trackingTolerance'
+    },
+  ],
+};
+
+/// Descriptor for `FollowPathParams`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List followPathParamsDescriptor = $convert.base64Decode(
+    'ChBGb2xsb3dQYXRoUGFyYW1zEjYKCXdheXBvaW50cxgBIAMoCzIYLnJvYm90LnYxLk5hdmlnYX'
+    'Rpb25Hb2FsUgl3YXlwb2ludHMSLQoSdHJhY2tpbmdfdG9sZXJhbmNlGAIgASgBUhF0cmFja2lu'
+    'Z1RvbGVyYW5jZQ==');
+
 @$core.Deprecated('Use startTaskRequestDescriptor instead')
 const StartTaskRequest$json = {
   '1': 'StartTaskRequest',
@@ -407,6 +498,30 @@ const StartTaskRequest$json = {
       '10': 'taskType'
     },
     {'1': 'params_json', '3': 3, '4': 1, '5': 9, '10': 'paramsJson'},
+    {
+      '1': 'navigation_params',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.NavigationParams',
+      '10': 'navigationParams'
+    },
+    {
+      '1': 'mapping_params',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.MappingParams',
+      '10': 'mappingParams'
+    },
+    {
+      '1': 'follow_path_params',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.FollowPathParams',
+      '10': 'followPathParams'
+    },
   ],
 };
 
@@ -414,7 +529,11 @@ const StartTaskRequest$json = {
 final $typed_data.Uint8List startTaskRequestDescriptor = $convert.base64Decode(
     'ChBTdGFydFRhc2tSZXF1ZXN0EikKBGJhc2UYASABKAsyFS5yb2JvdC52MS5SZXF1ZXN0QmFzZV'
     'IEYmFzZRIvCgl0YXNrX3R5cGUYAiABKA4yEi5yb2JvdC52MS5UYXNrVHlwZVIIdGFza1R5cGUS'
-    'HwoLcGFyYW1zX2pzb24YAyABKAlSCnBhcmFtc0pzb24=');
+    'HwoLcGFyYW1zX2pzb24YAyABKAlSCnBhcmFtc0pzb24SRwoRbmF2aWdhdGlvbl9wYXJhbXMYBC'
+    'ABKAsyGi5yb2JvdC52MS5OYXZpZ2F0aW9uUGFyYW1zUhBuYXZpZ2F0aW9uUGFyYW1zEj4KDm1h'
+    'cHBpbmdfcGFyYW1zGAUgASgLMhcucm9ib3QudjEuTWFwcGluZ1BhcmFtc1INbWFwcGluZ1Bhcm'
+    'FtcxJIChJmb2xsb3dfcGF0aF9wYXJhbXMYBiABKAsyGi5yb2JvdC52MS5Gb2xsb3dQYXRoUGFy'
+    'YW1zUhBmb2xsb3dQYXRoUGFyYW1z');
 
 @$core.Deprecated('Use startTaskResponseDescriptor instead')
 const StartTaskResponse$json = {
@@ -480,3 +599,129 @@ const CancelTaskResponse$json = {
 final $typed_data.Uint8List cancelTaskResponseDescriptor = $convert.base64Decode(
     'ChJDYW5jZWxUYXNrUmVzcG9uc2USKgoEYmFzZRgBIAEoCzIWLnJvYm90LnYxLlJlc3BvbnNlQm'
     'FzZVIEYmFzZRIiCgR0YXNrGAIgASgLMg4ucm9ib3QudjEuVGFza1IEdGFzaw==');
+
+@$core.Deprecated('Use pauseTaskRequestDescriptor instead')
+const PauseTaskRequest$json = {
+  '1': 'PauseTaskRequest',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {'1': 'task_id', '3': 2, '4': 1, '5': 9, '10': 'taskId'},
+  ],
+};
+
+/// Descriptor for `PauseTaskRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pauseTaskRequestDescriptor = $convert.base64Decode(
+    'ChBQYXVzZVRhc2tSZXF1ZXN0EikKBGJhc2UYASABKAsyFS5yb2JvdC52MS5SZXF1ZXN0QmFzZV'
+    'IEYmFzZRIXCgd0YXNrX2lkGAIgASgJUgZ0YXNrSWQ=');
+
+@$core.Deprecated('Use pauseTaskResponseDescriptor instead')
+const PauseTaskResponse$json = {
+  '1': 'PauseTaskResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {'1': 'task', '3': 2, '4': 1, '5': 11, '6': '.robot.v1.Task', '10': 'task'},
+  ],
+};
+
+/// Descriptor for `PauseTaskResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pauseTaskResponseDescriptor = $convert.base64Decode(
+    'ChFQYXVzZVRhc2tSZXNwb25zZRIqCgRiYXNlGAEgASgLMhYucm9ib3QudjEuUmVzcG9uc2VCYX'
+    'NlUgRiYXNlEiIKBHRhc2sYAiABKAsyDi5yb2JvdC52MS5UYXNrUgR0YXNr');
+
+@$core.Deprecated('Use resumeTaskRequestDescriptor instead')
+const ResumeTaskRequest$json = {
+  '1': 'ResumeTaskRequest',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {'1': 'task_id', '3': 2, '4': 1, '5': 9, '10': 'taskId'},
+  ],
+};
+
+/// Descriptor for `ResumeTaskRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resumeTaskRequestDescriptor = $convert.base64Decode(
+    'ChFSZXN1bWVUYXNrUmVxdWVzdBIpCgRiYXNlGAEgASgLMhUucm9ib3QudjEuUmVxdWVzdEJhc2'
+    'VSBGJhc2USFwoHdGFza19pZBgCIAEoCVIGdGFza0lk');
+
+@$core.Deprecated('Use resumeTaskResponseDescriptor instead')
+const ResumeTaskResponse$json = {
+  '1': 'ResumeTaskResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {'1': 'task', '3': 2, '4': 1, '5': 11, '6': '.robot.v1.Task', '10': 'task'},
+  ],
+};
+
+/// Descriptor for `ResumeTaskResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resumeTaskResponseDescriptor = $convert.base64Decode(
+    'ChJSZXN1bWVUYXNrUmVzcG9uc2USKgoEYmFzZRgBIAEoCzIWLnJvYm90LnYxLlJlc3BvbnNlQm'
+    'FzZVIEYmFzZRIiCgR0YXNrGAIgASgLMg4ucm9ib3QudjEuVGFza1IEdGFzaw==');
+
+@$core.Deprecated('Use getTaskStatusRequestDescriptor instead')
+const GetTaskStatusRequest$json = {
+  '1': 'GetTaskStatusRequest',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {'1': 'task_id', '3': 2, '4': 1, '5': 9, '10': 'taskId'},
+  ],
+};
+
+/// Descriptor for `GetTaskStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getTaskStatusRequestDescriptor = $convert.base64Decode(
+    'ChRHZXRUYXNrU3RhdHVzUmVxdWVzdBIpCgRiYXNlGAEgASgLMhUucm9ib3QudjEuUmVxdWVzdE'
+    'Jhc2VSBGJhc2USFwoHdGFza19pZBgCIAEoCVIGdGFza0lk');
+
+@$core.Deprecated('Use getTaskStatusResponseDescriptor instead')
+const GetTaskStatusResponse$json = {
+  '1': 'GetTaskStatusResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {'1': 'task', '3': 2, '4': 1, '5': 11, '6': '.robot.v1.Task', '10': 'task'},
+  ],
+};
+
+/// Descriptor for `GetTaskStatusResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getTaskStatusResponseDescriptor = $convert.base64Decode(
+    'ChVHZXRUYXNrU3RhdHVzUmVzcG9uc2USKgoEYmFzZRgBIAEoCzIWLnJvYm90LnYxLlJlc3Bvbn'
+    'NlQmFzZVIEYmFzZRIiCgR0YXNrGAIgASgLMg4ucm9ib3QudjEuVGFza1IEdGFzaw==');

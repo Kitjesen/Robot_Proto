@@ -365,3 +365,163 @@ final $typed_data.Uint8List saveMapResponseDescriptor = $convert.base64Decode(
     'Cg9TYXZlTWFwUmVzcG9uc2USKgoEYmFzZRgBIAEoCzIWLnJvYm90LnYxLlJlc3BvbnNlQmFzZV'
     'IEYmFzZRIYCgdzdWNjZXNzGAIgASgIUgdzdWNjZXNzEhgKB21lc3NhZ2UYAyABKAlSB21lc3Nh'
     'Z2U=');
+
+@$core.Deprecated('Use mapInfoDescriptor instead')
+const MapInfo$json = {
+  '1': 'MapInfo',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'path', '3': 2, '4': 1, '5': 9, '10': 'path'},
+    {'1': 'size_bytes', '3': 3, '4': 1, '5': 3, '10': 'sizeBytes'},
+    {'1': 'created_at', '3': 4, '4': 1, '5': 9, '10': 'createdAt'},
+    {'1': 'modified_at', '3': 5, '4': 1, '5': 9, '10': 'modifiedAt'},
+    {'1': 'point_count', '3': 6, '4': 1, '5': 5, '10': 'pointCount'},
+  ],
+};
+
+/// Descriptor for `MapInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mapInfoDescriptor = $convert.base64Decode(
+    'CgdNYXBJbmZvEhIKBG5hbWUYASABKAlSBG5hbWUSEgoEcGF0aBgCIAEoCVIEcGF0aBIdCgpzaX'
+    'plX2J5dGVzGAMgASgDUglzaXplQnl0ZXMSHQoKY3JlYXRlZF9hdBgEIAEoCVIJY3JlYXRlZEF0'
+    'Eh8KC21vZGlmaWVkX2F0GAUgASgJUgptb2RpZmllZEF0Eh8KC3BvaW50X2NvdW50GAYgASgFUg'
+    'pwb2ludENvdW50');
+
+@$core.Deprecated('Use listMapsRequestDescriptor instead')
+const ListMapsRequest$json = {
+  '1': 'ListMapsRequest',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {'1': 'directory', '3': 2, '4': 1, '5': 9, '10': 'directory'},
+  ],
+};
+
+/// Descriptor for `ListMapsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMapsRequestDescriptor = $convert.base64Decode(
+    'Cg9MaXN0TWFwc1JlcXVlc3QSKQoEYmFzZRgBIAEoCzIVLnJvYm90LnYxLlJlcXVlc3RCYXNlUg'
+    'RiYXNlEhwKCWRpcmVjdG9yeRgCIAEoCVIJZGlyZWN0b3J5');
+
+@$core.Deprecated('Use listMapsResponseDescriptor instead')
+const ListMapsResponse$json = {
+  '1': 'ListMapsResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {
+      '1': 'maps',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.robot.v1.MapInfo',
+      '10': 'maps'
+    },
+  ],
+};
+
+/// Descriptor for `ListMapsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMapsResponseDescriptor = $convert.base64Decode(
+    'ChBMaXN0TWFwc1Jlc3BvbnNlEioKBGJhc2UYASABKAsyFi5yb2JvdC52MS5SZXNwb25zZUJhc2'
+    'VSBGJhc2USJQoEbWFwcxgCIAMoCzIRLnJvYm90LnYxLk1hcEluZm9SBG1hcHM=');
+
+@$core.Deprecated('Use deleteMapRequestDescriptor instead')
+const DeleteMapRequest$json = {
+  '1': 'DeleteMapRequest',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {'1': 'path', '3': 2, '4': 1, '5': 9, '10': 'path'},
+  ],
+};
+
+/// Descriptor for `DeleteMapRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteMapRequestDescriptor = $convert.base64Decode(
+    'ChBEZWxldGVNYXBSZXF1ZXN0EikKBGJhc2UYASABKAsyFS5yb2JvdC52MS5SZXF1ZXN0QmFzZV'
+    'IEYmFzZRISCgRwYXRoGAIgASgJUgRwYXRo');
+
+@$core.Deprecated('Use deleteMapResponseDescriptor instead')
+const DeleteMapResponse$json = {
+  '1': 'DeleteMapResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {'1': 'success', '3': 2, '4': 1, '5': 8, '10': 'success'},
+    {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `DeleteMapResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteMapResponseDescriptor = $convert.base64Decode(
+    'ChFEZWxldGVNYXBSZXNwb25zZRIqCgRiYXNlGAEgASgLMhYucm9ib3QudjEuUmVzcG9uc2VCYX'
+    'NlUgRiYXNlEhgKB3N1Y2Nlc3MYAiABKAhSB3N1Y2Nlc3MSGAoHbWVzc2FnZRgDIAEoCVIHbWVz'
+    'c2FnZQ==');
+
+@$core.Deprecated('Use renameMapRequestDescriptor instead')
+const RenameMapRequest$json = {
+  '1': 'RenameMapRequest',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {'1': 'old_path', '3': 2, '4': 1, '5': 9, '10': 'oldPath'},
+    {'1': 'new_name', '3': 3, '4': 1, '5': 9, '10': 'newName'},
+  ],
+};
+
+/// Descriptor for `RenameMapRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List renameMapRequestDescriptor = $convert.base64Decode(
+    'ChBSZW5hbWVNYXBSZXF1ZXN0EikKBGJhc2UYASABKAsyFS5yb2JvdC52MS5SZXF1ZXN0QmFzZV'
+    'IEYmFzZRIZCghvbGRfcGF0aBgCIAEoCVIHb2xkUGF0aBIZCghuZXdfbmFtZRgDIAEoCVIHbmV3'
+    'TmFtZQ==');
+
+@$core.Deprecated('Use renameMapResponseDescriptor instead')
+const RenameMapResponse$json = {
+  '1': 'RenameMapResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {'1': 'success', '3': 2, '4': 1, '5': 8, '10': 'success'},
+    {'1': 'new_path', '3': 3, '4': 1, '5': 9, '10': 'newPath'},
+    {'1': 'message', '3': 4, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `RenameMapResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List renameMapResponseDescriptor = $convert.base64Decode(
+    'ChFSZW5hbWVNYXBSZXNwb25zZRIqCgRiYXNlGAEgASgLMhYucm9ib3QudjEuUmVzcG9uc2VCYX'
+    'NlUgRiYXNlEhgKB3N1Y2Nlc3MYAiABKAhSB3N1Y2Nlc3MSGQoIbmV3X3BhdGgYAyABKAlSB25l'
+    'd1BhdGgSGAoHbWVzc2FnZRgEIAEoCVIHbWVzc2FnZQ==');

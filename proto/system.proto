@@ -24,6 +24,11 @@ service SystemService {
   
   // 保存地图
   rpc SaveMap(SaveMapRequest) returns (SaveMapResponse);
+  
+  // 地图管理
+  rpc ListMaps(ListMapsRequest) returns (ListMapsResponse);
+  rpc DeleteMap(DeleteMapRequest) returns (DeleteMapResponse);
+  rpc RenameMap(RenameMapRequest) returns (RenameMapResponse);
 }
 
 // ==================== 登录 ====================
@@ -114,4 +119,49 @@ message SaveMapResponse {
   ResponseBase base = 1;
   bool success = 2;
   string message = 3;
+}
+
+// ==================== 地图管理 ====================
+
+message MapInfo {
+  string name = 1;               // 文件名（不含路径）
+  string path = 2;               // 完整路径
+  int64 size_bytes = 3;          // 文件大小
+  string created_at = 4;         // ISO 8601 创建时间
+  string modified_at = 5;        // ISO 8601 修改时间
+  int32 point_count = 6;         // 点云数量（PCD 文件）
+}
+
+message ListMapsRequest {
+  RequestBase base = 1;
+  string directory = 2;          // 搜索目录，默认 "/maps"
+}
+
+message ListMapsResponse {
+  ResponseBase base = 1;
+  repeated MapInfo maps = 2;
+}
+
+message DeleteMapRequest {
+  RequestBase base = 1;
+  string path = 2;               // 要删除的地图路径
+}
+
+message DeleteMapResponse {
+  ResponseBase base = 1;
+  bool success = 2;
+  string message = 3;
+}
+
+message RenameMapRequest {
+  RequestBase base = 1;
+  string old_path = 2;           // 原路径
+  string new_name = 3;           // 新文件名（不含路径）
+}
+
+message RenameMapResponse {
+  ResponseBase base = 1;
+  bool success = 2;
+  string new_path = 3;           // 重命名后的完整路径
+  string message = 4;
 }

@@ -85,6 +85,28 @@ class SystemServiceClient extends $grpc.Client {
     return $createUnaryCall(_$saveMap, request, options: options);
   }
 
+  /// 地图管理
+  $grpc.ResponseFuture<$0.ListMapsResponse> listMaps(
+    $0.ListMapsRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$listMaps, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.DeleteMapResponse> deleteMap(
+    $0.DeleteMapRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$deleteMap, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.RenameMapResponse> renameMap(
+    $0.RenameMapRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$renameMap, request, options: options);
+  }
+
   // method descriptors
 
   static final _$login = $grpc.ClientMethod<$0.LoginRequest, $0.LoginResponse>(
@@ -121,6 +143,21 @@ class SystemServiceClient extends $grpc.Client {
           '/robot.v1.SystemService/SaveMap',
           ($0.SaveMapRequest value) => value.writeToBuffer(),
           $0.SaveMapResponse.fromBuffer);
+  static final _$listMaps =
+      $grpc.ClientMethod<$0.ListMapsRequest, $0.ListMapsResponse>(
+          '/robot.v1.SystemService/ListMaps',
+          ($0.ListMapsRequest value) => value.writeToBuffer(),
+          $0.ListMapsResponse.fromBuffer);
+  static final _$deleteMap =
+      $grpc.ClientMethod<$0.DeleteMapRequest, $0.DeleteMapResponse>(
+          '/robot.v1.SystemService/DeleteMap',
+          ($0.DeleteMapRequest value) => value.writeToBuffer(),
+          $0.DeleteMapResponse.fromBuffer);
+  static final _$renameMap =
+      $grpc.ClientMethod<$0.RenameMapRequest, $0.RenameMapResponse>(
+          '/robot.v1.SystemService/RenameMap',
+          ($0.RenameMapRequest value) => value.writeToBuffer(),
+          $0.RenameMapResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('robot.v1.SystemService')
@@ -177,6 +214,27 @@ abstract class SystemServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.SaveMapRequest.fromBuffer(value),
         ($0.SaveMapResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListMapsRequest, $0.ListMapsResponse>(
+        'ListMaps',
+        listMaps_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListMapsRequest.fromBuffer(value),
+        ($0.ListMapsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.DeleteMapRequest, $0.DeleteMapResponse>(
+        'DeleteMap',
+        deleteMap_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.DeleteMapRequest.fromBuffer(value),
+        ($0.DeleteMapResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.RenameMapRequest, $0.RenameMapResponse>(
+        'RenameMap',
+        renameMap_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.RenameMapRequest.fromBuffer(value),
+        ($0.RenameMapResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.LoginResponse> login_Pre(
@@ -234,4 +292,28 @@ abstract class SystemServiceBase extends $grpc.Service {
 
   $async.Future<$0.SaveMapResponse> saveMap(
       $grpc.ServiceCall call, $0.SaveMapRequest request);
+
+  $async.Future<$0.ListMapsResponse> listMaps_Pre($grpc.ServiceCall $call,
+      $async.Future<$0.ListMapsRequest> $request) async {
+    return listMaps($call, await $request);
+  }
+
+  $async.Future<$0.ListMapsResponse> listMaps(
+      $grpc.ServiceCall call, $0.ListMapsRequest request);
+
+  $async.Future<$0.DeleteMapResponse> deleteMap_Pre($grpc.ServiceCall $call,
+      $async.Future<$0.DeleteMapRequest> $request) async {
+    return deleteMap($call, await $request);
+  }
+
+  $async.Future<$0.DeleteMapResponse> deleteMap(
+      $grpc.ServiceCall call, $0.DeleteMapRequest request);
+
+  $async.Future<$0.RenameMapResponse> renameMap_Pre($grpc.ServiceCall $call,
+      $async.Future<$0.RenameMapRequest> $request) async {
+    return renameMap($call, await $request);
+  }
+
+  $async.Future<$0.RenameMapResponse> renameMap(
+      $grpc.ServiceCall call, $0.RenameMapRequest request);
 }

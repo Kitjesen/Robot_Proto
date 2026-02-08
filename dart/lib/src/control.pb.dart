@@ -1061,16 +1061,331 @@ class SafetyStatus extends $pb.GeneratedMessage {
   void clearSafetyMessage() => $_clearField(6);
 }
 
+/// 导航目标点
+class NavigationGoal extends $pb.GeneratedMessage {
+  factory NavigationGoal({
+    $1.Vector3? position,
+    $core.double? yaw,
+    $core.String? label,
+    $core.double? arrivalRadius,
+  }) {
+    final result = create();
+    if (position != null) result.position = position;
+    if (yaw != null) result.yaw = yaw;
+    if (label != null) result.label = label;
+    if (arrivalRadius != null) result.arrivalRadius = arrivalRadius;
+    return result;
+  }
+
+  NavigationGoal._();
+
+  factory NavigationGoal.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory NavigationGoal.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'NavigationGoal',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$1.Vector3>(1, _omitFieldNames ? '' : 'position',
+        subBuilder: $1.Vector3.create)
+    ..aD(2, _omitFieldNames ? '' : 'yaw')
+    ..aOS(3, _omitFieldNames ? '' : 'label')
+    ..aD(4, _omitFieldNames ? '' : 'arrivalRadius')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NavigationGoal clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NavigationGoal copyWith(void Function(NavigationGoal) updates) =>
+      super.copyWith((message) => updates(message as NavigationGoal))
+          as NavigationGoal;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NavigationGoal create() => NavigationGoal._();
+  @$core.override
+  NavigationGoal createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static NavigationGoal getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NavigationGoal>(create);
+  static NavigationGoal? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Vector3 get position => $_getN(0);
+  @$pb.TagNumber(1)
+  set position($1.Vector3 value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPosition() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPosition() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $1.Vector3 ensurePosition() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.double get yaw => $_getN(1);
+  @$pb.TagNumber(2)
+  set yaw($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasYaw() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearYaw() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get label => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set label($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLabel() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLabel() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get arrivalRadius => $_getN(3);
+  @$pb.TagNumber(4)
+  set arrivalRadius($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasArrivalRadius() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearArrivalRadius() => $_clearField(4);
+}
+
+/// 导航任务参数
+class NavigationParams extends $pb.GeneratedMessage {
+  factory NavigationParams({
+    $core.Iterable<NavigationGoal>? waypoints,
+    $core.bool? loop,
+    $core.double? maxSpeed,
+  }) {
+    final result = create();
+    if (waypoints != null) result.waypoints.addAll(waypoints);
+    if (loop != null) result.loop = loop;
+    if (maxSpeed != null) result.maxSpeed = maxSpeed;
+    return result;
+  }
+
+  NavigationParams._();
+
+  factory NavigationParams.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory NavigationParams.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'NavigationParams',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..pPM<NavigationGoal>(1, _omitFieldNames ? '' : 'waypoints',
+        subBuilder: NavigationGoal.create)
+    ..aOB(2, _omitFieldNames ? '' : 'loop')
+    ..aD(3, _omitFieldNames ? '' : 'maxSpeed')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NavigationParams clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NavigationParams copyWith(void Function(NavigationParams) updates) =>
+      super.copyWith((message) => updates(message as NavigationParams))
+          as NavigationParams;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NavigationParams create() => NavigationParams._();
+  @$core.override
+  NavigationParams createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static NavigationParams getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NavigationParams>(create);
+  static NavigationParams? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<NavigationGoal> get waypoints => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get loop => $_getBF(1);
+  @$pb.TagNumber(2)
+  set loop($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasLoop() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLoop() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get maxSpeed => $_getN(2);
+  @$pb.TagNumber(3)
+  set maxSpeed($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMaxSpeed() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMaxSpeed() => $_clearField(3);
+}
+
+/// 建图任务参数
+class MappingParams extends $pb.GeneratedMessage {
+  factory MappingParams({
+    $core.String? mapName,
+    $core.bool? saveOnComplete,
+    $core.double? resolution,
+  }) {
+    final result = create();
+    if (mapName != null) result.mapName = mapName;
+    if (saveOnComplete != null) result.saveOnComplete = saveOnComplete;
+    if (resolution != null) result.resolution = resolution;
+    return result;
+  }
+
+  MappingParams._();
+
+  factory MappingParams.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory MappingParams.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'MappingParams',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mapName')
+    ..aOB(2, _omitFieldNames ? '' : 'saveOnComplete')
+    ..aD(3, _omitFieldNames ? '' : 'resolution')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MappingParams clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MappingParams copyWith(void Function(MappingParams) updates) =>
+      super.copyWith((message) => updates(message as MappingParams))
+          as MappingParams;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MappingParams create() => MappingParams._();
+  @$core.override
+  MappingParams createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static MappingParams getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MappingParams>(create);
+  static MappingParams? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get mapName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mapName($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMapName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMapName() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.bool get saveOnComplete => $_getBF(1);
+  @$pb.TagNumber(2)
+  set saveOnComplete($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSaveOnComplete() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSaveOnComplete() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get resolution => $_getN(2);
+  @$pb.TagNumber(3)
+  set resolution($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasResolution() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearResolution() => $_clearField(3);
+}
+
+/// 路径跟随参数
+class FollowPathParams extends $pb.GeneratedMessage {
+  factory FollowPathParams({
+    $core.Iterable<NavigationGoal>? waypoints,
+    $core.double? trackingTolerance,
+  }) {
+    final result = create();
+    if (waypoints != null) result.waypoints.addAll(waypoints);
+    if (trackingTolerance != null) result.trackingTolerance = trackingTolerance;
+    return result;
+  }
+
+  FollowPathParams._();
+
+  factory FollowPathParams.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory FollowPathParams.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'FollowPathParams',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..pPM<NavigationGoal>(1, _omitFieldNames ? '' : 'waypoints',
+        subBuilder: NavigationGoal.create)
+    ..aD(2, _omitFieldNames ? '' : 'trackingTolerance')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FollowPathParams clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FollowPathParams copyWith(void Function(FollowPathParams) updates) =>
+      super.copyWith((message) => updates(message as FollowPathParams))
+          as FollowPathParams;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FollowPathParams create() => FollowPathParams._();
+  @$core.override
+  FollowPathParams createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static FollowPathParams getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FollowPathParams>(create);
+  static FollowPathParams? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<NavigationGoal> get waypoints => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.double get trackingTolerance => $_getN(1);
+  @$pb.TagNumber(2)
+  set trackingTolerance($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTrackingTolerance() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTrackingTolerance() => $_clearField(2);
+}
+
 class StartTaskRequest extends $pb.GeneratedMessage {
   factory StartTaskRequest({
     $1.RequestBase? base,
     $1.TaskType? taskType,
     $core.String? paramsJson,
+    NavigationParams? navigationParams,
+    MappingParams? mappingParams,
+    FollowPathParams? followPathParams,
   }) {
     final result = create();
     if (base != null) result.base = base;
     if (taskType != null) result.taskType = taskType;
     if (paramsJson != null) result.paramsJson = paramsJson;
+    if (navigationParams != null) result.navigationParams = navigationParams;
+    if (mappingParams != null) result.mappingParams = mappingParams;
+    if (followPathParams != null) result.followPathParams = followPathParams;
     return result;
   }
 
@@ -1092,6 +1407,12 @@ class StartTaskRequest extends $pb.GeneratedMessage {
     ..aE<$1.TaskType>(2, _omitFieldNames ? '' : 'taskType',
         enumValues: $1.TaskType.values)
     ..aOS(3, _omitFieldNames ? '' : 'paramsJson')
+    ..aOM<NavigationParams>(4, _omitFieldNames ? '' : 'navigationParams',
+        subBuilder: NavigationParams.create)
+    ..aOM<MappingParams>(5, _omitFieldNames ? '' : 'mappingParams',
+        subBuilder: MappingParams.create)
+    ..aOM<FollowPathParams>(6, _omitFieldNames ? '' : 'followPathParams',
+        subBuilder: FollowPathParams.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1141,6 +1462,40 @@ class StartTaskRequest extends $pb.GeneratedMessage {
   $core.bool hasParamsJson() => $_has(2);
   @$pb.TagNumber(3)
   void clearParamsJson() => $_clearField(3);
+
+  /// 结构化参数（优先级高于 params_json）
+  @$pb.TagNumber(4)
+  NavigationParams get navigationParams => $_getN(3);
+  @$pb.TagNumber(4)
+  set navigationParams(NavigationParams value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasNavigationParams() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearNavigationParams() => $_clearField(4);
+  @$pb.TagNumber(4)
+  NavigationParams ensureNavigationParams() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  MappingParams get mappingParams => $_getN(4);
+  @$pb.TagNumber(5)
+  set mappingParams(MappingParams value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMappingParams() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMappingParams() => $_clearField(5);
+  @$pb.TagNumber(5)
+  MappingParams ensureMappingParams() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  FollowPathParams get followPathParams => $_getN(5);
+  @$pb.TagNumber(6)
+  set followPathParams(FollowPathParams value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasFollowPathParams() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFollowPathParams() => $_clearField(6);
+  @$pb.TagNumber(6)
+  FollowPathParams ensureFollowPathParams() => $_ensure(5);
 }
 
 class StartTaskResponse extends $pb.GeneratedMessage {
@@ -1342,6 +1697,427 @@ class CancelTaskResponse extends $pb.GeneratedMessage {
   static CancelTaskResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<CancelTaskResponse>(create);
   static CancelTaskResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($1.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $1.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $1.Task get task => $_getN(1);
+  @$pb.TagNumber(2)
+  set task($1.Task value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTask() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTask() => $_clearField(2);
+  @$pb.TagNumber(2)
+  $1.Task ensureTask() => $_ensure(1);
+}
+
+class PauseTaskRequest extends $pb.GeneratedMessage {
+  factory PauseTaskRequest({
+    $1.RequestBase? base,
+    $core.String? taskId,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (taskId != null) result.taskId = taskId;
+    return result;
+  }
+
+  PauseTaskRequest._();
+
+  factory PauseTaskRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory PauseTaskRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'PauseTaskRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$1.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $1.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'taskId')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PauseTaskRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PauseTaskRequest copyWith(void Function(PauseTaskRequest) updates) =>
+      super.copyWith((message) => updates(message as PauseTaskRequest))
+          as PauseTaskRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PauseTaskRequest create() => PauseTaskRequest._();
+  @$core.override
+  PauseTaskRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static PauseTaskRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PauseTaskRequest>(create);
+  static PauseTaskRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($1.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $1.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get taskId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set taskId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTaskId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTaskId() => $_clearField(2);
+}
+
+class PauseTaskResponse extends $pb.GeneratedMessage {
+  factory PauseTaskResponse({
+    $1.ResponseBase? base,
+    $1.Task? task,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (task != null) result.task = task;
+    return result;
+  }
+
+  PauseTaskResponse._();
+
+  factory PauseTaskResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory PauseTaskResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'PauseTaskResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$1.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $1.ResponseBase.create)
+    ..aOM<$1.Task>(2, _omitFieldNames ? '' : 'task', subBuilder: $1.Task.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PauseTaskResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PauseTaskResponse copyWith(void Function(PauseTaskResponse) updates) =>
+      super.copyWith((message) => updates(message as PauseTaskResponse))
+          as PauseTaskResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PauseTaskResponse create() => PauseTaskResponse._();
+  @$core.override
+  PauseTaskResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static PauseTaskResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PauseTaskResponse>(create);
+  static PauseTaskResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($1.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $1.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $1.Task get task => $_getN(1);
+  @$pb.TagNumber(2)
+  set task($1.Task value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTask() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTask() => $_clearField(2);
+  @$pb.TagNumber(2)
+  $1.Task ensureTask() => $_ensure(1);
+}
+
+class ResumeTaskRequest extends $pb.GeneratedMessage {
+  factory ResumeTaskRequest({
+    $1.RequestBase? base,
+    $core.String? taskId,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (taskId != null) result.taskId = taskId;
+    return result;
+  }
+
+  ResumeTaskRequest._();
+
+  factory ResumeTaskRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ResumeTaskRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ResumeTaskRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$1.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $1.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'taskId')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ResumeTaskRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ResumeTaskRequest copyWith(void Function(ResumeTaskRequest) updates) =>
+      super.copyWith((message) => updates(message as ResumeTaskRequest))
+          as ResumeTaskRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ResumeTaskRequest create() => ResumeTaskRequest._();
+  @$core.override
+  ResumeTaskRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ResumeTaskRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ResumeTaskRequest>(create);
+  static ResumeTaskRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($1.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $1.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get taskId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set taskId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTaskId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTaskId() => $_clearField(2);
+}
+
+class ResumeTaskResponse extends $pb.GeneratedMessage {
+  factory ResumeTaskResponse({
+    $1.ResponseBase? base,
+    $1.Task? task,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (task != null) result.task = task;
+    return result;
+  }
+
+  ResumeTaskResponse._();
+
+  factory ResumeTaskResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ResumeTaskResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ResumeTaskResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$1.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $1.ResponseBase.create)
+    ..aOM<$1.Task>(2, _omitFieldNames ? '' : 'task', subBuilder: $1.Task.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ResumeTaskResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ResumeTaskResponse copyWith(void Function(ResumeTaskResponse) updates) =>
+      super.copyWith((message) => updates(message as ResumeTaskResponse))
+          as ResumeTaskResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ResumeTaskResponse create() => ResumeTaskResponse._();
+  @$core.override
+  ResumeTaskResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ResumeTaskResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ResumeTaskResponse>(create);
+  static ResumeTaskResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($1.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $1.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $1.Task get task => $_getN(1);
+  @$pb.TagNumber(2)
+  set task($1.Task value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTask() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTask() => $_clearField(2);
+  @$pb.TagNumber(2)
+  $1.Task ensureTask() => $_ensure(1);
+}
+
+class GetTaskStatusRequest extends $pb.GeneratedMessage {
+  factory GetTaskStatusRequest({
+    $1.RequestBase? base,
+    $core.String? taskId,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (taskId != null) result.taskId = taskId;
+    return result;
+  }
+
+  GetTaskStatusRequest._();
+
+  factory GetTaskStatusRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GetTaskStatusRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetTaskStatusRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$1.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $1.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'taskId')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetTaskStatusRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetTaskStatusRequest copyWith(void Function(GetTaskStatusRequest) updates) =>
+      super.copyWith((message) => updates(message as GetTaskStatusRequest))
+          as GetTaskStatusRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetTaskStatusRequest create() => GetTaskStatusRequest._();
+  @$core.override
+  GetTaskStatusRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static GetTaskStatusRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetTaskStatusRequest>(create);
+  static GetTaskStatusRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($1.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $1.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get taskId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set taskId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTaskId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTaskId() => $_clearField(2);
+}
+
+class GetTaskStatusResponse extends $pb.GeneratedMessage {
+  factory GetTaskStatusResponse({
+    $1.ResponseBase? base,
+    $1.Task? task,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (task != null) result.task = task;
+    return result;
+  }
+
+  GetTaskStatusResponse._();
+
+  factory GetTaskStatusResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GetTaskStatusResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetTaskStatusResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$1.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $1.ResponseBase.create)
+    ..aOM<$1.Task>(2, _omitFieldNames ? '' : 'task', subBuilder: $1.Task.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetTaskStatusResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetTaskStatusResponse copyWith(
+          void Function(GetTaskStatusResponse) updates) =>
+      super.copyWith((message) => updates(message as GetTaskStatusResponse))
+          as GetTaskStatusResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetTaskStatusResponse create() => GetTaskStatusResponse._();
+  @$core.override
+  GetTaskStatusResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static GetTaskStatusResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetTaskStatusResponse>(create);
+  static GetTaskStatusResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   $1.ResponseBase get base => $_getN(0);

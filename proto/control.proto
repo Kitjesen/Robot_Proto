@@ -29,6 +29,9 @@ service ControlService {
   // 任务控制
   rpc StartTask(StartTaskRequest) returns (StartTaskResponse);
   rpc CancelTask(CancelTaskRequest) returns (CancelTaskResponse);
+  rpc PauseTask(PauseTaskRequest) returns (PauseTaskResponse);
+  rpc ResumeTask(ResumeTaskRequest) returns (ResumeTaskResponse);
+  rpc GetTaskStatus(GetTaskStatusRequest) returns (GetTaskStatusResponse);
 }
 
 // ==================== 租约 ====================
@@ -144,12 +147,46 @@ message SafetyStatus {
   string safety_message = 6;
 }
 
+// ==================== 导航/建图参数 ====================
+
+// 导航目标点
+message NavigationGoal {
+  Vector3 position = 1;          // 目标位置 (x, y, z) odom 坐标系
+  double yaw = 2;                // 目标朝向 (rad), 0 = 不指定
+  string label = 3;              // 航点标签（可选）
+  double arrival_radius = 4;     // 到达半径 (m), 默认 1.0
+}
+
+// 导航任务参数
+message NavigationParams {
+  repeated NavigationGoal waypoints = 1;  // 航点列表
+  bool loop = 2;                          // 是否循环
+  double max_speed = 3;                   // 最大速度限制 (m/s), 0 = 不限
+}
+
+// 建图任务参数
+message MappingParams {
+  string map_name = 1;            // 地图名称（保存时使用）
+  bool save_on_complete = 2;      // 完成后自动保存
+  double resolution = 3;          // 分辨率 (m), 默认 0.1
+}
+
+// 路径跟随参数
+message FollowPathParams {
+  repeated NavigationGoal waypoints = 1;
+  double tracking_tolerance = 2;  // 跟踪容差 (m)
+}
+
 // ==================== 任务控制 ====================
 
 message StartTaskRequest {
   RequestBase base = 1;
   TaskType task_type = 2;
-  string params_json = 3;
+  string params_json = 3;                  // 向后兼容的 JSON 参数
+  // 结构化参数（优先级高于 params_json）
+  NavigationParams navigation_params = 4;
+  MappingParams mapping_params = 5;
+  FollowPathParams follow_path_params = 6;
 }
 
 message StartTaskResponse {
@@ -164,6 +201,36 @@ message CancelTaskRequest {
 }
 
 message CancelTaskResponse {
+  ResponseBase base = 1;
+  Task task = 2;
+}
+
+message PauseTaskRequest {
+  RequestBase base = 1;
+  string task_id = 2;
+}
+
+message PauseTaskResponse {
+  ResponseBase base = 1;
+  Task task = 2;
+}
+
+message ResumeTaskRequest {
+  RequestBase base = 1;
+  string task_id = 2;
+}
+
+message ResumeTaskResponse {
+  ResponseBase base = 1;
+  Task task = 2;
+}
+
+message GetTaskStatusRequest {
+  RequestBase base = 1;
+  string task_id = 2;
+}
+
+message GetTaskStatusResponse {
   ResponseBase base = 1;
   Task task = 2;
 }

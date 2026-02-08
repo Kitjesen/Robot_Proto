@@ -94,6 +94,27 @@ class ControlServiceClient extends $grpc.Client {
     return $createUnaryCall(_$cancelTask, request, options: options);
   }
 
+  $grpc.ResponseFuture<$0.PauseTaskResponse> pauseTask(
+    $0.PauseTaskRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$pauseTask, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.ResumeTaskResponse> resumeTask(
+    $0.ResumeTaskRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$resumeTask, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.GetTaskStatusResponse> getTaskStatus(
+    $0.GetTaskStatusRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$getTaskStatus, request, options: options);
+  }
+
   // method descriptors
 
   static final _$acquireLease =
@@ -136,6 +157,21 @@ class ControlServiceClient extends $grpc.Client {
           '/robot.v1.ControlService/CancelTask',
           ($0.CancelTaskRequest value) => value.writeToBuffer(),
           $0.CancelTaskResponse.fromBuffer);
+  static final _$pauseTask =
+      $grpc.ClientMethod<$0.PauseTaskRequest, $0.PauseTaskResponse>(
+          '/robot.v1.ControlService/PauseTask',
+          ($0.PauseTaskRequest value) => value.writeToBuffer(),
+          $0.PauseTaskResponse.fromBuffer);
+  static final _$resumeTask =
+      $grpc.ClientMethod<$0.ResumeTaskRequest, $0.ResumeTaskResponse>(
+          '/robot.v1.ControlService/ResumeTask',
+          ($0.ResumeTaskRequest value) => value.writeToBuffer(),
+          $0.ResumeTaskResponse.fromBuffer);
+  static final _$getTaskStatus =
+      $grpc.ClientMethod<$0.GetTaskStatusRequest, $0.GetTaskStatusResponse>(
+          '/robot.v1.ControlService/GetTaskStatus',
+          ($0.GetTaskStatusRequest value) => value.writeToBuffer(),
+          $0.GetTaskStatusResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('robot.v1.ControlService')
@@ -205,6 +241,29 @@ abstract class ControlServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CancelTaskRequest.fromBuffer(value),
         ($0.CancelTaskResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.PauseTaskRequest, $0.PauseTaskResponse>(
+        'PauseTask',
+        pauseTask_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.PauseTaskRequest.fromBuffer(value),
+        ($0.PauseTaskResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ResumeTaskRequest, $0.ResumeTaskResponse>(
+        'ResumeTask',
+        resumeTask_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ResumeTaskRequest.fromBuffer(value),
+        ($0.ResumeTaskResponse value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<$0.GetTaskStatusRequest, $0.GetTaskStatusResponse>(
+            'GetTaskStatus',
+            getTaskStatus_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) =>
+                $0.GetTaskStatusRequest.fromBuffer(value),
+            ($0.GetTaskStatusResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.AcquireLeaseResponse> acquireLease_Pre(
@@ -268,4 +327,29 @@ abstract class ControlServiceBase extends $grpc.Service {
 
   $async.Future<$0.CancelTaskResponse> cancelTask(
       $grpc.ServiceCall call, $0.CancelTaskRequest request);
+
+  $async.Future<$0.PauseTaskResponse> pauseTask_Pre($grpc.ServiceCall $call,
+      $async.Future<$0.PauseTaskRequest> $request) async {
+    return pauseTask($call, await $request);
+  }
+
+  $async.Future<$0.PauseTaskResponse> pauseTask(
+      $grpc.ServiceCall call, $0.PauseTaskRequest request);
+
+  $async.Future<$0.ResumeTaskResponse> resumeTask_Pre($grpc.ServiceCall $call,
+      $async.Future<$0.ResumeTaskRequest> $request) async {
+    return resumeTask($call, await $request);
+  }
+
+  $async.Future<$0.ResumeTaskResponse> resumeTask(
+      $grpc.ServiceCall call, $0.ResumeTaskRequest request);
+
+  $async.Future<$0.GetTaskStatusResponse> getTaskStatus_Pre(
+      $grpc.ServiceCall $call,
+      $async.Future<$0.GetTaskStatusRequest> $request) async {
+    return getTaskStatus($call, await $request);
+  }
+
+  $async.Future<$0.GetTaskStatusResponse> getTaskStatus(
+      $grpc.ServiceCall call, $0.GetTaskStatusRequest request);
 }

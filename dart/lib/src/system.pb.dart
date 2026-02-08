@@ -12,6 +12,7 @@
 
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 import 'package:protobuf/well_known_types/google/protobuf/duration.pb.dart'
     as $3;
@@ -1095,6 +1096,575 @@ class SaveMapResponse extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(2);
   @$pb.TagNumber(3)
   void clearMessage() => $_clearField(3);
+}
+
+class MapInfo extends $pb.GeneratedMessage {
+  factory MapInfo({
+    $core.String? name,
+    $core.String? path,
+    $fixnum.Int64? sizeBytes,
+    $core.String? createdAt,
+    $core.String? modifiedAt,
+    $core.int? pointCount,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    if (path != null) result.path = path;
+    if (sizeBytes != null) result.sizeBytes = sizeBytes;
+    if (createdAt != null) result.createdAt = createdAt;
+    if (modifiedAt != null) result.modifiedAt = modifiedAt;
+    if (pointCount != null) result.pointCount = pointCount;
+    return result;
+  }
+
+  MapInfo._();
+
+  factory MapInfo.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory MapInfo.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'MapInfo',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aOS(2, _omitFieldNames ? '' : 'path')
+    ..aInt64(3, _omitFieldNames ? '' : 'sizeBytes')
+    ..aOS(4, _omitFieldNames ? '' : 'createdAt')
+    ..aOS(5, _omitFieldNames ? '' : 'modifiedAt')
+    ..aI(6, _omitFieldNames ? '' : 'pointCount')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MapInfo clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MapInfo copyWith(void Function(MapInfo) updates) =>
+      super.copyWith((message) => updates(message as MapInfo)) as MapInfo;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MapInfo create() => MapInfo._();
+  @$core.override
+  MapInfo createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static MapInfo getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MapInfo>(create);
+  static MapInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get path => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set path($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPath() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPath() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get sizeBytes => $_getI64(2);
+  @$pb.TagNumber(3)
+  set sizeBytes($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSizeBytes() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSizeBytes() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get createdAt => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set createdAt($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCreatedAt() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCreatedAt() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get modifiedAt => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set modifiedAt($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasModifiedAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearModifiedAt() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get pointCount => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set pointCount($core.int value) => $_setSignedInt32(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasPointCount() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPointCount() => $_clearField(6);
+}
+
+class ListMapsRequest extends $pb.GeneratedMessage {
+  factory ListMapsRequest({
+    $2.RequestBase? base,
+    $core.String? directory,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (directory != null) result.directory = directory;
+    return result;
+  }
+
+  ListMapsRequest._();
+
+  factory ListMapsRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ListMapsRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ListMapsRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'directory')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMapsRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMapsRequest copyWith(void Function(ListMapsRequest) updates) =>
+      super.copyWith((message) => updates(message as ListMapsRequest))
+          as ListMapsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMapsRequest create() => ListMapsRequest._();
+  @$core.override
+  ListMapsRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ListMapsRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListMapsRequest>(create);
+  static ListMapsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get directory => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set directory($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDirectory() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDirectory() => $_clearField(2);
+}
+
+class ListMapsResponse extends $pb.GeneratedMessage {
+  factory ListMapsResponse({
+    $2.ResponseBase? base,
+    $core.Iterable<MapInfo>? maps,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (maps != null) result.maps.addAll(maps);
+    return result;
+  }
+
+  ListMapsResponse._();
+
+  factory ListMapsResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ListMapsResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ListMapsResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..pPM<MapInfo>(2, _omitFieldNames ? '' : 'maps', subBuilder: MapInfo.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMapsResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMapsResponse copyWith(void Function(ListMapsResponse) updates) =>
+      super.copyWith((message) => updates(message as ListMapsResponse))
+          as ListMapsResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMapsResponse create() => ListMapsResponse._();
+  @$core.override
+  ListMapsResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ListMapsResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListMapsResponse>(create);
+  static ListMapsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $pb.PbList<MapInfo> get maps => $_getList(1);
+}
+
+class DeleteMapRequest extends $pb.GeneratedMessage {
+  factory DeleteMapRequest({
+    $2.RequestBase? base,
+    $core.String? path,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (path != null) result.path = path;
+    return result;
+  }
+
+  DeleteMapRequest._();
+
+  factory DeleteMapRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory DeleteMapRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'DeleteMapRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'path')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteMapRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteMapRequest copyWith(void Function(DeleteMapRequest) updates) =>
+      super.copyWith((message) => updates(message as DeleteMapRequest))
+          as DeleteMapRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteMapRequest create() => DeleteMapRequest._();
+  @$core.override
+  DeleteMapRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static DeleteMapRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeleteMapRequest>(create);
+  static DeleteMapRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get path => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set path($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPath() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPath() => $_clearField(2);
+}
+
+class DeleteMapResponse extends $pb.GeneratedMessage {
+  factory DeleteMapResponse({
+    $2.ResponseBase? base,
+    $core.bool? success,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (success != null) result.success = success;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  DeleteMapResponse._();
+
+  factory DeleteMapResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory DeleteMapResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'DeleteMapResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..aOB(2, _omitFieldNames ? '' : 'success')
+    ..aOS(3, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteMapResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteMapResponse copyWith(void Function(DeleteMapResponse) updates) =>
+      super.copyWith((message) => updates(message as DeleteMapResponse))
+          as DeleteMapResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteMapResponse create() => DeleteMapResponse._();
+  @$core.override
+  DeleteMapResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static DeleteMapResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeleteMapResponse>(create);
+  static DeleteMapResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get success => $_getBF(1);
+  @$pb.TagNumber(2)
+  set success($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSuccess() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSuccess() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get message => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set message($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessage() => $_clearField(3);
+}
+
+class RenameMapRequest extends $pb.GeneratedMessage {
+  factory RenameMapRequest({
+    $2.RequestBase? base,
+    $core.String? oldPath,
+    $core.String? newName,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (oldPath != null) result.oldPath = oldPath;
+    if (newName != null) result.newName = newName;
+    return result;
+  }
+
+  RenameMapRequest._();
+
+  factory RenameMapRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory RenameMapRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'RenameMapRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.RequestBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.RequestBase.create)
+    ..aOS(2, _omitFieldNames ? '' : 'oldPath')
+    ..aOS(3, _omitFieldNames ? '' : 'newName')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RenameMapRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RenameMapRequest copyWith(void Function(RenameMapRequest) updates) =>
+      super.copyWith((message) => updates(message as RenameMapRequest))
+          as RenameMapRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RenameMapRequest create() => RenameMapRequest._();
+  @$core.override
+  RenameMapRequest createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static RenameMapRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RenameMapRequest>(create);
+  static RenameMapRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.RequestBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.RequestBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.RequestBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get oldPath => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set oldPath($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasOldPath() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOldPath() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get newName => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set newName($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasNewName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNewName() => $_clearField(3);
+}
+
+class RenameMapResponse extends $pb.GeneratedMessage {
+  factory RenameMapResponse({
+    $2.ResponseBase? base,
+    $core.bool? success,
+    $core.String? newPath,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (base != null) result.base = base;
+    if (success != null) result.success = success;
+    if (newPath != null) result.newPath = newPath;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  RenameMapResponse._();
+
+  factory RenameMapResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory RenameMapResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'RenameMapResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'robot.v1'),
+      createEmptyInstance: create)
+    ..aOM<$2.ResponseBase>(1, _omitFieldNames ? '' : 'base',
+        subBuilder: $2.ResponseBase.create)
+    ..aOB(2, _omitFieldNames ? '' : 'success')
+    ..aOS(3, _omitFieldNames ? '' : 'newPath')
+    ..aOS(4, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RenameMapResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RenameMapResponse copyWith(void Function(RenameMapResponse) updates) =>
+      super.copyWith((message) => updates(message as RenameMapResponse))
+          as RenameMapResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RenameMapResponse create() => RenameMapResponse._();
+  @$core.override
+  RenameMapResponse createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static RenameMapResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RenameMapResponse>(create);
+  static RenameMapResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseBase get base => $_getN(0);
+  @$pb.TagNumber(1)
+  set base($2.ResponseBase value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBase() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBase() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseBase ensureBase() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get success => $_getBF(1);
+  @$pb.TagNumber(2)
+  set success($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSuccess() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSuccess() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get newPath => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set newPath($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasNewPath() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNewPath() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get message => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set message($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasMessage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMessage() => $_clearField(4);
 }
 
 const $core.bool _omitFieldNames =
