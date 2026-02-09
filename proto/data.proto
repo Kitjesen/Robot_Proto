@@ -50,6 +50,12 @@ service DataService {
   // 安装前预检查（磁盘空间、电量、兼容性）
   rpc CheckUpdateReadiness(CheckUpdateReadinessRequest) returns (CheckUpdateReadinessResponse);
 
+  // 查询升级历史 (持久日志)
+  rpc GetUpgradeHistory(GetUpgradeHistoryRequest) returns (GetUpgradeHistoryResponse);
+
+  // 版本一致性校验 (客户端传入期望版本集，机器人端对比)
+  rpc ValidateSystemVersion(ValidateSystemVersionRequest) returns (ValidateSystemVersionResponse);
+
   // ---- 视频控制 ----
 
   // 视频控制（WebRTC 信令）- 旧接口，保留兼容
@@ -242,6 +248,38 @@ enum OtaUpdateStatus {
   OTA_UPDATE_STATUS_ROLLED_BACK = 8;      // 已回滚
 }
 
+// OTA 标准化失败码 (用于统计和可观测性)
+enum OtaFailureCode {
+  OTA_FAILURE_NONE = 0;
+  OTA_FAILURE_NETWORK = 1;          // 下载失败
+  OTA_FAILURE_SHA256_MISMATCH = 2;  // 校验失败
+  OTA_FAILURE_SIGNATURE_INVALID = 3;// 签名无效
+  OTA_FAILURE_DISK_FULL = 4;        // 磁盘不足
+  OTA_FAILURE_DEPENDENCY = 5;       // 依赖不满足
+  OTA_FAILURE_INSTALL_SCRIPT = 6;   // 安装脚本失败
+  OTA_FAILURE_HEALTH_CHECK = 7;     // 安装后健康检查失败
+  OTA_FAILURE_BATTERY_LOW = 8;      // 电量不足
+  OTA_FAILURE_HW_INCOMPAT = 9;     // 硬件不兼容
+  OTA_FAILURE_SAFETY_MODE = 10;     // 安全模式不允许
+  OTA_FAILURE_PERMISSION = 11;      // 权限不足
+  OTA_FAILURE_ROLLBACK_FAILED = 12; // 回滚也失败
+}
+
+// 制品安全等级: 决定安装前机器人必须进入的状态
+enum OtaSafetyLevel {
+  OTA_SAFETY_LEVEL_UNSPECIFIED = 0;
+  OTA_SAFETY_LEVEL_HOT = 1;              // 热更新: 无需停机 (地图、配置)
+  OTA_SAFETY_LEVEL_WARM = 2;             // 温更新: 需暂停导航 (模型)
+  OTA_SAFETY_LEVEL_COLD = 3;             // 冷更新: 需 sit + disable + 维护态 (固件、MCU)
+}
+
+// 制品间依赖关系
+message ArtifactDependency {
+  string artifact_name = 1;               // 依赖的制品名称
+  string min_version = 2;                 // 最低版本 (semver), 如 "1.2.0"
+  string max_version = 3;                 // 最高版本 (可选, 空=不限)
+}
+
 // 单个 OTA 制品描述 (来自云端 manifest)
 message OtaArtifact {
   string name = 1;                        // 制品名称, 如 "policy_walk"
@@ -258,6 +296,9 @@ message OtaArtifact {
   uint32 min_battery_percent = 12;        // 最低电量要求 (0=不限)
   string changelog = 13;
   bool rollback_safe = 14;                // 是否支持回滚
+  OtaSafetyLevel safety_level = 15;       // 安装安全等级 (决定机器人必须进入的状态)
+  repeated ArtifactDependency dependencies = 16; // 制品间依赖 (兼容性约束)
+  string owner_module = 17;               // 负责安装的模块边界, 如 "brain", "navigation", "config_service"
 }
 
 // 已安装的版本信息
@@ -294,6 +335,7 @@ message ApplyUpdateResponse {
   string message = 4;
   string installed_path = 5;              // 最终安装路径
   string previous_version = 6;            // 被替换的旧版本
+  OtaFailureCode failure_code = 7;        // 标准化失败码 (success=false 时有效)
 }
 
 // 查询已安装版本
@@ -309,6 +351,7 @@ message GetInstalledVersionsResponse {
   string system_version = 4;
   repeated InstalledArtifact installed = 5;
   repeated RollbackEntry rollback_available = 6;
+  string system_version_json = 7;           // 完整组件版本集 JSON (system_version.json 内容)
 }
 
 // 回滚到上一版本
@@ -349,6 +392,7 @@ message OtaProgress {
 message CheckUpdateReadinessRequest {
   RequestBase base = 1;
   repeated OtaArtifact artifacts = 2;     // 待安装制品列表
+  string manifest_signature = 3;          // Ed25519 签名 (hex), 验证 manifest 真实性
 }
 
 message CheckUpdateReadinessResponse {
@@ -358,10 +402,78 @@ message CheckUpdateReadinessResponse {
 }
 
 message ReadinessCheck {
-  string check_name = 1;                  // "disk_space", "battery", "hw_compat", "running_tasks"
+  string check_name = 1;                  // "disk_space", "battery", "hw_compat", "safety_mode", "dependencies", "signature"
   bool passed = 2;
   string message = 3;                     // 人可读描述
   string detail = 4;                      // 机器可读详情 (如 "free=2048MB required=512MB")
+}
+
+// OTA 事务日志条目 (用于崩溃恢复)
+message OtaTransactionLog {
+  string transaction_id = 1;              // UUID
+  string artifact_name = 2;
+  string artifact_version = 3;
+  OtaUpdateStatus status = 4;
+  string staged_path = 5;
+  string target_path = 6;
+  string backup_path = 7;                 // 旧版本备份路径
+  string started_at = 8;                  // ISO 8601
+  string completed_at = 9;
+  string error_message = 10;
+}
+
+// ==================== 升级历史 ====================
+
+message UpgradeHistoryEntry {
+  string timestamp = 1;                   // ISO 8601
+  string action = 2;                      // "install", "rollback", "health_rollback"
+  string artifact_name = 3;
+  string from_version = 4;                // 旧版本 (空=首次安装)
+  string to_version = 5;
+  string status = 6;                      // "success", "failed", "rolled_back"
+  OtaFailureCode failure_code = 7;        // 失败时的标准码
+  string failure_reason = 8;              // 人类可读原因
+  uint64 duration_ms = 9;                 // 操作耗时
+  string health_check_result = 10;        // "passed", "failed", "skipped"
+}
+
+message GetUpgradeHistoryRequest {
+  RequestBase base = 1;
+  string artifact_filter = 2;            // 可选: 仅查某制品
+  uint32 limit = 3;                      // 最多返回条数 (0=全部)
+}
+
+message GetUpgradeHistoryResponse {
+  ResponseBase base = 1;
+  repeated UpgradeHistoryEntry entries = 2;
+}
+
+// ==================== 版本一致性校验 ====================
+
+message ComponentVersion {
+  string name = 1;                        // 组件名, 如 "navigation", "policy_walk"
+  string version = 2;                     // 期望/实际版本
+  string git_commit = 3;                  // 可选 git commit
+}
+
+message ValidateSystemVersionRequest {
+  RequestBase base = 1;
+  string expected_system_version = 2;     // 期望的系统版本 (如 "1.0.0")
+  repeated ComponentVersion expected_components = 3; // 期望的组件版本集
+}
+
+message VersionMismatch {
+  string component_name = 1;
+  string expected_version = 2;
+  string actual_version = 3;              // 空=未安装
+  string status = 4;                      // "match", "mismatch", "missing", "extra"
+}
+
+message ValidateSystemVersionResponse {
+  ResponseBase base = 1;
+  bool consistent = 2;                    // 全部一致
+  string actual_system_version = 3;
+  repeated VersionMismatch mismatches = 4;
 }
 
 // ==================== 视频控制 ====================
