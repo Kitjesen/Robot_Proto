@@ -9,7 +9,7 @@ package robot.v1;
 import "common.proto";
 import "google/protobuf/empty.proto";
 
-// DataService - 数据资源订阅与下载
+// DataService - 数据资源订阅与下载 (ROS2 依赖, 运行在 grpc_gateway 中)
 service DataService {
   // 列出可用资源
   rpc ListResources(google.protobuf.Empty) returns (ListResourcesResponse);
@@ -22,39 +22,6 @@ service DataService {
   
   // 文件下载（分块）
   rpc DownloadFile(DownloadFileRequest) returns (stream FileChunk);
-  
-  // 文件上传（分块）- 用于 OTA 部署模型/配置到机器人
-  rpc UploadFile(stream UploadFileChunk) returns (UploadFileResponse);
-  
-  // 列出远程目录文件
-  rpc ListRemoteFiles(ListRemoteFilesRequest) returns (ListRemoteFilesResponse);
-  
-  // 删除远程文件
-  rpc DeleteRemoteFile(DeleteRemoteFileRequest) returns (DeleteRemoteFileResponse);
-  
-  // ---- OTA 更新管理 ----
-
-  // 应用 OTA 更新（上传后调用）
-  rpc ApplyUpdate(ApplyUpdateRequest) returns (ApplyUpdateResponse);
-
-  // 查询已安装版本
-  rpc GetInstalledVersions(GetInstalledVersionsRequest) returns (GetInstalledVersionsResponse);
-
-  // 回滚到上一版本
-  rpc Rollback(RollbackRequest) returns (RollbackResponse);
-
-  // 机器人直接从 URL 下载（免手机中转，适合大文件如 ONNX 模型）
-  // 返回下载进度流，客户端可实时显示进度条
-  rpc DownloadFromUrl(DownloadFromUrlRequest) returns (stream OtaProgress);
-
-  // 安装前预检查（磁盘空间、电量、兼容性）
-  rpc CheckUpdateReadiness(CheckUpdateReadinessRequest) returns (CheckUpdateReadinessResponse);
-
-  // 查询升级历史 (持久日志)
-  rpc GetUpgradeHistory(GetUpgradeHistoryRequest) returns (GetUpgradeHistoryResponse);
-
-  // 版本一致性校验 (客户端传入期望版本集，机器人端对比)
-  rpc ValidateSystemVersion(ValidateSystemVersionRequest) returns (ValidateSystemVersionResponse);
 
   // ---- 视频控制 ----
 
@@ -64,9 +31,54 @@ service DataService {
   
   // WebRTC 双向信令流（新接口，支持实时视频/音频）
   rpc WebRTCSignaling(stream WebRTCSignal) returns (stream WebRTCSignal);
-  
-  // 应用固件更新（上传完成后调用，触发外部刷写脚本）
-  rpc ApplyFirmware(ApplyFirmwareRequest) returns (ApplyFirmwareResponse);
+}
+
+// ==========================================================================
+// OtaService — 独立守护进程, 不依赖 ROS2
+// 部署: ota_daemon (:50052), 独立于 navigation.service
+// ==========================================================================
+service OtaService {
+  // ---- 文件传输 ----
+
+  // 文件上传（分块, 断点续传）
+  rpc UploadFile(stream UploadFileChunk) returns (UploadFileResponse);
+
+  // 列出远程目录文件
+  rpc ListRemoteFiles(ListRemoteFilesRequest) returns (ListRemoteFilesResponse);
+
+  // 删除远程文件
+  rpc DeleteRemoteFile(DeleteRemoteFileRequest) returns (DeleteRemoteFileResponse);
+
+  // 机器人直接从 URL 下载（免手机中转, 适合大文件）
+  rpc DownloadFromUrl(DownloadFromUrlRequest) returns (stream OtaProgress);
+
+  // ---- OTA 更新管理 ----
+
+  // 安装前预检查（磁盘空间、电量、兼容性、签名）
+  rpc CheckUpdateReadiness(CheckUpdateReadinessRequest) returns (CheckUpdateReadinessResponse);
+
+  // 应用 OTA 更新
+  rpc ApplyUpdate(ApplyUpdateRequest) returns (ApplyUpdateResponse);
+
+  // 查询已安装版本
+  rpc GetInstalledVersions(GetInstalledVersionsRequest) returns (GetInstalledVersionsResponse);
+
+  // 回滚到上一版本
+  rpc Rollback(RollbackRequest) returns (RollbackResponse);
+
+  // 查询升级历史 (持久日志)
+  rpc GetUpgradeHistory(GetUpgradeHistoryRequest) returns (GetUpgradeHistoryResponse);
+
+  // 版本一致性校验
+  rpc ValidateSystemVersion(ValidateSystemVersionRequest) returns (ValidateSystemVersionResponse);
+
+  // ---- 设备管理 (不依赖 ROS2) ----
+
+  // 获取设备信息 (IP/hostname/磁盘/运行时间/服务状态)
+  rpc GetDeviceInfo(google.protobuf.Empty) returns (DeviceInfoResponse);
+
+  // 管理 systemd 服务 (启停 navigation.service 等)
+  rpc ManageService(ManageServiceRequest) returns (ManageServiceResponse);
 }
 
 // ==================== 资源列举 ====================
@@ -554,17 +566,50 @@ message AudioProfile {
   uint32 bitrate_kbps = 4;            // 比特率
 }
 
-// ==================== 固件更新 ====================
+// ==================== 设备管理 (OtaService 专属) ====================
 
-// 固件刷写请求（上传完成后调用）
-message ApplyFirmwareRequest {
-  RequestBase base = 1;
-  string firmware_path = 2;           // 已上传的固件文件路径
+message DeviceInfoResponse {
+  ResponseBase base = 1;
+  string hostname = 2;
+  string robot_id = 3;
+  string hw_id = 4;
+  repeated string ip_addresses = 5;   // 所有网卡 IP
+  uint64 disk_total_bytes = 6;
+  uint64 disk_free_bytes = 7;
+  int32 battery_percent = 8;          // -1 = 未知
+  uint64 uptime_seconds = 9;
+  string os_version = 10;
+  string ota_daemon_version = 11;
+
+  // 关键 systemd 服务状态
+  repeated ServiceStatus services = 12;
 }
 
-// 固件刷写响应
-message ApplyFirmwareResponse {
+message ServiceStatus {
+  string name = 1;                    // e.g. "navigation.service"
+  string state = 2;                   // "active", "inactive", "failed", "activating"
+  string sub_state = 3;              // "running", "dead", "exited"
+  uint64 uptime_seconds = 4;
+  uint32 restart_count = 5;
+}
+
+enum ServiceAction {
+  SERVICE_ACTION_UNSPECIFIED = 0;
+  SERVICE_ACTION_START = 1;
+  SERVICE_ACTION_STOP = 2;
+  SERVICE_ACTION_RESTART = 3;
+  SERVICE_ACTION_STATUS = 4;
+}
+
+message ManageServiceRequest {
+  RequestBase base = 1;
+  string service_name = 2;           // e.g. "navigation.service"
+  ServiceAction action = 3;
+}
+
+message ManageServiceResponse {
   ResponseBase base = 1;
   bool success = 2;
-  string message = 3;                 // 结果描述（成功/失败原因）
+  string message = 3;
+  ServiceStatus status = 4;          // 操作后的状态
 }
