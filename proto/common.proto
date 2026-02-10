@@ -163,6 +163,7 @@ enum ResourceType {
   RESOURCE_TYPE_MAP = 3;
   RESOURCE_TYPE_STATE = 4;
   RESOURCE_TYPE_EVENT = 5;
+  RESOURCE_TYPE_PATH = 6;
 }
 
 message ResourceId {
