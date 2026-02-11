@@ -21,7 +21,7 @@ import 'data.pb.dart' as $1;
 
 export 'data.pb.dart';
 
-/// DataService - 数据资源订阅与下载
+/// DataService - 数据资源订阅与下载 (ROS2 依赖, 运行在 grpc_gateway 中)
 @$pb.GrpcServiceName('robot.v1.DataService')
 class DataServiceClient extends $grpc.Client {
   /// The hostname for this service.
@@ -70,73 +70,6 @@ class DataServiceClient extends $grpc.Client {
         options: options);
   }
 
-  /// 文件上传（分块）- 用于 OTA 部署模型/配置到机器人
-  $grpc.ResponseFuture<$1.UploadFileResponse> uploadFile(
-    $async.Stream<$1.UploadFileChunk> request, {
-    $grpc.CallOptions? options,
-  }) {
-    return $createStreamingCall(_$uploadFile, request, options: options).single;
-  }
-
-  /// 列出远程目录文件
-  $grpc.ResponseFuture<$1.ListRemoteFilesResponse> listRemoteFiles(
-    $1.ListRemoteFilesRequest request, {
-    $grpc.CallOptions? options,
-  }) {
-    return $createUnaryCall(_$listRemoteFiles, request, options: options);
-  }
-
-  /// 删除远程文件
-  $grpc.ResponseFuture<$1.DeleteRemoteFileResponse> deleteRemoteFile(
-    $1.DeleteRemoteFileRequest request, {
-    $grpc.CallOptions? options,
-  }) {
-    return $createUnaryCall(_$deleteRemoteFile, request, options: options);
-  }
-
-  /// 应用 OTA 更新（上传后调用）
-  $grpc.ResponseFuture<$1.ApplyUpdateResponse> applyUpdate(
-    $1.ApplyUpdateRequest request, {
-    $grpc.CallOptions? options,
-  }) {
-    return $createUnaryCall(_$applyUpdate, request, options: options);
-  }
-
-  /// 查询已安装版本
-  $grpc.ResponseFuture<$1.GetInstalledVersionsResponse> getInstalledVersions(
-    $1.GetInstalledVersionsRequest request, {
-    $grpc.CallOptions? options,
-  }) {
-    return $createUnaryCall(_$getInstalledVersions, request, options: options);
-  }
-
-  /// 回滚到上一版本
-  $grpc.ResponseFuture<$1.RollbackResponse> rollback(
-    $1.RollbackRequest request, {
-    $grpc.CallOptions? options,
-  }) {
-    return $createUnaryCall(_$rollback, request, options: options);
-  }
-
-  /// 机器人直接从 URL 下载（免手机中转，适合大文件如 ONNX 模型）
-  /// 返回下载进度流，客户端可实时显示进度条
-  $grpc.ResponseStream<$1.OtaProgress> downloadFromUrl(
-    $1.DownloadFromUrlRequest request, {
-    $grpc.CallOptions? options,
-  }) {
-    return $createStreamingCall(
-        _$downloadFromUrl, $async.Stream.fromIterable([request]),
-        options: options);
-  }
-
-  /// 安装前预检查（磁盘空间、电量、兼容性）
-  $grpc.ResponseFuture<$1.CheckUpdateReadinessResponse> checkUpdateReadiness(
-    $1.CheckUpdateReadinessRequest request, {
-    $grpc.CallOptions? options,
-  }) {
-    return $createUnaryCall(_$checkUpdateReadiness, request, options: options);
-  }
-
   /// 视频控制（WebRTC 信令）- 旧接口，保留兼容
   $grpc.ResponseFuture<$1.StartCameraResponse> startCamera(
     $1.StartCameraRequest request, {
@@ -158,14 +91,6 @@ class DataServiceClient extends $grpc.Client {
     $grpc.CallOptions? options,
   }) {
     return $createStreamingCall(_$webRTCSignaling, request, options: options);
-  }
-
-  /// 应用固件更新（上传完成后调用，触发外部刷写脚本）
-  $grpc.ResponseFuture<$1.ApplyFirmwareResponse> applyFirmware(
-    $1.ApplyFirmwareRequest request, {
-    $grpc.CallOptions? options,
-  }) {
-    return $createUnaryCall(_$applyFirmware, request, options: options);
   }
 
   // method descriptors
@@ -190,46 +115,6 @@ class DataServiceClient extends $grpc.Client {
           '/robot.v1.DataService/DownloadFile',
           ($1.DownloadFileRequest value) => value.writeToBuffer(),
           $1.FileChunk.fromBuffer);
-  static final _$uploadFile =
-      $grpc.ClientMethod<$1.UploadFileChunk, $1.UploadFileResponse>(
-          '/robot.v1.DataService/UploadFile',
-          ($1.UploadFileChunk value) => value.writeToBuffer(),
-          $1.UploadFileResponse.fromBuffer);
-  static final _$listRemoteFiles =
-      $grpc.ClientMethod<$1.ListRemoteFilesRequest, $1.ListRemoteFilesResponse>(
-          '/robot.v1.DataService/ListRemoteFiles',
-          ($1.ListRemoteFilesRequest value) => value.writeToBuffer(),
-          $1.ListRemoteFilesResponse.fromBuffer);
-  static final _$deleteRemoteFile = $grpc.ClientMethod<
-          $1.DeleteRemoteFileRequest, $1.DeleteRemoteFileResponse>(
-      '/robot.v1.DataService/DeleteRemoteFile',
-      ($1.DeleteRemoteFileRequest value) => value.writeToBuffer(),
-      $1.DeleteRemoteFileResponse.fromBuffer);
-  static final _$applyUpdate =
-      $grpc.ClientMethod<$1.ApplyUpdateRequest, $1.ApplyUpdateResponse>(
-          '/robot.v1.DataService/ApplyUpdate',
-          ($1.ApplyUpdateRequest value) => value.writeToBuffer(),
-          $1.ApplyUpdateResponse.fromBuffer);
-  static final _$getInstalledVersions = $grpc.ClientMethod<
-          $1.GetInstalledVersionsRequest, $1.GetInstalledVersionsResponse>(
-      '/robot.v1.DataService/GetInstalledVersions',
-      ($1.GetInstalledVersionsRequest value) => value.writeToBuffer(),
-      $1.GetInstalledVersionsResponse.fromBuffer);
-  static final _$rollback =
-      $grpc.ClientMethod<$1.RollbackRequest, $1.RollbackResponse>(
-          '/robot.v1.DataService/Rollback',
-          ($1.RollbackRequest value) => value.writeToBuffer(),
-          $1.RollbackResponse.fromBuffer);
-  static final _$downloadFromUrl =
-      $grpc.ClientMethod<$1.DownloadFromUrlRequest, $1.OtaProgress>(
-          '/robot.v1.DataService/DownloadFromUrl',
-          ($1.DownloadFromUrlRequest value) => value.writeToBuffer(),
-          $1.OtaProgress.fromBuffer);
-  static final _$checkUpdateReadiness = $grpc.ClientMethod<
-          $1.CheckUpdateReadinessRequest, $1.CheckUpdateReadinessResponse>(
-      '/robot.v1.DataService/CheckUpdateReadiness',
-      ($1.CheckUpdateReadinessRequest value) => value.writeToBuffer(),
-      $1.CheckUpdateReadinessResponse.fromBuffer);
   static final _$startCamera =
       $grpc.ClientMethod<$1.StartCameraRequest, $1.StartCameraResponse>(
           '/robot.v1.DataService/StartCamera',
@@ -245,11 +130,6 @@ class DataServiceClient extends $grpc.Client {
           '/robot.v1.DataService/WebRTCSignaling',
           ($1.WebRTCSignal value) => value.writeToBuffer(),
           $1.WebRTCSignal.fromBuffer);
-  static final _$applyFirmware =
-      $grpc.ClientMethod<$1.ApplyFirmwareRequest, $1.ApplyFirmwareResponse>(
-          '/robot.v1.DataService/ApplyFirmware',
-          ($1.ApplyFirmwareRequest value) => value.writeToBuffer(),
-          $1.ApplyFirmwareResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('robot.v1.DataService')
@@ -288,73 +168,6 @@ abstract class DataServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $1.DownloadFileRequest.fromBuffer(value),
         ($1.FileChunk value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.UploadFileChunk, $1.UploadFileResponse>(
-        'UploadFile',
-        uploadFile,
-        true,
-        false,
-        ($core.List<$core.int> value) => $1.UploadFileChunk.fromBuffer(value),
-        ($1.UploadFileResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.ListRemoteFilesRequest,
-            $1.ListRemoteFilesResponse>(
-        'ListRemoteFiles',
-        listRemoteFiles_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $1.ListRemoteFilesRequest.fromBuffer(value),
-        ($1.ListRemoteFilesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.DeleteRemoteFileRequest,
-            $1.DeleteRemoteFileResponse>(
-        'DeleteRemoteFile',
-        deleteRemoteFile_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $1.DeleteRemoteFileRequest.fromBuffer(value),
-        ($1.DeleteRemoteFileResponse value) => value.writeToBuffer()));
-    $addMethod(
-        $grpc.ServiceMethod<$1.ApplyUpdateRequest, $1.ApplyUpdateResponse>(
-            'ApplyUpdate',
-            applyUpdate_Pre,
-            false,
-            false,
-            ($core.List<$core.int> value) =>
-                $1.ApplyUpdateRequest.fromBuffer(value),
-            ($1.ApplyUpdateResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.GetInstalledVersionsRequest,
-            $1.GetInstalledVersionsResponse>(
-        'GetInstalledVersions',
-        getInstalledVersions_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $1.GetInstalledVersionsRequest.fromBuffer(value),
-        ($1.GetInstalledVersionsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.RollbackRequest, $1.RollbackResponse>(
-        'Rollback',
-        rollback_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $1.RollbackRequest.fromBuffer(value),
-        ($1.RollbackResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.DownloadFromUrlRequest, $1.OtaProgress>(
-        'DownloadFromUrl',
-        downloadFromUrl_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) =>
-            $1.DownloadFromUrlRequest.fromBuffer(value),
-        ($1.OtaProgress value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.CheckUpdateReadinessRequest,
-            $1.CheckUpdateReadinessResponse>(
-        'CheckUpdateReadiness',
-        checkUpdateReadiness_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $1.CheckUpdateReadinessRequest.fromBuffer(value),
-        ($1.CheckUpdateReadinessResponse value) => value.writeToBuffer()));
     $addMethod(
         $grpc.ServiceMethod<$1.StartCameraRequest, $1.StartCameraResponse>(
             'StartCamera',
@@ -378,15 +191,6 @@ abstract class DataServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $1.WebRTCSignal.fromBuffer(value),
         ($1.WebRTCSignal value) => value.writeToBuffer()));
-    $addMethod(
-        $grpc.ServiceMethod<$1.ApplyFirmwareRequest, $1.ApplyFirmwareResponse>(
-            'ApplyFirmware',
-            applyFirmware_Pre,
-            false,
-            false,
-            ($core.List<$core.int> value) =>
-                $1.ApplyFirmwareRequest.fromBuffer(value),
-            ($1.ApplyFirmwareResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.ListResourcesResponse> listResources_Pre(
@@ -421,6 +225,312 @@ abstract class DataServiceBase extends $grpc.Service {
   $async.Stream<$1.FileChunk> downloadFile(
       $grpc.ServiceCall call, $1.DownloadFileRequest request);
 
+  $async.Future<$1.StartCameraResponse> startCamera_Pre($grpc.ServiceCall $call,
+      $async.Future<$1.StartCameraRequest> $request) async {
+    return startCamera($call, await $request);
+  }
+
+  $async.Future<$1.StartCameraResponse> startCamera(
+      $grpc.ServiceCall call, $1.StartCameraRequest request);
+
+  $async.Future<$1.StopCameraResponse> stopCamera_Pre($grpc.ServiceCall $call,
+      $async.Future<$1.StopCameraRequest> $request) async {
+    return stopCamera($call, await $request);
+  }
+
+  $async.Future<$1.StopCameraResponse> stopCamera(
+      $grpc.ServiceCall call, $1.StopCameraRequest request);
+
+  $async.Stream<$1.WebRTCSignal> webRTCSignaling(
+      $grpc.ServiceCall call, $async.Stream<$1.WebRTCSignal> request);
+}
+
+/// ==========================================================================
+/// OtaService — 独立守护进程, 不依赖 ROS2
+/// 部署: ota_daemon (:50052), 独立于 navigation.service
+/// ==========================================================================
+@$pb.GrpcServiceName('robot.v1.OtaService')
+class OtaServiceClient extends $grpc.Client {
+  /// The hostname for this service.
+  static const $core.String defaultHost = '';
+
+  /// OAuth scopes needed for the client.
+  static const $core.List<$core.String> oauthScopes = [
+    '',
+  ];
+
+  OtaServiceClient(super.channel, {super.options, super.interceptors});
+
+  /// 文件上传（分块, 断点续传）
+  $grpc.ResponseFuture<$1.UploadFileResponse> uploadFile(
+    $async.Stream<$1.UploadFileChunk> request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createStreamingCall(_$uploadFile, request, options: options).single;
+  }
+
+  /// 列出远程目录文件
+  $grpc.ResponseFuture<$1.ListRemoteFilesResponse> listRemoteFiles(
+    $1.ListRemoteFilesRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$listRemoteFiles, request, options: options);
+  }
+
+  /// 删除远程文件
+  $grpc.ResponseFuture<$1.DeleteRemoteFileResponse> deleteRemoteFile(
+    $1.DeleteRemoteFileRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$deleteRemoteFile, request, options: options);
+  }
+
+  /// 机器人直接从 URL 下载（免手机中转, 适合大文件）
+  $grpc.ResponseStream<$1.OtaProgress> downloadFromUrl(
+    $1.DownloadFromUrlRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createStreamingCall(
+        _$downloadFromUrl, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  /// 安装前预检查（磁盘空间、电量、兼容性、签名）
+  $grpc.ResponseFuture<$1.CheckUpdateReadinessResponse> checkUpdateReadiness(
+    $1.CheckUpdateReadinessRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$checkUpdateReadiness, request, options: options);
+  }
+
+  /// 应用 OTA 更新
+  $grpc.ResponseFuture<$1.ApplyUpdateResponse> applyUpdate(
+    $1.ApplyUpdateRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$applyUpdate, request, options: options);
+  }
+
+  /// 查询已安装版本
+  $grpc.ResponseFuture<$1.GetInstalledVersionsResponse> getInstalledVersions(
+    $1.GetInstalledVersionsRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$getInstalledVersions, request, options: options);
+  }
+
+  /// 回滚到上一版本
+  $grpc.ResponseFuture<$1.RollbackResponse> rollback(
+    $1.RollbackRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$rollback, request, options: options);
+  }
+
+  /// 查询升级历史 (持久日志)
+  $grpc.ResponseFuture<$1.GetUpgradeHistoryResponse> getUpgradeHistory(
+    $1.GetUpgradeHistoryRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$getUpgradeHistory, request, options: options);
+  }
+
+  /// 版本一致性校验
+  $grpc.ResponseFuture<$1.ValidateSystemVersionResponse> validateSystemVersion(
+    $1.ValidateSystemVersionRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$validateSystemVersion, request, options: options);
+  }
+
+  /// 获取设备信息 (IP/hostname/磁盘/运行时间/服务状态)
+  $grpc.ResponseFuture<$1.DeviceInfoResponse> getDeviceInfo(
+    $0.Empty request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$getDeviceInfo, request, options: options);
+  }
+
+  /// 管理 systemd 服务 (启停 navigation.service 等)
+  $grpc.ResponseFuture<$1.ManageServiceResponse> manageService(
+    $1.ManageServiceRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$manageService, request, options: options);
+  }
+
+  // method descriptors
+
+  static final _$uploadFile =
+      $grpc.ClientMethod<$1.UploadFileChunk, $1.UploadFileResponse>(
+          '/robot.v1.OtaService/UploadFile',
+          ($1.UploadFileChunk value) => value.writeToBuffer(),
+          $1.UploadFileResponse.fromBuffer);
+  static final _$listRemoteFiles =
+      $grpc.ClientMethod<$1.ListRemoteFilesRequest, $1.ListRemoteFilesResponse>(
+          '/robot.v1.OtaService/ListRemoteFiles',
+          ($1.ListRemoteFilesRequest value) => value.writeToBuffer(),
+          $1.ListRemoteFilesResponse.fromBuffer);
+  static final _$deleteRemoteFile = $grpc.ClientMethod<
+          $1.DeleteRemoteFileRequest, $1.DeleteRemoteFileResponse>(
+      '/robot.v1.OtaService/DeleteRemoteFile',
+      ($1.DeleteRemoteFileRequest value) => value.writeToBuffer(),
+      $1.DeleteRemoteFileResponse.fromBuffer);
+  static final _$downloadFromUrl =
+      $grpc.ClientMethod<$1.DownloadFromUrlRequest, $1.OtaProgress>(
+          '/robot.v1.OtaService/DownloadFromUrl',
+          ($1.DownloadFromUrlRequest value) => value.writeToBuffer(),
+          $1.OtaProgress.fromBuffer);
+  static final _$checkUpdateReadiness = $grpc.ClientMethod<
+          $1.CheckUpdateReadinessRequest, $1.CheckUpdateReadinessResponse>(
+      '/robot.v1.OtaService/CheckUpdateReadiness',
+      ($1.CheckUpdateReadinessRequest value) => value.writeToBuffer(),
+      $1.CheckUpdateReadinessResponse.fromBuffer);
+  static final _$applyUpdate =
+      $grpc.ClientMethod<$1.ApplyUpdateRequest, $1.ApplyUpdateResponse>(
+          '/robot.v1.OtaService/ApplyUpdate',
+          ($1.ApplyUpdateRequest value) => value.writeToBuffer(),
+          $1.ApplyUpdateResponse.fromBuffer);
+  static final _$getInstalledVersions = $grpc.ClientMethod<
+          $1.GetInstalledVersionsRequest, $1.GetInstalledVersionsResponse>(
+      '/robot.v1.OtaService/GetInstalledVersions',
+      ($1.GetInstalledVersionsRequest value) => value.writeToBuffer(),
+      $1.GetInstalledVersionsResponse.fromBuffer);
+  static final _$rollback =
+      $grpc.ClientMethod<$1.RollbackRequest, $1.RollbackResponse>(
+          '/robot.v1.OtaService/Rollback',
+          ($1.RollbackRequest value) => value.writeToBuffer(),
+          $1.RollbackResponse.fromBuffer);
+  static final _$getUpgradeHistory = $grpc.ClientMethod<
+          $1.GetUpgradeHistoryRequest, $1.GetUpgradeHistoryResponse>(
+      '/robot.v1.OtaService/GetUpgradeHistory',
+      ($1.GetUpgradeHistoryRequest value) => value.writeToBuffer(),
+      $1.GetUpgradeHistoryResponse.fromBuffer);
+  static final _$validateSystemVersion = $grpc.ClientMethod<
+          $1.ValidateSystemVersionRequest, $1.ValidateSystemVersionResponse>(
+      '/robot.v1.OtaService/ValidateSystemVersion',
+      ($1.ValidateSystemVersionRequest value) => value.writeToBuffer(),
+      $1.ValidateSystemVersionResponse.fromBuffer);
+  static final _$getDeviceInfo =
+      $grpc.ClientMethod<$0.Empty, $1.DeviceInfoResponse>(
+          '/robot.v1.OtaService/GetDeviceInfo',
+          ($0.Empty value) => value.writeToBuffer(),
+          $1.DeviceInfoResponse.fromBuffer);
+  static final _$manageService =
+      $grpc.ClientMethod<$1.ManageServiceRequest, $1.ManageServiceResponse>(
+          '/robot.v1.OtaService/ManageService',
+          ($1.ManageServiceRequest value) => value.writeToBuffer(),
+          $1.ManageServiceResponse.fromBuffer);
+}
+
+@$pb.GrpcServiceName('robot.v1.OtaService')
+abstract class OtaServiceBase extends $grpc.Service {
+  $core.String get $name => 'robot.v1.OtaService';
+
+  OtaServiceBase() {
+    $addMethod($grpc.ServiceMethod<$1.UploadFileChunk, $1.UploadFileResponse>(
+        'UploadFile',
+        uploadFile,
+        true,
+        false,
+        ($core.List<$core.int> value) => $1.UploadFileChunk.fromBuffer(value),
+        ($1.UploadFileResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.ListRemoteFilesRequest,
+            $1.ListRemoteFilesResponse>(
+        'ListRemoteFiles',
+        listRemoteFiles_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $1.ListRemoteFilesRequest.fromBuffer(value),
+        ($1.ListRemoteFilesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.DeleteRemoteFileRequest,
+            $1.DeleteRemoteFileResponse>(
+        'DeleteRemoteFile',
+        deleteRemoteFile_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $1.DeleteRemoteFileRequest.fromBuffer(value),
+        ($1.DeleteRemoteFileResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.DownloadFromUrlRequest, $1.OtaProgress>(
+        'DownloadFromUrl',
+        downloadFromUrl_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) =>
+            $1.DownloadFromUrlRequest.fromBuffer(value),
+        ($1.OtaProgress value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.CheckUpdateReadinessRequest,
+            $1.CheckUpdateReadinessResponse>(
+        'CheckUpdateReadiness',
+        checkUpdateReadiness_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $1.CheckUpdateReadinessRequest.fromBuffer(value),
+        ($1.CheckUpdateReadinessResponse value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<$1.ApplyUpdateRequest, $1.ApplyUpdateResponse>(
+            'ApplyUpdate',
+            applyUpdate_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) =>
+                $1.ApplyUpdateRequest.fromBuffer(value),
+            ($1.ApplyUpdateResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.GetInstalledVersionsRequest,
+            $1.GetInstalledVersionsResponse>(
+        'GetInstalledVersions',
+        getInstalledVersions_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $1.GetInstalledVersionsRequest.fromBuffer(value),
+        ($1.GetInstalledVersionsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.RollbackRequest, $1.RollbackResponse>(
+        'Rollback',
+        rollback_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.RollbackRequest.fromBuffer(value),
+        ($1.RollbackResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.GetUpgradeHistoryRequest,
+            $1.GetUpgradeHistoryResponse>(
+        'GetUpgradeHistory',
+        getUpgradeHistory_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $1.GetUpgradeHistoryRequest.fromBuffer(value),
+        ($1.GetUpgradeHistoryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.ValidateSystemVersionRequest,
+            $1.ValidateSystemVersionResponse>(
+        'ValidateSystemVersion',
+        validateSystemVersion_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $1.ValidateSystemVersionRequest.fromBuffer(value),
+        ($1.ValidateSystemVersionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.Empty, $1.DeviceInfoResponse>(
+        'GetDeviceInfo',
+        getDeviceInfo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.Empty.fromBuffer(value),
+        ($1.DeviceInfoResponse value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<$1.ManageServiceRequest, $1.ManageServiceResponse>(
+            'ManageService',
+            manageService_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) =>
+                $1.ManageServiceRequest.fromBuffer(value),
+            ($1.ManageServiceResponse value) => value.writeToBuffer()));
+  }
+
   $async.Future<$1.UploadFileResponse> uploadFile(
       $grpc.ServiceCall call, $async.Stream<$1.UploadFileChunk> request);
 
@@ -441,6 +551,23 @@ abstract class DataServiceBase extends $grpc.Service {
 
   $async.Future<$1.DeleteRemoteFileResponse> deleteRemoteFile(
       $grpc.ServiceCall call, $1.DeleteRemoteFileRequest request);
+
+  $async.Stream<$1.OtaProgress> downloadFromUrl_Pre($grpc.ServiceCall $call,
+      $async.Future<$1.DownloadFromUrlRequest> $request) async* {
+    yield* downloadFromUrl($call, await $request);
+  }
+
+  $async.Stream<$1.OtaProgress> downloadFromUrl(
+      $grpc.ServiceCall call, $1.DownloadFromUrlRequest request);
+
+  $async.Future<$1.CheckUpdateReadinessResponse> checkUpdateReadiness_Pre(
+      $grpc.ServiceCall $call,
+      $async.Future<$1.CheckUpdateReadinessRequest> $request) async {
+    return checkUpdateReadiness($call, await $request);
+  }
+
+  $async.Future<$1.CheckUpdateReadinessResponse> checkUpdateReadiness(
+      $grpc.ServiceCall call, $1.CheckUpdateReadinessRequest request);
 
   $async.Future<$1.ApplyUpdateResponse> applyUpdate_Pre($grpc.ServiceCall $call,
       $async.Future<$1.ApplyUpdateRequest> $request) async {
@@ -467,48 +594,38 @@ abstract class DataServiceBase extends $grpc.Service {
   $async.Future<$1.RollbackResponse> rollback(
       $grpc.ServiceCall call, $1.RollbackRequest request);
 
-  $async.Stream<$1.OtaProgress> downloadFromUrl_Pre($grpc.ServiceCall $call,
-      $async.Future<$1.DownloadFromUrlRequest> $request) async* {
-    yield* downloadFromUrl($call, await $request);
-  }
-
-  $async.Stream<$1.OtaProgress> downloadFromUrl(
-      $grpc.ServiceCall call, $1.DownloadFromUrlRequest request);
-
-  $async.Future<$1.CheckUpdateReadinessResponse> checkUpdateReadiness_Pre(
+  $async.Future<$1.GetUpgradeHistoryResponse> getUpgradeHistory_Pre(
       $grpc.ServiceCall $call,
-      $async.Future<$1.CheckUpdateReadinessRequest> $request) async {
-    return checkUpdateReadiness($call, await $request);
+      $async.Future<$1.GetUpgradeHistoryRequest> $request) async {
+    return getUpgradeHistory($call, await $request);
   }
 
-  $async.Future<$1.CheckUpdateReadinessResponse> checkUpdateReadiness(
-      $grpc.ServiceCall call, $1.CheckUpdateReadinessRequest request);
+  $async.Future<$1.GetUpgradeHistoryResponse> getUpgradeHistory(
+      $grpc.ServiceCall call, $1.GetUpgradeHistoryRequest request);
 
-  $async.Future<$1.StartCameraResponse> startCamera_Pre($grpc.ServiceCall $call,
-      $async.Future<$1.StartCameraRequest> $request) async {
-    return startCamera($call, await $request);
-  }
-
-  $async.Future<$1.StartCameraResponse> startCamera(
-      $grpc.ServiceCall call, $1.StartCameraRequest request);
-
-  $async.Future<$1.StopCameraResponse> stopCamera_Pre($grpc.ServiceCall $call,
-      $async.Future<$1.StopCameraRequest> $request) async {
-    return stopCamera($call, await $request);
-  }
-
-  $async.Future<$1.StopCameraResponse> stopCamera(
-      $grpc.ServiceCall call, $1.StopCameraRequest request);
-
-  $async.Stream<$1.WebRTCSignal> webRTCSignaling(
-      $grpc.ServiceCall call, $async.Stream<$1.WebRTCSignal> request);
-
-  $async.Future<$1.ApplyFirmwareResponse> applyFirmware_Pre(
+  $async.Future<$1.ValidateSystemVersionResponse> validateSystemVersion_Pre(
       $grpc.ServiceCall $call,
-      $async.Future<$1.ApplyFirmwareRequest> $request) async {
-    return applyFirmware($call, await $request);
+      $async.Future<$1.ValidateSystemVersionRequest> $request) async {
+    return validateSystemVersion($call, await $request);
   }
 
-  $async.Future<$1.ApplyFirmwareResponse> applyFirmware(
-      $grpc.ServiceCall call, $1.ApplyFirmwareRequest request);
+  $async.Future<$1.ValidateSystemVersionResponse> validateSystemVersion(
+      $grpc.ServiceCall call, $1.ValidateSystemVersionRequest request);
+
+  $async.Future<$1.DeviceInfoResponse> getDeviceInfo_Pre(
+      $grpc.ServiceCall $call, $async.Future<$0.Empty> $request) async {
+    return getDeviceInfo($call, await $request);
+  }
+
+  $async.Future<$1.DeviceInfoResponse> getDeviceInfo(
+      $grpc.ServiceCall call, $0.Empty request);
+
+  $async.Future<$1.ManageServiceResponse> manageService_Pre(
+      $grpc.ServiceCall $call,
+      $async.Future<$1.ManageServiceRequest> $request) async {
+    return manageService($call, await $request);
+  }
+
+  $async.Future<$1.ManageServiceResponse> manageService(
+      $grpc.ServiceCall call, $1.ManageServiceRequest request);
 }

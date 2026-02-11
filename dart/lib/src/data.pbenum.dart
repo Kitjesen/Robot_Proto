@@ -119,6 +119,85 @@ class OtaUpdateStatus extends $pb.ProtobufEnum {
   const OtaUpdateStatus._(super.value, super.name);
 }
 
+/// OTA 标准化失败码 (用于统计和可观测性)
+class OtaFailureCode extends $pb.ProtobufEnum {
+  static const OtaFailureCode OTA_FAILURE_NONE =
+      OtaFailureCode._(0, _omitEnumNames ? '' : 'OTA_FAILURE_NONE');
+  static const OtaFailureCode OTA_FAILURE_NETWORK =
+      OtaFailureCode._(1, _omitEnumNames ? '' : 'OTA_FAILURE_NETWORK');
+  static const OtaFailureCode OTA_FAILURE_SHA256_MISMATCH =
+      OtaFailureCode._(2, _omitEnumNames ? '' : 'OTA_FAILURE_SHA256_MISMATCH');
+  static const OtaFailureCode OTA_FAILURE_SIGNATURE_INVALID = OtaFailureCode._(
+      3, _omitEnumNames ? '' : 'OTA_FAILURE_SIGNATURE_INVALID');
+  static const OtaFailureCode OTA_FAILURE_DISK_FULL =
+      OtaFailureCode._(4, _omitEnumNames ? '' : 'OTA_FAILURE_DISK_FULL');
+  static const OtaFailureCode OTA_FAILURE_DEPENDENCY =
+      OtaFailureCode._(5, _omitEnumNames ? '' : 'OTA_FAILURE_DEPENDENCY');
+  static const OtaFailureCode OTA_FAILURE_INSTALL_SCRIPT =
+      OtaFailureCode._(6, _omitEnumNames ? '' : 'OTA_FAILURE_INSTALL_SCRIPT');
+  static const OtaFailureCode OTA_FAILURE_HEALTH_CHECK =
+      OtaFailureCode._(7, _omitEnumNames ? '' : 'OTA_FAILURE_HEALTH_CHECK');
+  static const OtaFailureCode OTA_FAILURE_BATTERY_LOW =
+      OtaFailureCode._(8, _omitEnumNames ? '' : 'OTA_FAILURE_BATTERY_LOW');
+  static const OtaFailureCode OTA_FAILURE_HW_INCOMPAT =
+      OtaFailureCode._(9, _omitEnumNames ? '' : 'OTA_FAILURE_HW_INCOMPAT');
+  static const OtaFailureCode OTA_FAILURE_SAFETY_MODE =
+      OtaFailureCode._(10, _omitEnumNames ? '' : 'OTA_FAILURE_SAFETY_MODE');
+  static const OtaFailureCode OTA_FAILURE_PERMISSION =
+      OtaFailureCode._(11, _omitEnumNames ? '' : 'OTA_FAILURE_PERMISSION');
+  static const OtaFailureCode OTA_FAILURE_ROLLBACK_FAILED =
+      OtaFailureCode._(12, _omitEnumNames ? '' : 'OTA_FAILURE_ROLLBACK_FAILED');
+
+  static const $core.List<OtaFailureCode> values = <OtaFailureCode>[
+    OTA_FAILURE_NONE,
+    OTA_FAILURE_NETWORK,
+    OTA_FAILURE_SHA256_MISMATCH,
+    OTA_FAILURE_SIGNATURE_INVALID,
+    OTA_FAILURE_DISK_FULL,
+    OTA_FAILURE_DEPENDENCY,
+    OTA_FAILURE_INSTALL_SCRIPT,
+    OTA_FAILURE_HEALTH_CHECK,
+    OTA_FAILURE_BATTERY_LOW,
+    OTA_FAILURE_HW_INCOMPAT,
+    OTA_FAILURE_SAFETY_MODE,
+    OTA_FAILURE_PERMISSION,
+    OTA_FAILURE_ROLLBACK_FAILED,
+  ];
+
+  static final $core.List<OtaFailureCode?> _byValue =
+      $pb.ProtobufEnum.$_initByValueList(values, 12);
+  static OtaFailureCode? valueOf($core.int value) =>
+      value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const OtaFailureCode._(super.value, super.name);
+}
+
+/// 制品安全等级: 决定安装前机器人必须进入的状态
+class OtaSafetyLevel extends $pb.ProtobufEnum {
+  static const OtaSafetyLevel OTA_SAFETY_LEVEL_UNSPECIFIED =
+      OtaSafetyLevel._(0, _omitEnumNames ? '' : 'OTA_SAFETY_LEVEL_UNSPECIFIED');
+  static const OtaSafetyLevel OTA_SAFETY_LEVEL_HOT =
+      OtaSafetyLevel._(1, _omitEnumNames ? '' : 'OTA_SAFETY_LEVEL_HOT');
+  static const OtaSafetyLevel OTA_SAFETY_LEVEL_WARM =
+      OtaSafetyLevel._(2, _omitEnumNames ? '' : 'OTA_SAFETY_LEVEL_WARM');
+  static const OtaSafetyLevel OTA_SAFETY_LEVEL_COLD =
+      OtaSafetyLevel._(3, _omitEnumNames ? '' : 'OTA_SAFETY_LEVEL_COLD');
+
+  static const $core.List<OtaSafetyLevel> values = <OtaSafetyLevel>[
+    OTA_SAFETY_LEVEL_UNSPECIFIED,
+    OTA_SAFETY_LEVEL_HOT,
+    OTA_SAFETY_LEVEL_WARM,
+    OTA_SAFETY_LEVEL_COLD,
+  ];
+
+  static final $core.List<OtaSafetyLevel?> _byValue =
+      $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static OtaSafetyLevel? valueOf($core.int value) =>
+      value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const OtaSafetyLevel._(super.value, super.name);
+}
+
 /// WebRTC 信令类型
 class WebRTCSignalType extends $pb.ProtobufEnum {
   static const WebRTCSignalType WEBRTC_SIGNAL_TYPE_UNSPECIFIED =
@@ -152,6 +231,34 @@ class WebRTCSignalType extends $pb.ProtobufEnum {
       value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const WebRTCSignalType._(super.value, super.name);
+}
+
+class ServiceAction extends $pb.ProtobufEnum {
+  static const ServiceAction SERVICE_ACTION_UNSPECIFIED =
+      ServiceAction._(0, _omitEnumNames ? '' : 'SERVICE_ACTION_UNSPECIFIED');
+  static const ServiceAction SERVICE_ACTION_START =
+      ServiceAction._(1, _omitEnumNames ? '' : 'SERVICE_ACTION_START');
+  static const ServiceAction SERVICE_ACTION_STOP =
+      ServiceAction._(2, _omitEnumNames ? '' : 'SERVICE_ACTION_STOP');
+  static const ServiceAction SERVICE_ACTION_RESTART =
+      ServiceAction._(3, _omitEnumNames ? '' : 'SERVICE_ACTION_RESTART');
+  static const ServiceAction SERVICE_ACTION_STATUS =
+      ServiceAction._(4, _omitEnumNames ? '' : 'SERVICE_ACTION_STATUS');
+
+  static const $core.List<ServiceAction> values = <ServiceAction>[
+    SERVICE_ACTION_UNSPECIFIED,
+    SERVICE_ACTION_START,
+    SERVICE_ACTION_STOP,
+    SERVICE_ACTION_RESTART,
+    SERVICE_ACTION_STATUS,
+  ];
+
+  static final $core.List<ServiceAction?> _byValue =
+      $pb.ProtobufEnum.$_initByValueList(values, 4);
+  static ServiceAction? valueOf($core.int value) =>
+      value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const ServiceAction._(super.value, super.name);
 }
 
 const $core.bool _omitEnumNames =

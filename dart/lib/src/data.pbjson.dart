@@ -78,6 +78,54 @@ final $typed_data.Uint8List otaUpdateStatusDescriptor = $convert.base64Decode(
     'T1RBX1VQREFURV9TVEFUVVNfU1VDQ0VTUxAGEhwKGE9UQV9VUERBVEVfU1RBVFVTX0ZBSUxFRB'
     'AHEiEKHU9UQV9VUERBVEVfU1RBVFVTX1JPTExFRF9CQUNLEAg=');
 
+@$core.Deprecated('Use otaFailureCodeDescriptor instead')
+const OtaFailureCode$json = {
+  '1': 'OtaFailureCode',
+  '2': [
+    {'1': 'OTA_FAILURE_NONE', '2': 0},
+    {'1': 'OTA_FAILURE_NETWORK', '2': 1},
+    {'1': 'OTA_FAILURE_SHA256_MISMATCH', '2': 2},
+    {'1': 'OTA_FAILURE_SIGNATURE_INVALID', '2': 3},
+    {'1': 'OTA_FAILURE_DISK_FULL', '2': 4},
+    {'1': 'OTA_FAILURE_DEPENDENCY', '2': 5},
+    {'1': 'OTA_FAILURE_INSTALL_SCRIPT', '2': 6},
+    {'1': 'OTA_FAILURE_HEALTH_CHECK', '2': 7},
+    {'1': 'OTA_FAILURE_BATTERY_LOW', '2': 8},
+    {'1': 'OTA_FAILURE_HW_INCOMPAT', '2': 9},
+    {'1': 'OTA_FAILURE_SAFETY_MODE', '2': 10},
+    {'1': 'OTA_FAILURE_PERMISSION', '2': 11},
+    {'1': 'OTA_FAILURE_ROLLBACK_FAILED', '2': 12},
+  ],
+};
+
+/// Descriptor for `OtaFailureCode`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List otaFailureCodeDescriptor = $convert.base64Decode(
+    'Cg5PdGFGYWlsdXJlQ29kZRIUChBPVEFfRkFJTFVSRV9OT05FEAASFwoTT1RBX0ZBSUxVUkVfTk'
+    'VUV09SSxABEh8KG09UQV9GQUlMVVJFX1NIQTI1Nl9NSVNNQVRDSBACEiEKHU9UQV9GQUlMVVJF'
+    'X1NJR05BVFVSRV9JTlZBTElEEAMSGQoVT1RBX0ZBSUxVUkVfRElTS19GVUxMEAQSGgoWT1RBX0'
+    'ZBSUxVUkVfREVQRU5ERU5DWRAFEh4KGk9UQV9GQUlMVVJFX0lOU1RBTExfU0NSSVBUEAYSHAoY'
+    'T1RBX0ZBSUxVUkVfSEVBTFRIX0NIRUNLEAcSGwoXT1RBX0ZBSUxVUkVfQkFUVEVSWV9MT1cQCB'
+    'IbChdPVEFfRkFJTFVSRV9IV19JTkNPTVBBVBAJEhsKF09UQV9GQUlMVVJFX1NBRkVUWV9NT0RF'
+    'EAoSGgoWT1RBX0ZBSUxVUkVfUEVSTUlTU0lPThALEh8KG09UQV9GQUlMVVJFX1JPTExCQUNLX0'
+    'ZBSUxFRBAM');
+
+@$core.Deprecated('Use otaSafetyLevelDescriptor instead')
+const OtaSafetyLevel$json = {
+  '1': 'OtaSafetyLevel',
+  '2': [
+    {'1': 'OTA_SAFETY_LEVEL_UNSPECIFIED', '2': 0},
+    {'1': 'OTA_SAFETY_LEVEL_HOT', '2': 1},
+    {'1': 'OTA_SAFETY_LEVEL_WARM', '2': 2},
+    {'1': 'OTA_SAFETY_LEVEL_COLD', '2': 3},
+  ],
+};
+
+/// Descriptor for `OtaSafetyLevel`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List otaSafetyLevelDescriptor = $convert.base64Decode(
+    'Cg5PdGFTYWZldHlMZXZlbBIgChxPVEFfU0FGRVRZX0xFVkVMX1VOU1BFQ0lGSUVEEAASGAoUT1'
+    'RBX1NBRkVUWV9MRVZFTF9IT1QQARIZChVPVEFfU0FGRVRZX0xFVkVMX1dBUk0QAhIZChVPVEFf'
+    'U0FGRVRZX0xFVkVMX0NPTEQQAw==');
+
 @$core.Deprecated('Use webRTCSignalTypeDescriptor instead')
 const WebRTCSignalType$json = {
   '1': 'WebRTCSignalType',
@@ -97,6 +145,24 @@ final $typed_data.Uint8List webRTCSignalTypeDescriptor = $convert.base64Decode(
     'wKGFdFQlJUQ19TSUdOQUxfVFlQRV9PRkZFUhABEh0KGVdFQlJUQ19TSUdOQUxfVFlQRV9BTlNX'
     'RVIQAhIkCiBXRUJSVENfU0lHTkFMX1RZUEVfSUNFX0NBTkRJREFURRADEh8KG1dFQlJUQ19TSU'
     'dOQUxfVFlQRV9JQ0VfRE9ORRAEEh0KGVdFQlJUQ19TSUdOQUxfVFlQRV9IQU5HVVAQBQ==');
+
+@$core.Deprecated('Use serviceActionDescriptor instead')
+const ServiceAction$json = {
+  '1': 'ServiceAction',
+  '2': [
+    {'1': 'SERVICE_ACTION_UNSPECIFIED', '2': 0},
+    {'1': 'SERVICE_ACTION_START', '2': 1},
+    {'1': 'SERVICE_ACTION_STOP', '2': 2},
+    {'1': 'SERVICE_ACTION_RESTART', '2': 3},
+    {'1': 'SERVICE_ACTION_STATUS', '2': 4},
+  ],
+};
+
+/// Descriptor for `ServiceAction`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List serviceActionDescriptor = $convert.base64Decode(
+    'Cg1TZXJ2aWNlQWN0aW9uEh4KGlNFUlZJQ0VfQUNUSU9OX1VOU1BFQ0lGSUVEEAASGAoUU0VSVk'
+    'lDRV9BQ1RJT05fU1RBUlQQARIXChNTRVJWSUNFX0FDVElPTl9TVE9QEAISGgoWU0VSVklDRV9B'
+    'Q1RJT05fUkVTVEFSVBADEhkKFVNFUlZJQ0VfQUNUSU9OX1NUQVRVUxAE');
 
 @$core.Deprecated('Use listResourcesResponseDescriptor instead')
 const ListResourcesResponse$json = {
@@ -627,6 +693,22 @@ final $typed_data.Uint8List deleteRemoteFileResponseDescriptor = $convert.base64
     'BvbnNlQmFzZVIEYmFzZRIYCgdzdWNjZXNzGAIgASgIUgdzdWNjZXNzEhgKB21lc3NhZ2UYAyAB'
     'KAlSB21lc3NhZ2U=');
 
+@$core.Deprecated('Use artifactDependencyDescriptor instead')
+const ArtifactDependency$json = {
+  '1': 'ArtifactDependency',
+  '2': [
+    {'1': 'artifact_name', '3': 1, '4': 1, '5': 9, '10': 'artifactName'},
+    {'1': 'min_version', '3': 2, '4': 1, '5': 9, '10': 'minVersion'},
+    {'1': 'max_version', '3': 3, '4': 1, '5': 9, '10': 'maxVersion'},
+  ],
+};
+
+/// Descriptor for `ArtifactDependency`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List artifactDependencyDescriptor = $convert.base64Decode(
+    'ChJBcnRpZmFjdERlcGVuZGVuY3kSIwoNYXJ0aWZhY3RfbmFtZRgBIAEoCVIMYXJ0aWZhY3ROYW'
+    '1lEh8KC21pbl92ZXJzaW9uGAIgASgJUgptaW5WZXJzaW9uEh8KC21heF92ZXJzaW9uGAMgASgJ'
+    'UgptYXhWZXJzaW9u');
+
 @$core.Deprecated('Use otaArtifactDescriptor instead')
 const OtaArtifact$json = {
   '1': 'OtaArtifact',
@@ -665,6 +747,23 @@ const OtaArtifact$json = {
     },
     {'1': 'changelog', '3': 13, '4': 1, '5': 9, '10': 'changelog'},
     {'1': 'rollback_safe', '3': 14, '4': 1, '5': 8, '10': 'rollbackSafe'},
+    {
+      '1': 'safety_level',
+      '3': 15,
+      '4': 1,
+      '5': 14,
+      '6': '.robot.v1.OtaSafetyLevel',
+      '10': 'safetyLevel'
+    },
+    {
+      '1': 'dependencies',
+      '3': 16,
+      '4': 3,
+      '5': 11,
+      '6': '.robot.v1.ArtifactDependency',
+      '10': 'dependencies'
+    },
+    {'1': 'owner_module', '3': 17, '4': 1, '5': 9, '10': 'ownerModule'},
   ],
 };
 
@@ -678,7 +777,10 @@ final $typed_data.Uint8List otaArtifactDescriptor = $convert.base64Decode(
     'F0EjsKDGFwcGx5X2FjdGlvbhgKIAEoDjIYLnJvYm90LnYxLk90YUFwcGx5QWN0aW9uUgthcHBs'
     'eUFjdGlvbhInCg9yZXF1aXJlc19yZWJvb3QYCyABKAhSDnJlcXVpcmVzUmVib290Ei4KE21pbl'
     '9iYXR0ZXJ5X3BlcmNlbnQYDCABKA1SEW1pbkJhdHRlcnlQZXJjZW50EhwKCWNoYW5nZWxvZxgN'
-    'IAEoCVIJY2hhbmdlbG9nEiMKDXJvbGxiYWNrX3NhZmUYDiABKAhSDHJvbGxiYWNrU2FmZQ==');
+    'IAEoCVIJY2hhbmdlbG9nEiMKDXJvbGxiYWNrX3NhZmUYDiABKAhSDHJvbGxiYWNrU2FmZRI7Cg'
+    'xzYWZldHlfbGV2ZWwYDyABKA4yGC5yb2JvdC52MS5PdGFTYWZldHlMZXZlbFILc2FmZXR5TGV2'
+    'ZWwSQAoMZGVwZW5kZW5jaWVzGBAgAygLMhwucm9ib3QudjEuQXJ0aWZhY3REZXBlbmRlbmN5Ug'
+    'xkZXBlbmRlbmNpZXMSIQoMb3duZXJfbW9kdWxlGBEgASgJUgtvd25lck1vZHVsZQ==');
 
 @$core.Deprecated('Use installedArtifactDescriptor instead')
 const InstalledArtifact$json = {
@@ -778,6 +880,14 @@ const ApplyUpdateResponse$json = {
     {'1': 'message', '3': 4, '4': 1, '5': 9, '10': 'message'},
     {'1': 'installed_path', '3': 5, '4': 1, '5': 9, '10': 'installedPath'},
     {'1': 'previous_version', '3': 6, '4': 1, '5': 9, '10': 'previousVersion'},
+    {
+      '1': 'failure_code',
+      '3': 7,
+      '4': 1,
+      '5': 14,
+      '6': '.robot.v1.OtaFailureCode',
+      '10': 'failureCode'
+    },
   ],
 };
 
@@ -787,7 +897,8 @@ final $typed_data.Uint8List applyUpdateResponseDescriptor = $convert.base64Decod
     'Jhc2VSBGJhc2USGAoHc3VjY2VzcxgCIAEoCFIHc3VjY2VzcxIxCgZzdGF0dXMYAyABKA4yGS5y'
     'b2JvdC52MS5PdGFVcGRhdGVTdGF0dXNSBnN0YXR1cxIYCgdtZXNzYWdlGAQgASgJUgdtZXNzYW'
     'dlEiUKDmluc3RhbGxlZF9wYXRoGAUgASgJUg1pbnN0YWxsZWRQYXRoEikKEHByZXZpb3VzX3Zl'
-    'cnNpb24YBiABKAlSD3ByZXZpb3VzVmVyc2lvbg==');
+    'cnNpb24YBiABKAlSD3ByZXZpb3VzVmVyc2lvbhI7CgxmYWlsdXJlX2NvZGUYByABKA4yGC5yb2'
+    'JvdC52MS5PdGFGYWlsdXJlQ29kZVILZmFpbHVyZUNvZGU=');
 
 @$core.Deprecated('Use getInstalledVersionsRequestDescriptor instead')
 const GetInstalledVersionsRequest$json = {
@@ -850,6 +961,13 @@ const GetInstalledVersionsResponse$json = {
       '6': '.robot.v1.RollbackEntry',
       '10': 'rollbackAvailable'
     },
+    {
+      '1': 'system_version_json',
+      '3': 7,
+      '4': 1,
+      '5': 9,
+      '10': 'systemVersionJson'
+    },
   ],
 };
 
@@ -860,7 +978,8 @@ final $typed_data.Uint8List getInstalledVersionsResponseDescriptor = $convert.ba
     'AyABKAlSBGh3SWQSJQoOc3lzdGVtX3ZlcnNpb24YBCABKAlSDXN5c3RlbVZlcnNpb24SOQoJaW'
     '5zdGFsbGVkGAUgAygLMhsucm9ib3QudjEuSW5zdGFsbGVkQXJ0aWZhY3RSCWluc3RhbGxlZBJG'
     'ChJyb2xsYmFja19hdmFpbGFibGUYBiADKAsyFy5yb2JvdC52MS5Sb2xsYmFja0VudHJ5UhFyb2'
-    'xsYmFja0F2YWlsYWJsZQ==');
+    'xsYmFja0F2YWlsYWJsZRIuChNzeXN0ZW1fdmVyc2lvbl9qc29uGAcgASgJUhFzeXN0ZW1WZXJz'
+    'aW9uSnNvbg==');
 
 @$core.Deprecated('Use rollbackRequestDescriptor instead')
 const RollbackRequest$json = {
@@ -1010,15 +1129,22 @@ const CheckUpdateReadinessRequest$json = {
       '6': '.robot.v1.OtaArtifact',
       '10': 'artifacts'
     },
+    {
+      '1': 'manifest_signature',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '10': 'manifestSignature'
+    },
   ],
 };
 
 /// Descriptor for `CheckUpdateReadinessRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List checkUpdateReadinessRequestDescriptor =
-    $convert.base64Decode(
-        'ChtDaGVja1VwZGF0ZVJlYWRpbmVzc1JlcXVlc3QSKQoEYmFzZRgBIAEoCzIVLnJvYm90LnYxLl'
-        'JlcXVlc3RCYXNlUgRiYXNlEjMKCWFydGlmYWN0cxgCIAMoCzIVLnJvYm90LnYxLk90YUFydGlm'
-        'YWN0UglhcnRpZmFjdHM=');
+final $typed_data.Uint8List checkUpdateReadinessRequestDescriptor = $convert.base64Decode(
+    'ChtDaGVja1VwZGF0ZVJlYWRpbmVzc1JlcXVlc3QSKQoEYmFzZRgBIAEoCzIVLnJvYm90LnYxLl'
+    'JlcXVlc3RCYXNlUgRiYXNlEjMKCWFydGlmYWN0cxgCIAMoCzIVLnJvYm90LnYxLk90YUFydGlm'
+    'YWN0UglhcnRpZmFjdHMSLQoSbWFuaWZlc3Rfc2lnbmF0dXJlGAMgASgJUhFtYW5pZmVzdFNpZ2'
+    '5hdHVyZQ==');
 
 @$core.Deprecated('Use checkUpdateReadinessResponseDescriptor instead')
 const CheckUpdateReadinessResponse$json = {
@@ -1067,6 +1193,240 @@ final $typed_data.Uint8List readinessCheckDescriptor = $convert.base64Decode(
     'Cg5SZWFkaW5lc3NDaGVjaxIdCgpjaGVja19uYW1lGAEgASgJUgljaGVja05hbWUSFgoGcGFzc2'
     'VkGAIgASgIUgZwYXNzZWQSGAoHbWVzc2FnZRgDIAEoCVIHbWVzc2FnZRIWCgZkZXRhaWwYBCAB'
     'KAlSBmRldGFpbA==');
+
+@$core.Deprecated('Use otaTransactionLogDescriptor instead')
+const OtaTransactionLog$json = {
+  '1': 'OtaTransactionLog',
+  '2': [
+    {'1': 'transaction_id', '3': 1, '4': 1, '5': 9, '10': 'transactionId'},
+    {'1': 'artifact_name', '3': 2, '4': 1, '5': 9, '10': 'artifactName'},
+    {'1': 'artifact_version', '3': 3, '4': 1, '5': 9, '10': 'artifactVersion'},
+    {
+      '1': 'status',
+      '3': 4,
+      '4': 1,
+      '5': 14,
+      '6': '.robot.v1.OtaUpdateStatus',
+      '10': 'status'
+    },
+    {'1': 'staged_path', '3': 5, '4': 1, '5': 9, '10': 'stagedPath'},
+    {'1': 'target_path', '3': 6, '4': 1, '5': 9, '10': 'targetPath'},
+    {'1': 'backup_path', '3': 7, '4': 1, '5': 9, '10': 'backupPath'},
+    {'1': 'started_at', '3': 8, '4': 1, '5': 9, '10': 'startedAt'},
+    {'1': 'completed_at', '3': 9, '4': 1, '5': 9, '10': 'completedAt'},
+    {'1': 'error_message', '3': 10, '4': 1, '5': 9, '10': 'errorMessage'},
+  ],
+};
+
+/// Descriptor for `OtaTransactionLog`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List otaTransactionLogDescriptor = $convert.base64Decode(
+    'ChFPdGFUcmFuc2FjdGlvbkxvZxIlCg50cmFuc2FjdGlvbl9pZBgBIAEoCVINdHJhbnNhY3Rpb2'
+    '5JZBIjCg1hcnRpZmFjdF9uYW1lGAIgASgJUgxhcnRpZmFjdE5hbWUSKQoQYXJ0aWZhY3RfdmVy'
+    'c2lvbhgDIAEoCVIPYXJ0aWZhY3RWZXJzaW9uEjEKBnN0YXR1cxgEIAEoDjIZLnJvYm90LnYxLk'
+    '90YVVwZGF0ZVN0YXR1c1IGc3RhdHVzEh8KC3N0YWdlZF9wYXRoGAUgASgJUgpzdGFnZWRQYXRo'
+    'Eh8KC3RhcmdldF9wYXRoGAYgASgJUgp0YXJnZXRQYXRoEh8KC2JhY2t1cF9wYXRoGAcgASgJUg'
+    'piYWNrdXBQYXRoEh0KCnN0YXJ0ZWRfYXQYCCABKAlSCXN0YXJ0ZWRBdBIhCgxjb21wbGV0ZWRf'
+    'YXQYCSABKAlSC2NvbXBsZXRlZEF0EiMKDWVycm9yX21lc3NhZ2UYCiABKAlSDGVycm9yTWVzc2'
+    'FnZQ==');
+
+@$core.Deprecated('Use upgradeHistoryEntryDescriptor instead')
+const UpgradeHistoryEntry$json = {
+  '1': 'UpgradeHistoryEntry',
+  '2': [
+    {'1': 'timestamp', '3': 1, '4': 1, '5': 9, '10': 'timestamp'},
+    {'1': 'action', '3': 2, '4': 1, '5': 9, '10': 'action'},
+    {'1': 'artifact_name', '3': 3, '4': 1, '5': 9, '10': 'artifactName'},
+    {'1': 'from_version', '3': 4, '4': 1, '5': 9, '10': 'fromVersion'},
+    {'1': 'to_version', '3': 5, '4': 1, '5': 9, '10': 'toVersion'},
+    {'1': 'status', '3': 6, '4': 1, '5': 9, '10': 'status'},
+    {
+      '1': 'failure_code',
+      '3': 7,
+      '4': 1,
+      '5': 14,
+      '6': '.robot.v1.OtaFailureCode',
+      '10': 'failureCode'
+    },
+    {'1': 'failure_reason', '3': 8, '4': 1, '5': 9, '10': 'failureReason'},
+    {'1': 'duration_ms', '3': 9, '4': 1, '5': 4, '10': 'durationMs'},
+    {
+      '1': 'health_check_result',
+      '3': 10,
+      '4': 1,
+      '5': 9,
+      '10': 'healthCheckResult'
+    },
+  ],
+};
+
+/// Descriptor for `UpgradeHistoryEntry`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List upgradeHistoryEntryDescriptor = $convert.base64Decode(
+    'ChNVcGdyYWRlSGlzdG9yeUVudHJ5EhwKCXRpbWVzdGFtcBgBIAEoCVIJdGltZXN0YW1wEhYKBm'
+    'FjdGlvbhgCIAEoCVIGYWN0aW9uEiMKDWFydGlmYWN0X25hbWUYAyABKAlSDGFydGlmYWN0TmFt'
+    'ZRIhCgxmcm9tX3ZlcnNpb24YBCABKAlSC2Zyb21WZXJzaW9uEh0KCnRvX3ZlcnNpb24YBSABKA'
+    'lSCXRvVmVyc2lvbhIWCgZzdGF0dXMYBiABKAlSBnN0YXR1cxI7CgxmYWlsdXJlX2NvZGUYByAB'
+    'KA4yGC5yb2JvdC52MS5PdGFGYWlsdXJlQ29kZVILZmFpbHVyZUNvZGUSJQoOZmFpbHVyZV9yZW'
+    'Fzb24YCCABKAlSDWZhaWx1cmVSZWFzb24SHwoLZHVyYXRpb25fbXMYCSABKARSCmR1cmF0aW9u'
+    'TXMSLgoTaGVhbHRoX2NoZWNrX3Jlc3VsdBgKIAEoCVIRaGVhbHRoQ2hlY2tSZXN1bHQ=');
+
+@$core.Deprecated('Use getUpgradeHistoryRequestDescriptor instead')
+const GetUpgradeHistoryRequest$json = {
+  '1': 'GetUpgradeHistoryRequest',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {'1': 'artifact_filter', '3': 2, '4': 1, '5': 9, '10': 'artifactFilter'},
+    {'1': 'limit', '3': 3, '4': 1, '5': 13, '10': 'limit'},
+  ],
+};
+
+/// Descriptor for `GetUpgradeHistoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUpgradeHistoryRequestDescriptor = $convert.base64Decode(
+    'ChhHZXRVcGdyYWRlSGlzdG9yeVJlcXVlc3QSKQoEYmFzZRgBIAEoCzIVLnJvYm90LnYxLlJlcX'
+    'Vlc3RCYXNlUgRiYXNlEicKD2FydGlmYWN0X2ZpbHRlchgCIAEoCVIOYXJ0aWZhY3RGaWx0ZXIS'
+    'FAoFbGltaXQYAyABKA1SBWxpbWl0');
+
+@$core.Deprecated('Use getUpgradeHistoryResponseDescriptor instead')
+const GetUpgradeHistoryResponse$json = {
+  '1': 'GetUpgradeHistoryResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {
+      '1': 'entries',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.robot.v1.UpgradeHistoryEntry',
+      '10': 'entries'
+    },
+  ],
+};
+
+/// Descriptor for `GetUpgradeHistoryResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getUpgradeHistoryResponseDescriptor = $convert.base64Decode(
+    'ChlHZXRVcGdyYWRlSGlzdG9yeVJlc3BvbnNlEioKBGJhc2UYASABKAsyFi5yb2JvdC52MS5SZX'
+    'Nwb25zZUJhc2VSBGJhc2USNwoHZW50cmllcxgCIAMoCzIdLnJvYm90LnYxLlVwZ3JhZGVIaXN0'
+    'b3J5RW50cnlSB2VudHJpZXM=');
+
+@$core.Deprecated('Use componentVersionDescriptor instead')
+const ComponentVersion$json = {
+  '1': 'ComponentVersion',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'version', '3': 2, '4': 1, '5': 9, '10': 'version'},
+    {'1': 'git_commit', '3': 3, '4': 1, '5': 9, '10': 'gitCommit'},
+  ],
+};
+
+/// Descriptor for `ComponentVersion`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List componentVersionDescriptor = $convert.base64Decode(
+    'ChBDb21wb25lbnRWZXJzaW9uEhIKBG5hbWUYASABKAlSBG5hbWUSGAoHdmVyc2lvbhgCIAEoCV'
+    'IHdmVyc2lvbhIdCgpnaXRfY29tbWl0GAMgASgJUglnaXRDb21taXQ=');
+
+@$core.Deprecated('Use validateSystemVersionRequestDescriptor instead')
+const ValidateSystemVersionRequest$json = {
+  '1': 'ValidateSystemVersionRequest',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.RequestBase',
+      '10': 'base'
+    },
+    {
+      '1': 'expected_system_version',
+      '3': 2,
+      '4': 1,
+      '5': 9,
+      '10': 'expectedSystemVersion'
+    },
+    {
+      '1': 'expected_components',
+      '3': 3,
+      '4': 3,
+      '5': 11,
+      '6': '.robot.v1.ComponentVersion',
+      '10': 'expectedComponents'
+    },
+  ],
+};
+
+/// Descriptor for `ValidateSystemVersionRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List validateSystemVersionRequestDescriptor = $convert.base64Decode(
+    'ChxWYWxpZGF0ZVN5c3RlbVZlcnNpb25SZXF1ZXN0EikKBGJhc2UYASABKAsyFS5yb2JvdC52MS'
+    '5SZXF1ZXN0QmFzZVIEYmFzZRI2ChdleHBlY3RlZF9zeXN0ZW1fdmVyc2lvbhgCIAEoCVIVZXhw'
+    'ZWN0ZWRTeXN0ZW1WZXJzaW9uEksKE2V4cGVjdGVkX2NvbXBvbmVudHMYAyADKAsyGi5yb2JvdC'
+    '52MS5Db21wb25lbnRWZXJzaW9uUhJleHBlY3RlZENvbXBvbmVudHM=');
+
+@$core.Deprecated('Use versionMismatchDescriptor instead')
+const VersionMismatch$json = {
+  '1': 'VersionMismatch',
+  '2': [
+    {'1': 'component_name', '3': 1, '4': 1, '5': 9, '10': 'componentName'},
+    {'1': 'expected_version', '3': 2, '4': 1, '5': 9, '10': 'expectedVersion'},
+    {'1': 'actual_version', '3': 3, '4': 1, '5': 9, '10': 'actualVersion'},
+    {'1': 'status', '3': 4, '4': 1, '5': 9, '10': 'status'},
+  ],
+};
+
+/// Descriptor for `VersionMismatch`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List versionMismatchDescriptor = $convert.base64Decode(
+    'Cg9WZXJzaW9uTWlzbWF0Y2gSJQoOY29tcG9uZW50X25hbWUYASABKAlSDWNvbXBvbmVudE5hbW'
+    'USKQoQZXhwZWN0ZWRfdmVyc2lvbhgCIAEoCVIPZXhwZWN0ZWRWZXJzaW9uEiUKDmFjdHVhbF92'
+    'ZXJzaW9uGAMgASgJUg1hY3R1YWxWZXJzaW9uEhYKBnN0YXR1cxgEIAEoCVIGc3RhdHVz');
+
+@$core.Deprecated('Use validateSystemVersionResponseDescriptor instead')
+const ValidateSystemVersionResponse$json = {
+  '1': 'ValidateSystemVersionResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {'1': 'consistent', '3': 2, '4': 1, '5': 8, '10': 'consistent'},
+    {
+      '1': 'actual_system_version',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '10': 'actualSystemVersion'
+    },
+    {
+      '1': 'mismatches',
+      '3': 4,
+      '4': 3,
+      '5': 11,
+      '6': '.robot.v1.VersionMismatch',
+      '10': 'mismatches'
+    },
+  ],
+};
+
+/// Descriptor for `ValidateSystemVersionResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List validateSystemVersionResponseDescriptor = $convert.base64Decode(
+    'Ch1WYWxpZGF0ZVN5c3RlbVZlcnNpb25SZXNwb25zZRIqCgRiYXNlGAEgASgLMhYucm9ib3Qudj'
+    'EuUmVzcG9uc2VCYXNlUgRiYXNlEh4KCmNvbnNpc3RlbnQYAiABKAhSCmNvbnNpc3RlbnQSMgoV'
+    'YWN0dWFsX3N5c3RlbV92ZXJzaW9uGAMgASgJUhNhY3R1YWxTeXN0ZW1WZXJzaW9uEjkKCm1pc2'
+    '1hdGNoZXMYBCADKAsyGS5yb2JvdC52MS5WZXJzaW9uTWlzbWF0Y2hSCm1pc21hdGNoZXM=');
 
 @$core.Deprecated('Use startCameraRequestDescriptor instead')
 const StartCameraRequest$json = {
@@ -1268,9 +1628,78 @@ final $typed_data.Uint8List audioProfileDescriptor = $convert.base64Decode(
     '5lbHMYAiABKA1SCGNoYW5uZWxzEhQKBWNvZGVjGAMgASgJUgVjb2RlYxIhCgxiaXRyYXRlX2ti'
     'cHMYBCABKA1SC2JpdHJhdGVLYnBz');
 
-@$core.Deprecated('Use applyFirmwareRequestDescriptor instead')
-const ApplyFirmwareRequest$json = {
-  '1': 'ApplyFirmwareRequest',
+@$core.Deprecated('Use deviceInfoResponseDescriptor instead')
+const DeviceInfoResponse$json = {
+  '1': 'DeviceInfoResponse',
+  '2': [
+    {
+      '1': 'base',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ResponseBase',
+      '10': 'base'
+    },
+    {'1': 'hostname', '3': 2, '4': 1, '5': 9, '10': 'hostname'},
+    {'1': 'robot_id', '3': 3, '4': 1, '5': 9, '10': 'robotId'},
+    {'1': 'hw_id', '3': 4, '4': 1, '5': 9, '10': 'hwId'},
+    {'1': 'ip_addresses', '3': 5, '4': 3, '5': 9, '10': 'ipAddresses'},
+    {'1': 'disk_total_bytes', '3': 6, '4': 1, '5': 4, '10': 'diskTotalBytes'},
+    {'1': 'disk_free_bytes', '3': 7, '4': 1, '5': 4, '10': 'diskFreeBytes'},
+    {'1': 'battery_percent', '3': 8, '4': 1, '5': 5, '10': 'batteryPercent'},
+    {'1': 'uptime_seconds', '3': 9, '4': 1, '5': 4, '10': 'uptimeSeconds'},
+    {'1': 'os_version', '3': 10, '4': 1, '5': 9, '10': 'osVersion'},
+    {
+      '1': 'ota_daemon_version',
+      '3': 11,
+      '4': 1,
+      '5': 9,
+      '10': 'otaDaemonVersion'
+    },
+    {
+      '1': 'services',
+      '3': 12,
+      '4': 3,
+      '5': 11,
+      '6': '.robot.v1.ServiceStatus',
+      '10': 'services'
+    },
+  ],
+};
+
+/// Descriptor for `DeviceInfoResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deviceInfoResponseDescriptor = $convert.base64Decode(
+    'ChJEZXZpY2VJbmZvUmVzcG9uc2USKgoEYmFzZRgBIAEoCzIWLnJvYm90LnYxLlJlc3BvbnNlQm'
+    'FzZVIEYmFzZRIaCghob3N0bmFtZRgCIAEoCVIIaG9zdG5hbWUSGQoIcm9ib3RfaWQYAyABKAlS'
+    'B3JvYm90SWQSEwoFaHdfaWQYBCABKAlSBGh3SWQSIQoMaXBfYWRkcmVzc2VzGAUgAygJUgtpcE'
+    'FkZHJlc3NlcxIoChBkaXNrX3RvdGFsX2J5dGVzGAYgASgEUg5kaXNrVG90YWxCeXRlcxImCg9k'
+    'aXNrX2ZyZWVfYnl0ZXMYByABKARSDWRpc2tGcmVlQnl0ZXMSJwoPYmF0dGVyeV9wZXJjZW50GA'
+    'ggASgFUg5iYXR0ZXJ5UGVyY2VudBIlCg51cHRpbWVfc2Vjb25kcxgJIAEoBFINdXB0aW1lU2Vj'
+    'b25kcxIdCgpvc192ZXJzaW9uGAogASgJUglvc1ZlcnNpb24SLAoSb3RhX2RhZW1vbl92ZXJzaW'
+    '9uGAsgASgJUhBvdGFEYWVtb25WZXJzaW9uEjMKCHNlcnZpY2VzGAwgAygLMhcucm9ib3QudjEu'
+    'U2VydmljZVN0YXR1c1IIc2VydmljZXM=');
+
+@$core.Deprecated('Use serviceStatusDescriptor instead')
+const ServiceStatus$json = {
+  '1': 'ServiceStatus',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'state', '3': 2, '4': 1, '5': 9, '10': 'state'},
+    {'1': 'sub_state', '3': 3, '4': 1, '5': 9, '10': 'subState'},
+    {'1': 'uptime_seconds', '3': 4, '4': 1, '5': 4, '10': 'uptimeSeconds'},
+    {'1': 'restart_count', '3': 5, '4': 1, '5': 13, '10': 'restartCount'},
+  ],
+};
+
+/// Descriptor for `ServiceStatus`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List serviceStatusDescriptor = $convert.base64Decode(
+    'Cg1TZXJ2aWNlU3RhdHVzEhIKBG5hbWUYASABKAlSBG5hbWUSFAoFc3RhdGUYAiABKAlSBXN0YX'
+    'RlEhsKCXN1Yl9zdGF0ZRgDIAEoCVIIc3ViU3RhdGUSJQoOdXB0aW1lX3NlY29uZHMYBCABKARS'
+    'DXVwdGltZVNlY29uZHMSIwoNcmVzdGFydF9jb3VudBgFIAEoDVIMcmVzdGFydENvdW50');
+
+@$core.Deprecated('Use manageServiceRequestDescriptor instead')
+const ManageServiceRequest$json = {
+  '1': 'ManageServiceRequest',
   '2': [
     {
       '1': 'base',
@@ -1280,18 +1709,27 @@ const ApplyFirmwareRequest$json = {
       '6': '.robot.v1.RequestBase',
       '10': 'base'
     },
-    {'1': 'firmware_path', '3': 2, '4': 1, '5': 9, '10': 'firmwarePath'},
+    {'1': 'service_name', '3': 2, '4': 1, '5': 9, '10': 'serviceName'},
+    {
+      '1': 'action',
+      '3': 3,
+      '4': 1,
+      '5': 14,
+      '6': '.robot.v1.ServiceAction',
+      '10': 'action'
+    },
   ],
 };
 
-/// Descriptor for `ApplyFirmwareRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List applyFirmwareRequestDescriptor = $convert.base64Decode(
-    'ChRBcHBseUZpcm13YXJlUmVxdWVzdBIpCgRiYXNlGAEgASgLMhUucm9ib3QudjEuUmVxdWVzdE'
-    'Jhc2VSBGJhc2USIwoNZmlybXdhcmVfcGF0aBgCIAEoCVIMZmlybXdhcmVQYXRo');
+/// Descriptor for `ManageServiceRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List manageServiceRequestDescriptor = $convert.base64Decode(
+    'ChRNYW5hZ2VTZXJ2aWNlUmVxdWVzdBIpCgRiYXNlGAEgASgLMhUucm9ib3QudjEuUmVxdWVzdE'
+    'Jhc2VSBGJhc2USIQoMc2VydmljZV9uYW1lGAIgASgJUgtzZXJ2aWNlTmFtZRIvCgZhY3Rpb24Y'
+    'AyABKA4yFy5yb2JvdC52MS5TZXJ2aWNlQWN0aW9uUgZhY3Rpb24=');
 
-@$core.Deprecated('Use applyFirmwareResponseDescriptor instead')
-const ApplyFirmwareResponse$json = {
-  '1': 'ApplyFirmwareResponse',
+@$core.Deprecated('Use manageServiceResponseDescriptor instead')
+const ManageServiceResponse$json = {
+  '1': 'ManageServiceResponse',
   '2': [
     {
       '1': 'base',
@@ -1303,11 +1741,20 @@ const ApplyFirmwareResponse$json = {
     },
     {'1': 'success', '3': 2, '4': 1, '5': 8, '10': 'success'},
     {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
+    {
+      '1': 'status',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.robot.v1.ServiceStatus',
+      '10': 'status'
+    },
   ],
 };
 
-/// Descriptor for `ApplyFirmwareResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List applyFirmwareResponseDescriptor = $convert.base64Decode(
-    'ChVBcHBseUZpcm13YXJlUmVzcG9uc2USKgoEYmFzZRgBIAEoCzIWLnJvYm90LnYxLlJlc3Bvbn'
+/// Descriptor for `ManageServiceResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List manageServiceResponseDescriptor = $convert.base64Decode(
+    'ChVNYW5hZ2VTZXJ2aWNlUmVzcG9uc2USKgoEYmFzZRgBIAEoCzIWLnJvYm90LnYxLlJlc3Bvbn'
     'NlQmFzZVIEYmFzZRIYCgdzdWNjZXNzGAIgASgIUgdzdWNjZXNzEhgKB21lc3NhZ2UYAyABKAlS'
-    'B21lc3NhZ2U=');
+    'B21lc3NhZ2USLwoGc3RhdHVzGAQgASgLMhcucm9ib3QudjEuU2VydmljZVN0YXR1c1IGc3RhdH'
+    'Vz');
